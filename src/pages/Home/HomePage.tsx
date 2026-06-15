@@ -128,16 +128,16 @@ export default function HomePage() {
           serviceJsonLd('Automatización de procesos empresariales y copiloto AI', 'Solución para automatizar operaciones, integrar sistemas y asistir decisiones con agentes AI empresariales.', '/'),
         ]}
       />
-      <section className="relative overflow-hidden bg-brand-dark text-brand-white lg:min-h-[92svh]">
+      <section className="relative overflow-hidden bg-brand-dark text-brand-white lg:min-h-[82svh]">
         <div className="absolute inset-0 opacity-45">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_68%_20%,rgba(56,126,188,0.46),transparent_34%),linear-gradient(135deg,rgba(37,41,47,0.96),rgba(18,25,35,0.92))]" />
           <div className="absolute inset-0 grid-pattern opacity-20" />
         </div>
 
-        <div className="absolute inset-x-0 bottom-0 top-24 hidden overflow-hidden lg:block" aria-hidden="true">
-          <div className="absolute right-[-5%] top-10 w-[62%] rotate-[-2deg] rounded-2xl border border-brand-white/10 bg-brand-white/10 p-4 shadow-2xl backdrop-blur-xl">
-            <div className="rounded-xl bg-brand-white p-5 text-brand-dark shadow-2xl">
-              <div className="mb-5 flex items-center justify-between border-b border-brand-dark/10 pb-4">
+        <div className="absolute inset-x-0 bottom-0 top-20 hidden overflow-hidden xl:block" aria-hidden="true">
+          <div className="absolute right-[-3%] top-12 w-[50%] rotate-[-2deg] rounded-2xl border border-brand-white/10 bg-brand-white/10 p-3 shadow-2xl backdrop-blur-xl 2xl:w-[47%]">
+            <div className="rounded-xl bg-brand-white p-4 text-brand-dark shadow-2xl">
+              <div className="mb-4 flex items-center justify-between border-b border-brand-dark/10 pb-3">
                 <div className="flex items-center gap-3">
                   <img src="/assets/logos/dice-isologo.svg" alt="" className="h-10 w-10" />
                   <div>
@@ -149,15 +149,15 @@ export default function HomePage() {
               </div>
               <div className="grid grid-cols-12 gap-4">
                 <div className="col-span-8 space-y-4">
-                  <div className="grid grid-cols-3 gap-3">
+                  <div className="grid grid-cols-3 gap-2">
                     {['Margen', 'Cotizaciones', 'Stock'].map((label, index) => (
-                      <div key={label} className="rounded-lg border border-brand-dark/10 p-4">
+                      <div key={label} className="rounded-lg border border-brand-dark/10 p-3">
                         <p className="text-xs text-brand-dark/45">{label}</p>
                         <p className="mt-2 text-2xl font-bold text-brand-dark">{['28%', '142', '98%'][index]}</p>
                       </div>
                     ))}
                   </div>
-                  <div className="rounded-lg border border-brand-dark/10 p-4">
+                  <div className="rounded-lg border border-brand-dark/10 p-3">
                     <div className="mb-4 flex items-center justify-between">
                       <p className="text-xs font-bold uppercase text-brand-dark/50">Flujo automatizado</p>
                       <GitBranch className="text-brand-primary" size={18} />
@@ -190,21 +190,21 @@ export default function HomePage() {
           </div>
         </div>
 
-        <Container className="relative z-10 flex items-start pb-10 pt-28 lg:min-h-[92svh] lg:items-center lg:pb-16 lg:pt-32">
+        <Container className="relative z-10 flex items-start pb-12 pt-28 lg:min-h-[82svh] lg:items-center lg:pb-14 lg:pt-28">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7 }}
-            className="max-w-4xl space-y-6 lg:space-y-8"
+            className="max-w-3xl space-y-6 xl:max-w-2xl 2xl:max-w-3xl lg:space-y-7"
           >
             <div className="inline-flex items-center gap-3 rounded-full border border-brand-white/15 bg-brand-white/10 px-4 py-2 text-[11px] font-bold uppercase text-brand-white/80 backdrop-blur">
               <Sparkles size={14} className="text-brand-primary" />
               Sistema operativo empresarial para vender, comprar, ejecutar y medir
             </div>
-            <h1 className="max-w-5xl text-4xl font-medium leading-none text-brand-white md:text-7xl lg:text-8xl">
+            <h1 className="max-w-5xl text-4xl font-medium leading-none text-brand-white md:text-6xl lg:text-7xl">
               Dice Projects
             </h1>
-            <p className="max-w-2xl text-lg leading-relaxed text-brand-white/72 md:text-2xl">
+            <p className="max-w-2xl text-lg leading-relaxed text-brand-white/72 md:text-xl">
               Convertimos áreas dispersas en una plataforma inteligente: CRM operativo, productos, ventas, compras, stock, proyectos, marketing, integraciones, KPIs y agentes empresariales trabajando sobre la misma verdad.
             </p>
             <div className="flex flex-col gap-4 sm:flex-row">
@@ -231,21 +231,21 @@ export default function HomePage() {
         </Container>
       </section>
 
-      <section className="bg-brand-white py-20">
+      <section className="bg-brand-white py-16 md:py-20">
         <Container>
           <div className="grid grid-cols-1 gap-10 lg:grid-cols-12">
             <div className="lg:col-span-5">
               <SectionHeader subtitle="Catálogo de producto" title="Una plataforma modular para operar empresas multirubro." />
-              <p className="text-lg leading-relaxed text-brand-dark/60">
+              <p className="text-base leading-relaxed text-brand-dark/60 md:text-lg">
                 No vendemos una pantalla administrativa. Vendemos un sistema operativo de negocio: módulos conectados, datos gobernados, automatización de flujos, reporting ejecutivo y copilotos por empresa.
               </p>
             </div>
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3 lg:col-span-7">
               {productCatalog.map((item) => (
-                <div key={item.title} className="rounded-lg border border-brand-dark/10 bg-brand-light/60 p-6">
-                  <item.icon className="mb-5 text-brand-primary" size={28} />
-                  <h3 className="text-lg font-bold text-brand-dark">{item.title}</h3>
-                  <p className="mt-3 text-sm leading-relaxed text-brand-dark/60">{item.copy}</p>
+                <div key={item.title} className="rounded-lg border border-brand-dark/10 bg-brand-light/60 p-5">
+                  <item.icon className="mb-4 text-brand-primary" size={24} />
+                  <h3 className="text-base font-bold leading-tight text-brand-dark">{item.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-brand-dark/60">{item.copy}</p>
                 </div>
               ))}
             </div>

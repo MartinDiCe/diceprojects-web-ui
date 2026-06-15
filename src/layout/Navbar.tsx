@@ -12,7 +12,7 @@ export const Navbar = () => {
   const location = useLocation();
 
   return (
-    <nav className="fixed top-0 w-full z-50 bg-brand-white/95 backdrop-blur-md border-b border-brand-dark/5 h-24 flex items-center">
+    <nav className="fixed top-0 w-full z-50 bg-brand-white/95 backdrop-blur-md border-b border-brand-dark/5 h-20 flex items-center">
       <Container className="flex items-center justify-between px-6 md:px-10">
         <Link 
           to="/" 
@@ -22,12 +22,12 @@ export const Navbar = () => {
           <img 
             src="/assets/logos/dice-logo-lineal.svg" 
             alt={BRAND.name} 
-            className="h-10 md:h-12 lg:h-14 w-auto shrink-0"
+            className="h-9 md:h-11 w-auto shrink-0"
           />
         </Link>
 
         {/* Desktop Nav */}
-        <div className="hidden lg:flex items-center gap-10">
+        <div className="hidden lg:flex items-center gap-8">
           {navItems.map((item) => {
             const isActive = location.pathname === item.path;
             return (
@@ -36,7 +36,7 @@ export const Navbar = () => {
                 to={item.path}
                 aria-current={isActive ? 'page' : undefined}
                 className={cn(
-                  "relative text-[12px] font-semibold uppercase tracking-[0.18em] transition-all focus-visible:outline-2 focus-visible:outline-brand-primary focus-visible:outline-offset-4",
+                  "relative text-[11px] font-semibold uppercase tracking-[0.18em] transition-all focus-visible:outline-2 focus-visible:outline-brand-primary focus-visible:outline-offset-4",
                   isActive ? "text-brand-primary" : "text-brand-dark/65 hover:text-brand-primary"
                 )}
               >
@@ -51,7 +51,7 @@ export const Navbar = () => {
             );
           })}
           <Link to="/contacto">
-            <Button className="rounded-full h-11 px-6 text-[11px] font-semibold uppercase tracking-[0.18em]">
+            <Button className="rounded-full h-10 px-5 text-[10px] font-semibold uppercase tracking-[0.16em]">
               Agendar Diagnóstico <ChevronRight size={14} className="ml-2" />
             </Button>
           </Link>

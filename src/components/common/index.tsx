@@ -4,6 +4,7 @@ import { cn } from '@/src/lib/utils';
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: 'primary' | 'secondary' | 'outline';
   size?: 'sm' | 'md' | 'lg';
+  type?: 'button' | 'submit' | 'reset';
   className?: string;
   children: React.ReactNode;
 }
@@ -59,17 +60,18 @@ export const SectionHeader = ({
   align?: 'left' | 'center';
   light?: boolean;
 }) => (
-  <div className={cn('space-y-4 mb-16', align === 'center' ? 'text-center' : 'text-left')}>
+  <div className={cn('space-y-3 mb-10 md:mb-12', align === 'center' ? 'text-center' : 'text-left')}>
     {subtitle && (
       <span className={cn(
-        'text-[10px] font-bold uppercase tracking-[0.4em]',
+        'text-[10px] font-bold uppercase tracking-[0.28em]',
         light ? 'text-brand-white/60' : 'text-brand-primary'
       )}>
         {subtitle}
       </span>
     )}
     <h2 className={cn(
-      'text-4xl md:text-5xl font-medium tracking-tight leading-tight uppercase',
+      'max-w-4xl text-3xl md:text-4xl lg:text-5xl font-medium tracking-tight leading-tight',
+      align === 'center' ? 'mx-auto' : '',
       light ? 'text-brand-white' : 'text-brand-dark'
     )}>
       {title}
