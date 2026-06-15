@@ -6,10 +6,14 @@ import { cn } from '@/src/lib/utils';
 import { Container, Button } from '@/src/components/common';
 import { navItems } from '@/src/constants/navigation';
 import { BRAND } from '@/src/app/config/branding.config';
+import { copy, useLanguage } from '@/src/i18n/LanguageContext';
 
 export const Navbar = () => {
   const [isOpen, setIsOpen] = React.useState(false);
   const location = useLocation();
+  const { language, toggleLanguage } = useLanguage();
+  const t = copy[language];
+  const navLabels = [t.nav.home, t.nav.solution, t.nav.method, t.nav.insights, t.nav.about, t.nav.contact];
 
   return (
     <nav className="fixed top-0 w-full z-50 bg-brand-white/95 backdrop-blur-md border-b border-brand-dark/5 h-20 flex items-center">
@@ -28,7 +32,7 @@ export const Navbar = () => {
 
         {/* Desktop Nav */}
         <div className="hidden lg:flex items-center gap-8">
-          {navItems.map((item) => {
+          {navItems.map((item, index) => {
             const isActive = location.pathname === item.path;
             return (
               <Link
@@ -40,7 +44,7 @@ export const Navbar = () => {
                   isActive ? "text-brand-primary" : "text-brand-dark/65 hover:text-brand-primary"
                 )}
               >
-                {item.name}
+                {navLabels[index]}
                 {isActive && (
                   <motion.div 
                     layoutId="nav-active"
@@ -50,9 +54,17 @@ export const Navbar = () => {
               </Link>
             );
           })}
+          <button
+            type="button"
+            onClick={toggleLanguage}
+            className="rounded-full border border-brand-dark/10 px-3 py-2 text-[10px] font-bold uppercase tracking-[0.16em] text-brand-dark/65 transition hover:border-brand-primary hover:text-brand-primary"
+            aria-label={language === 'es' ? 'Switch to English' : 'Cambiar a Español'}
+          >
+            {language === 'es' ? 'EN' : 'ES'}
+          </button>
           <Link to="/contacto">
             <Button className="rounded-full h-10 px-5 text-[10px] font-semibold uppercase tracking-[0.16em]">
-              Agendar Diagnóstico <ChevronRight size={14} className="ml-2" />
+              {t.nav.cta} <ChevronRight size={14} className="ml-2" />
             </Button>
           </Link>
         </div>
@@ -66,6 +78,14 @@ export const Navbar = () => {
             aria-expanded={isOpen}
           >
             {isOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+          <button
+            type="button"
+            onClick={toggleLanguage}
+            className="rounded-lg border border-brand-dark/10 px-2.5 py-2 text-[10px] font-bold uppercase tracking-[0.12em] text-brand-dark/70"
+            aria-label={language === 'es' ? 'Switch to English' : 'Cambiar a Español'}
+          >
+            {language === 'es' ? 'EN' : 'ES'}
           </button>
         </div>
       </Container>
@@ -89,13 +109,13 @@ export const Navbar = () => {
               className="fixed top-0 right-0 h-full w-[88%] max-w-sm bg-brand-white z-50 lg:hidden shadow-2xl p-6 sm:p-8 flex flex-col"
             >
               <div className="flex items-center justify-between mb-10">
-                <span className="text-xs font-bold uppercase tracking-widest text-brand-primary">Menú</span>
+                <span className="text-xs font-bold uppercase tracking-widest text-brand-primary">{t.nav.menu}</span>
                 <button onClick={() => setIsOpen(false)} className="p-2 hover:bg-brand-dark/5 rounded-lg">
                   <X size={24} />
                 </button>
               </div>
               <div className="flex flex-col gap-5">
-                {navItems.map((item) => (
+                {navItems.map((item, index) => (
                   <Link
                     key={item.path}
                     to={item.path}
@@ -105,13 +125,13 @@ export const Navbar = () => {
                       location.pathname === item.path ? "text-brand-primary" : "text-brand-dark"
                     )}
                   >
-                    {item.name}
+                    {navLabels[index]}
                   </Link>
                 ))}
               </div>
               <div className="mt-auto pt-8 border-t border-brand-dark/5">
                 <Link to="/contacto" onClick={() => setIsOpen(false)}>
-                  <Button className="w-full py-4 rounded-lg">Agendar Diagnóstico</Button>
+                  <Button className="w-full py-4 rounded-lg">{t.nav.cta}</Button>
                 </Link>
               </div>
             </motion.div>
