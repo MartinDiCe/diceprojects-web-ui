@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { cn } from '@/src/lib/utils';
 
 interface LegalLinksProps {
@@ -21,6 +21,11 @@ export const LegalLinks = ({
   className 
 }: LegalLinksProps) => {
   const isFooter = variant === 'footer';
+  const navigate = useNavigate();
+
+  const goTo = React.useCallback((path: string) => {
+    navigate(path);
+  }, [navigate]);
 
   return (
     <div className={cn('space-y-4', className)}>
@@ -37,18 +42,19 @@ export const LegalLinks = ({
         !isFooter && 'grid grid-cols-1 md:grid-cols-2 gap-6'
       )}>
         {legalItems.map((item) => (
-          <Link
+          <button
             key={item.path}
-            to={item.path}
+            type="button"
+            onClick={() => goTo(item.path)}
             className={cn(
-              'text-sm transition-colors focus-visible:outline-2 focus-visible:outline-brand-accent focus-visible:outline-offset-4',
+              'w-full text-sm transition-colors focus-visible:outline-2 focus-visible:outline-brand-accent focus-visible:outline-offset-4',
               isFooter 
-                ? 'text-brand-white/60 hover:text-brand-white' 
-                : 'font-bold text-brand-ink/70 hover:text-brand-accent'
+                ? 'text-center text-brand-white/60 hover:text-brand-white md:text-left'
+                : 'text-left font-bold text-brand-ink/70 hover:text-brand-accent'
             )}
           >
             {item.name}
-          </Link>
+          </button>
         ))}
       </nav>
     </div>

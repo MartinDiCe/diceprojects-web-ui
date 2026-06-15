@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { ChevronRight, Linkedin, Mail, Phone } from 'lucide-react';
 import { Container } from '@/src/components/common';
 import { LegalLinks } from '@/src/components/legal/LegalLinks';
@@ -8,6 +8,7 @@ import { copy, useLanguage } from '@/src/i18n/LanguageContext';
 
 export const Footer = () => {
   const { language } = useLanguage();
+  const navigate = useNavigate();
   const t = copy[language];
   const seoLinks = [
     { label: 'Plataforma empresarial', path: '/plataforma-empresarial-multirubro' },
@@ -21,6 +22,10 @@ export const Footer = () => {
     { label: 'Integraciones empresariales', path: '/integraciones-apis-bases-documentos' },
     { label: 'Copiloto AI empresarial', path: '/copiloto-ai-empresarial' },
   ];
+
+  const goTo = React.useCallback((path: string) => {
+    navigate(path);
+  }, [navigate]);
 
   return (
     <footer className="bg-[#25292F] text-brand-white border-t border-brand-white/10">
@@ -63,9 +68,14 @@ export const Footer = () => {
                 <h4 className="text-[10px] font-bold uppercase tracking-[0.25em] text-brand-primary">{t.footer.solutions}</h4>
                 <div className="mt-3 grid grid-cols-1 gap-x-8 gap-y-2 sm:grid-cols-2">
                   {seoLinks.map((link, index) => (
-                    <Link key={link.path} to={link.path} className="block text-sm text-brand-white/60 transition hover:text-brand-primary">
+                    <button
+                      key={link.path}
+                      type="button"
+                      onClick={() => goTo(link.path)}
+                      className="block w-full text-center text-sm text-brand-white/60 transition hover:text-brand-primary md:text-left"
+                    >
                       {t.footer.links[index] ?? link.label}
-                    </Link>
+                    </button>
                   ))}
                 </div>
               </div>
@@ -96,14 +106,15 @@ export const Footer = () => {
               </div>
 
               <div className="pt-1">
-                <Link
-                  to="/contacto#diagnostico"
+                <button
+                  type="button"
+                  onClick={() => goTo('/contacto#diagnostico')}
                   data-mkt="footer_diagnostic_cta"
                   data-mkt-category="LEAD"
                   className="inline-flex h-10 items-center justify-center rounded-lg bg-brand-primary px-5 text-xs font-bold uppercase tracking-[0.16em] text-brand-white transition hover:bg-brand-secondary"
                 >
                   {t.footer.diagnostic} <ChevronRight size={14} className="ml-2" />
-                </Link>
+                </button>
               </div>
             </div>
           </div>
