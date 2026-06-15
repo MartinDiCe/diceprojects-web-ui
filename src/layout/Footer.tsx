@@ -7,9 +7,14 @@ import { BRAND } from '@/src/app/config/branding.config';
 
 export const Footer = () => {
   const seoLinks = [
+    { label: 'Plataforma empresarial', path: '/plataforma-empresarial-multirubro' },
     { label: 'Automatización de procesos', path: '/automatizacion-de-procesos' },
-    { label: 'Software para obras', path: '/software-gestion-obras-servicios' },
+    { label: 'Gestión comercial', path: '/gestion-comercial-crm-operativo' },
+    { label: 'Productos y catálogo', path: '/gestion-productos-catalogo-web' },
+    { label: 'Stock y almacenes', path: '/gestion-stock-almacenes-inventario' },
+    { label: 'Marketing y leads', path: '/marketing-leads-campanas-embudos' },
     { label: 'Presupuestos y cotizaciones', path: '/presupuestos-cotizaciones-compras' },
+    { label: 'Proyectos y servicios', path: '/software-gestion-obras-servicios' },
     { label: 'Integraciones empresariales', path: '/integraciones-apis-bases-documentos' },
     { label: 'Copiloto AI empresarial', path: '/copiloto-ai-empresarial' },
   ];
@@ -101,7 +106,7 @@ export const Footer = () => {
       <div className="border-t border-brand-white/10 py-6">
         <Container className="px-6 md:px-10 flex flex-col md:flex-row items-center md:justify-between text-center md:text-left gap-4 text-[10px] font-bold uppercase tracking-[0.4em] text-brand-white/40">
           <p>© {new Date().getFullYear()} Dice Projects. Todos los derechos reservados.</p>
-          <p className="hidden md:block">Arquitectura Digital • Integración • Gobernanza Tecnológica</p>
+          <p className="hidden md:block">Producto Empresarial • Automatización • Copiloto AI</p>
         </Container>
       </div>
     </footer>

@@ -2,26 +2,40 @@ import React from 'react';
 import { motion } from 'motion/react';
 import {
   ArrowRight,
+  Activity,
+  Bell,
   Bot,
   Boxes,
   Building2,
   CheckCircle2,
+  Database,
   FileCheck2,
   GitBranch,
   LineChart,
+  Megaphone,
   PlugZap,
   ShieldCheck,
   Sparkles,
+  Users,
+  Warehouse,
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Container, Button, SectionHeader } from '@/src/components/common';
 import { Seo, organizationJsonLd, serviceJsonLd } from '@/src/components/seo/Seo';
 
-const operatingSystems = [
-  { icon: Building2, title: 'Obras y servicios', copy: 'Avances, recursos, costos, partes, aprobaciones y seguimiento por cliente.' },
-  { icon: FileCheck2, title: 'Presupuestos y cotizaciones', copy: 'Solicitudes, comparativas, propuestas, compras y trazabilidad comercial.' },
-  { icon: Boxes, title: 'Productos web', copy: 'Catálogos, precios, stock, canales de publicación y operación multirubro.' },
-  { icon: PlugZap, title: 'Integraciones', copy: 'APIs, bases, Drive, SharePoint, ERPs y sistemas existentes trabajando como uno solo.' },
+const productCatalog = [
+  { icon: Building2, title: 'Organización multiempresa', copy: 'Empresas, vendedores, clientes, proveedores, contactos, direcciones y alcances por operación.' },
+  { icon: Users, title: 'Personas y responsables', copy: 'Personal interno, cargos, responsables operativos y datos de contacto por empresa.' },
+  { icon: Boxes, title: 'Productos y catálogo web', copy: 'Artículos, precios, imágenes, atributos, marcas, estados, canales y publicación comercial.' },
+  { icon: FileCheck2, title: 'Ventas y cotizaciones', copy: 'Cotizaciones, propuestas, clientes, PDF, link público, WhatsApp y seguimiento comercial.' },
+  { icon: PlugZap, title: 'Compras y proveedores', copy: 'Solicitudes de presupuesto, comparativas, respuestas proveedor, adjudicación y trazabilidad.' },
+  { icon: Building2, title: 'Proyectos y servicios', copy: 'Obras, proyectos integrales, recursos, templates, presupuestos, avances, costos y desvíos.' },
+  { icon: Warehouse, title: 'Almacenes y stock', copy: 'Depósitos, movimientos, disponibilidad, reservas, operaciones y reposición.' },
+  { icon: Megaphone, title: 'Marketing y demanda', copy: 'Prospectos, formularios, campañas, embudos, cupones, destacados y señales de producto.' },
+  { icon: Bell, title: 'Notificaciones', copy: 'Campana, email, push, plantillas, variables, perfiles de envío y logs.' },
+  { icon: ShieldCheck, title: 'Seguridad y auditoría', copy: 'Usuarios, roles, permisos, invitaciones, auditoría, API traces y gobierno de acceso.' },
+  { icon: Database, title: 'Configuración e infraestructura', copy: 'Parámetros, catálogos nativos, numeradores, feature flags, servicios y health checks.' },
+  { icon: Bot, title: 'AI Orchestrator', copy: 'Copiloto, agentes, memoria, knowledge, documentos, APIs, bases, métricas y control de costos.' },
 ];
 
 const outcomes = [
@@ -33,28 +47,26 @@ const outcomes = [
 ];
 
 const platformModules = [
-  'Proyectos y obras',
-  'Compras y proveedores',
-  'Ventas y cotizaciones',
+  'CRM operativo y organización',
+  'Ventas, presupuestos y compras',
   'Productos, stock y canales',
+  'Proyectos, servicios y ejecución',
+  'Marketing, leads y campañas',
+  'Notificaciones y trazabilidad',
   'Dashboards ejecutivos',
   'Copiloto AI por empresa',
   'Integraciones API/BD/documentos',
-  'Automatización de flujos',
+  'Seguridad, auditoría y permisos',
 ];
 
 export default function HomePage() {
-  React.useEffect(() => {
-    document.title = 'Dice Projects | Automatización, procesos y copiloto empresarial';
-  }, []);
-
   return (
     <div className="overflow-hidden bg-brand-white">
       <Seo
-        title="Automatización de procesos, obras, cotizaciones y copiloto empresarial"
-        description="Dice Projects automatiza procesos empresariales, ordena obras y servicios, productos, presupuestos, cotizaciones, integraciones y copiloto AI con datos reales."
+        title="Plataforma empresarial multirubro para automatización, operación y copiloto AI"
+        description="Dice Projects centraliza ventas, compras, productos, proyectos, servicios, stock, marketing, integraciones, KPIs y copiloto AI en una plataforma operativa multirubro."
         path="/"
-        keywords={['automatización de procesos', 'software para obras', 'cotizaciones empresariales', 'integraciones API', 'copiloto AI empresarial', 'mejora de procesos']}
+        keywords={['plataforma empresarial multirubro', 'automatización de procesos', 'software operativo empresarial', 'cotizaciones empresariales', 'integraciones API', 'copiloto AI empresarial', 'gestión de productos y stock']}
         jsonLd={[
           organizationJsonLd(),
           serviceJsonLd('Automatización de procesos empresariales y copiloto AI', 'Solución para automatizar operaciones, integrar sistemas y asistir decisiones con agentes AI empresariales.', '/'),
@@ -73,8 +85,8 @@ export default function HomePage() {
                 <div className="flex items-center gap-3">
                   <img src="/assets/logos/dice-isologo.svg" alt="" className="h-10 w-10" />
                   <div>
-                    <p className="text-sm font-bold">Centro de operación</p>
-                    <p className="text-xs text-brand-dark/50">Obras, ventas, compras, productos e AI</p>
+                    <p className="text-sm font-bold">Sistema operativo empresarial</p>
+                    <p className="text-xs text-brand-dark/50">Ventas, compras, productos, proyectos, stock, marketing e AI</p>
                   </div>
                 </div>
                 <span className="rounded-full bg-emerald-50 px-3 py-1 text-xs font-bold text-emerald-700">Online</span>
@@ -82,10 +94,10 @@ export default function HomePage() {
               <div className="grid grid-cols-12 gap-4">
                 <div className="col-span-8 space-y-4">
                   <div className="grid grid-cols-3 gap-3">
-                    {['Margen', 'Cotizaciones', 'Obras'].map((label, index) => (
+                    {['Margen', 'Cotizaciones', 'Stock'].map((label, index) => (
                       <div key={label} className="rounded-lg border border-brand-dark/10 p-4">
                         <p className="text-xs text-brand-dark/45">{label}</p>
-                        <p className="mt-2 text-2xl font-bold text-brand-dark">{['28%', '142', '37'][index]}</p>
+                        <p className="mt-2 text-2xl font-bold text-brand-dark">{['28%', '142', '98%'][index]}</p>
                       </div>
                     ))}
                   </div>
@@ -95,7 +107,7 @@ export default function HomePage() {
                       <GitBranch className="text-brand-primary" size={18} />
                     </div>
                     <div className="grid grid-cols-4 gap-2 text-center text-xs font-bold">
-                      {['Pedido', 'Cotización', 'Aprobación', 'Ejecución'].map((step) => (
+                      {['Lead', 'Cotización', 'Compra', 'Entrega'].map((step) => (
                         <div key={step} className="rounded-md bg-brand-light px-2 py-3">{step}</div>
                       ))}
                     </div>
@@ -131,13 +143,13 @@ export default function HomePage() {
           >
             <div className="inline-flex items-center gap-3 rounded-full border border-brand-white/15 bg-brand-white/10 px-4 py-2 text-[11px] font-bold uppercase text-brand-white/80 backdrop-blur">
               <Sparkles size={14} className="text-brand-primary" />
-              Automatización, procesos y copiloto AI para empresas reales
+              Sistema operativo empresarial para vender, comprar, ejecutar y medir
             </div>
             <h1 className="max-w-5xl text-4xl font-medium leading-none text-brand-white md:text-7xl lg:text-8xl">
               Dice Projects
             </h1>
             <p className="max-w-2xl text-lg leading-relaxed text-brand-white/72 md:text-2xl">
-              Convertimos operaciones dispersas en un sistema inteligente: obras, servicios, productos, cotizaciones, integraciones, KPIs y agentes empresariales trabajando sobre la misma verdad.
+              Convertimos áreas dispersas en una plataforma inteligente: CRM operativo, productos, ventas, compras, stock, proyectos, marketing, integraciones, KPIs y agentes empresariales trabajando sobre la misma verdad.
             </p>
             <div className="flex flex-col gap-4 sm:flex-row">
               <Link to="/contacto">
@@ -167,13 +179,13 @@ export default function HomePage() {
         <Container>
           <div className="grid grid-cols-1 gap-10 lg:grid-cols-12">
             <div className="lg:col-span-5">
-              <SectionHeader subtitle="El problema que resolvemos" title="Tu empresa no necesita más planillas. Necesita una operación conectada." />
+              <SectionHeader subtitle="Catálogo de producto" title="Una plataforma modular para operar empresas multirubro." />
               <p className="text-lg leading-relaxed text-brand-dark/60">
-                Cuando ventas, compras, obra, stock y administración trabajan en sistemas separados, cada decisión llega tarde. Dice Projects ordena el proceso y automatiza el trabajo crítico para que el crecimiento no dependa de perseguir información.
+                No vendemos una pantalla administrativa. Vendemos un sistema operativo de negocio: módulos conectados, datos gobernados, automatización de flujos, reporting ejecutivo y copilotos por empresa.
               </p>
             </div>
-            <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:col-span-7">
-              {operatingSystems.map((item) => (
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3 lg:col-span-7">
+              {productCatalog.map((item) => (
                 <div key={item.title} className="rounded-lg border border-brand-dark/10 bg-brand-light/60 p-6">
                   <item.icon className="mb-5 text-brand-primary" size={28} />
                   <h3 className="text-lg font-bold text-brand-dark">{item.title}</h3>
@@ -187,11 +199,12 @@ export default function HomePage() {
 
       <section className="bg-brand-light py-24">
         <Container>
-          <SectionHeader align="center" subtitle="La solución" title="Una plataforma operativa más un equipo que la implementa." />
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+          <SectionHeader align="center" subtitle="Arquitectura de valor" title="Producto, automatización e inteligencia en una misma propuesta." />
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-4">
             {[
-              { icon: ShieldCheck, title: 'Gobierno operativo', copy: 'Roles, permisos, trazabilidad, auditoría y procesos claros para operar con control.' },
-              { icon: PlugZap, title: 'Automatización e integraciones', copy: 'Conectamos APIs, bases, documentos y sistemas existentes para eliminar doble carga.' },
+              { icon: Activity, title: 'Módulos operativos', copy: 'Ventas, compras, stock, productos, proyectos, marketing, personas y organización funcionando conectados.' },
+              { icon: ShieldCheck, title: 'Gobierno y trazabilidad', copy: 'Roles, permisos, auditoría, multiempresa, alcance por vendedor y control de datos sensibles.' },
+              { icon: PlugZap, title: 'Automatización e integraciones', copy: 'APIs, bases, documentos y sistemas existentes conectados para eliminar doble carga.' },
               { icon: Bot, title: 'Copiloto empresarial', copy: 'Agentes que consultan documentos, datos, KPIs y módulos con contexto de empresa y usuario.' },
             ].map((item) => (
               <div key={item.title} className="rounded-lg bg-brand-white p-8 shadow-sm">
@@ -207,9 +220,9 @@ export default function HomePage() {
       <section className="bg-brand-dark py-24 text-brand-white">
         <Container className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:items-center">
           <div>
-            <SectionHeader subtitle="Qué vendemos" title="No es un backoffice. Es el sistema nervioso de tu operación." light />
+            <SectionHeader subtitle="Qué vendemos" title="No es un backoffice. Es una plataforma de operación e inteligencia." light />
             <p className="text-lg leading-relaxed text-brand-white/60">
-              Implementamos un núcleo operativo adaptable a empresas de construcción, servicios integrales, distribución, comercio, industrias livianas y equipos que venden, compran, ejecutan y reportan todos los días.
+              Implementamos un núcleo adaptable a empresas de servicios, comercio, distribución, industria liviana, construcción, mantenimiento, operaciones técnicas y equipos que venden, compran, ejecutan, comunican y reportan todos los días.
             </p>
           </div>
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">

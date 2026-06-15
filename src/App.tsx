@@ -36,7 +36,12 @@ export default function App() {
           <Route path="/insights/:slug" element={<InsightArticlePage />} />
           <Route path="/sobre" element={<SobrePage />} />
           <Route path="/contacto" element={<ContactoPage />} />
+          <Route path="/plataforma-empresarial-multirubro" element={<SeoLandingPage page="plataforma" />} />
           <Route path="/automatizacion-de-procesos" element={<SeoLandingPage page="automatizacion" />} />
+          <Route path="/gestion-comercial-crm-operativo" element={<SeoLandingPage page="comercial" />} />
+          <Route path="/gestion-productos-catalogo-web" element={<SeoLandingPage page="productos" />} />
+          <Route path="/gestion-stock-almacenes-inventario" element={<SeoLandingPage page="stock" />} />
+          <Route path="/marketing-leads-campanas-embudos" element={<SeoLandingPage page="marketing" />} />
           <Route path="/software-gestion-obras-servicios" element={<SeoLandingPage page="obras" />} />
           <Route path="/presupuestos-cotizaciones-compras" element={<SeoLandingPage page="cotizaciones" />} />
           <Route path="/integraciones-apis-bases-documentos" element={<SeoLandingPage page="integraciones" />} />

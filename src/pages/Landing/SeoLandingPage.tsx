@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { Container, Button, SectionHeader } from '@/src/components/common';
 import { Seo, organizationJsonLd, serviceJsonLd } from '@/src/components/seo/Seo';
 
-type LandingKey = 'automatizacion' | 'obras' | 'cotizaciones' | 'integraciones' | 'copiloto';
+type LandingKey = 'plataforma' | 'automatizacion' | 'comercial' | 'productos' | 'stock' | 'marketing' | 'obras' | 'cotizaciones' | 'integraciones' | 'copiloto';
 
 const pages: Record<LandingKey, {
   path: string;
@@ -17,6 +17,21 @@ const pages: Record<LandingKey, {
   bullets: string[];
   sections: Array<{ title: string; copy: string }>;
 }> = {
+  plataforma: {
+    path: '/plataforma-empresarial-multirubro',
+    title: 'Plataforma empresarial multirubro',
+    description: 'Plataforma empresarial multirubro para centralizar organización, ventas, compras, productos, stock, proyectos, marketing, KPIs, integraciones y copiloto AI.',
+    eyebrow: 'Sistema operativo de negocio',
+    h1: 'Una plataforma empresarial para operar distintos rubros con una misma arquitectura.',
+    intro: 'Dice Projects permite activar módulos según necesidad: organización comercial, productos, ventas, compras, stock, proyectos, marketing, notificaciones, auditoría, integraciones y AI.',
+    keywords: ['plataforma empresarial multirubro', 'software operativo empresarial', 'sistema operativo de negocio', 'software multiempresa', 'plataforma de gestión empresarial'],
+    bullets: ['Multiempresa y multivendedor', 'Módulos activables', 'Permisos y auditoría', 'Dashboards ejecutivos', 'Copiloto AI e integraciones'],
+    sections: [
+      { title: 'Arquitectura modular', copy: 'Activá solo lo que el cliente necesita hoy y escalá hacia nuevos módulos sin rediseñar todo.' },
+      { title: 'Dato único', copy: 'Clientes, proveedores, vendedores, productos y procesos conectados para evitar decisiones con información duplicada.' },
+      { title: 'Producto más servicio', copy: 'No entregamos software vacío: implementamos procesos, configuración, integraciones y adopción.' },
+    ],
+  },
   automatizacion: {
     path: '/automatizacion-de-procesos',
     title: 'Automatización de procesos empresariales',
@@ -60,6 +75,66 @@ const pages: Record<LandingKey, {
       { title: 'Del pedido a la decisión', copy: 'Convertí requerimientos en cotizaciones comparables y aprobaciones con historial.' },
       { title: 'Menos errores comerciales', copy: 'Estandarizá condiciones, precios, estados y documentación asociada.' },
       { title: 'Compras con evidencia', copy: 'Dejá registro de cada proveedor, valor, fecha, decisión y motivo.' },
+    ],
+  },
+  comercial: {
+    path: '/gestion-comercial-crm-operativo',
+    title: 'Gestión comercial y CRM operativo',
+    description: 'Gestión comercial con clientes, vendedores, prospectos, cotizaciones, campañas, seguimiento, propuestas y dashboards comerciales.',
+    eyebrow: 'Gestión comercial',
+    h1: 'Un CRM operativo conectado con cotizaciones, productos, compras y marketing.',
+    intro: 'Ordená clientes, vendedores, prospectos, campañas, cotizaciones y propuestas para que el equipo comercial venda con información real.',
+    keywords: ['CRM operativo', 'gestión comercial', 'software comercial', 'seguimiento de clientes', 'cotizaciones y ventas'],
+    bullets: ['Clientes y vendedores', 'Prospectos y campañas', 'Cotizaciones', 'Propuestas y links', 'Dashboards comerciales'],
+    sections: [
+      { title: 'De lead a propuesta', copy: 'El flujo conecta formularios, campañas, prospectos, cliente, cotización y seguimiento.' },
+      { title: 'Vendedores con alcance', copy: 'Multiempresa, multivendedor o vendedor único, con permisos y visibilidad correcta.' },
+      { title: 'Datos comerciales accionables', copy: 'Medí embudo, cotizaciones, señales de producto y oportunidades pendientes.' },
+    ],
+  },
+  productos: {
+    path: '/gestion-productos-catalogo-web',
+    title: 'Gestión de productos y catálogo web',
+    description: 'Gestión de productos, catálogo web, precios, imágenes, atributos, marcas, canales de publicación, importación y reglas comerciales.',
+    eyebrow: 'Productos y catálogo',
+    h1: 'Catálogo de productos listo para vender, publicar, cotizar y controlar.',
+    intro: 'Centralizá artículos, SKU, precios, imágenes, atributos, estados, marcas, unidades, canales e importación masiva.',
+    keywords: ['gestión de productos', 'catálogo web', 'software de productos', 'publicación de productos', 'importación de catálogo'],
+    bullets: ['Artículos y SKU', 'Precios e imágenes', 'Atributos y marcas', 'Canales de publicación', 'Importación masiva'],
+    sections: [
+      { title: 'Catálogo gobernado', copy: 'Un solo lugar para mantener productos comerciales, estados, atributos y reglas.' },
+      { title: 'Listo para cotizar y publicar', copy: 'El catálogo alimenta ventas, marketing, stock, canales web y procesos comerciales.' },
+      { title: 'Carga masiva', copy: 'Templates e importación para altas y actualizaciones sin fricción.' },
+    ],
+  },
+  stock: {
+    path: '/gestion-stock-almacenes-inventario',
+    title: 'Gestión de stock, almacenes e inventario',
+    description: 'Gestión de stock, depósitos, movimientos, reservas, operaciones de almacén, disponibilidad e inventario conectado con productos, ventas y compras.',
+    eyebrow: 'Almacenes e inventario',
+    h1: 'Stock y almacenes conectados con ventas, compras y productos.',
+    intro: 'Controlá depósitos, movimientos, disponibilidad, reservas, ajustes, operaciones y reposición con trazabilidad operativa.',
+    keywords: ['gestión de stock', 'software de almacenes', 'control de inventario', 'movimientos de stock', 'depósitos y reservas'],
+    bullets: ['Depósitos', 'Movimientos', 'Disponibilidad', 'Reservas', 'Reposición'],
+    sections: [
+      { title: 'Disponibilidad confiable', copy: 'Ventas y compras operan con stock real, no con planillas atrasadas.' },
+      { title: 'Movimientos trazables', copy: 'Entradas, salidas, ajustes y transferencias con motivo e historial.' },
+      { title: 'Operación por empresa', copy: 'Depósitos y stock por empresa o vendedor según el modelo comercial.' },
+    ],
+  },
+  marketing: {
+    path: '/marketing-leads-campanas-embudos',
+    title: 'Marketing, leads, campañas y embudos',
+    description: 'Marketing operativo con prospectos, formularios públicos, campañas, embudos, cupones, destacados, señales de producto y derivación a ventas.',
+    eyebrow: 'Marketing operativo',
+    h1: 'Capturá demanda, medí señales y conectá marketing con ventas.',
+    intro: 'Formularios, prospectos, campañas, embudos, cupones, productos destacados y señales comerciales conectadas al flujo de cotización.',
+    keywords: ['marketing operativo', 'gestión de leads', 'formularios comerciales', 'campañas y embudos', 'prospectos y cotizaciones'],
+    bullets: ['Prospectos', 'Formularios', 'Campañas', 'Embudo', 'Derivación a ventas'],
+    sections: [
+      { title: 'Captura multicanal', copy: 'Formularios públicos, QR, campañas y productos destacados para convertir interés en oportunidades.' },
+      { title: 'Seguimiento real', copy: 'Cada prospecto queda asociado a empresa, vendedor, campaña, producto y estado.' },
+      { title: 'Ventas conectadas', copy: 'Cuando el lead está listo, se transforma en cotización sin perder contexto.' },
     ],
   },
   integraciones: {
