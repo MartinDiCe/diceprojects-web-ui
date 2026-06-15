@@ -195,26 +195,27 @@ export default function HomePage() {
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7 }}
-            className="max-w-3xl space-y-6 xl:max-w-2xl 2xl:max-w-3xl lg:space-y-7"
+            className="max-w-3xl space-y-5 md:space-y-6 xl:max-w-2xl 2xl:max-w-3xl lg:space-y-7"
           >
-            <div className="inline-flex items-center gap-3 rounded-full border border-brand-white/15 bg-brand-white/10 px-4 py-2 text-[11px] font-bold uppercase text-brand-white/80 backdrop-blur">
-              <Sparkles size={14} className="text-brand-primary" />
-              Sistema operativo empresarial para vender, comprar, ejecutar y medir
+            <div className="inline-flex min-w-0 max-w-full items-start gap-2 rounded-full border border-brand-white/15 bg-brand-white/10 px-3 py-2 text-[10px] font-bold uppercase leading-relaxed tracking-[0.12em] text-brand-white/80 backdrop-blur sm:items-center sm:gap-3 sm:px-4 sm:text-[11px] sm:tracking-[0.16em]">
+              <Sparkles size={14} className="mt-0.5 shrink-0 text-brand-primary sm:mt-0" />
+              <span className="min-w-0 sm:hidden">Sistema operativo empresarial</span>
+              <span className="hidden min-w-0 sm:inline">Sistema operativo empresarial para vender, comprar, ejecutar y medir</span>
             </div>
             <h1 className="max-w-5xl text-4xl font-medium leading-none text-brand-white md:text-6xl lg:text-7xl">
               Dice Projects
             </h1>
-            <p className="max-w-2xl text-lg leading-relaxed text-brand-white/72 md:text-xl">
+            <p className="max-w-2xl text-base leading-relaxed text-brand-white/72 sm:text-lg md:text-xl">
               Convertimos áreas dispersas en una plataforma inteligente: CRM operativo, productos, ventas, compras, stock, proyectos, marketing, integraciones, KPIs y agentes empresariales trabajando sobre la misma verdad.
             </p>
             <div className="flex flex-col gap-4 sm:flex-row">
               <Link to="/contacto">
-                <Button size="lg" className="w-full px-8 sm:w-auto">
-                  Pedir diagnóstico comercial <ArrowRight size={18} />
+                <Button size="lg" className="w-full sm:w-auto">
+                  Pedir diagnóstico<span className="hidden sm:inline"> comercial</span> <ArrowRight size={18} />
                 </Button>
               </Link>
               <Link to="/automatizacion-y-orquestacion">
-                <Button variant="outline" size="lg" className="w-full border-brand-white/40 px-8 text-brand-white hover:border-brand-white hover:bg-brand-white hover:text-brand-dark sm:w-auto">
+                <Button variant="outline" size="lg" className="w-full border-brand-white/40 text-brand-white hover:border-brand-white hover:bg-brand-white hover:text-brand-dark sm:w-auto">
                   Ver solución
                 </Button>
               </Link>
@@ -231,11 +232,11 @@ export default function HomePage() {
         </Container>
       </section>
 
-      <section className="bg-brand-white py-16 md:py-20">
+      <section className="bg-brand-white py-14 md:py-20">
         <Container>
           <div className="grid grid-cols-1 gap-10 lg:grid-cols-12">
             <div className="lg:col-span-5">
-              <SectionHeader subtitle="Catálogo de producto" title="Una plataforma modular para operar empresas multirubro." />
+              <SectionHeader subtitle="Catálogo de producto" title="Plataforma modular para empresas multirubro." />
               <p className="text-base leading-relaxed text-brand-dark/60 md:text-lg">
                 No vendemos una pantalla administrativa. Vendemos un sistema operativo de negocio: módulos conectados, datos gobernados, automatización de flujos, reporting ejecutivo y copilotos por empresa.
               </p>
@@ -253,7 +254,7 @@ export default function HomePage() {
         </Container>
       </section>
 
-      <section className="bg-brand-white py-24">
+      <section className="bg-brand-white py-16 md:py-20 lg:py-24">
         <Container>
           <SectionHeader
             align="center"
@@ -262,13 +263,13 @@ export default function HomePage() {
           />
           <div className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-4">
             {businessExamples.map((item) => (
-              <div key={item.title} className="flex min-h-full flex-col rounded-lg border border-brand-dark/10 bg-brand-light/50 p-6">
-                <item.icon className="text-brand-primary" size={30} />
-                <h3 className="mt-5 text-xl font-bold leading-tight text-brand-dark">{item.title}</h3>
+              <div key={item.title} className="flex min-h-full flex-col rounded-lg border border-brand-dark/10 bg-brand-light/50 p-5 md:p-6">
+                <item.icon className="text-brand-primary" size={26} />
+                <h3 className="mt-4 text-lg font-bold leading-tight text-brand-dark md:text-xl">{item.title}</h3>
                 <p className="mt-3 flex-1 text-sm leading-relaxed text-brand-dark/62">{item.copy}</p>
-                <div className="mt-6 grid grid-cols-2 gap-2">
+                <div className="mt-5 grid grid-cols-2 gap-2">
                   {item.steps.map((step) => (
-                    <span key={step} className="rounded-md bg-brand-white px-3 py-2 text-xs font-bold text-brand-dark/70">
+                    <span key={step} className="min-w-0 rounded-md bg-brand-white px-2 py-2 text-xs font-bold leading-snug text-brand-dark/70 sm:px-3">
                       {step}
                     </span>
                   ))}
@@ -276,10 +277,10 @@ export default function HomePage() {
               </div>
             ))}
           </div>
-          <div className="mt-10 rounded-lg bg-brand-dark p-8 text-brand-white">
+          <div className="mt-8 rounded-lg bg-brand-dark p-6 text-brand-white md:mt-10 md:p-8">
             <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:items-center">
               <div className="lg:col-span-8">
-                <h3 className="text-3xl font-bold leading-tight">La diferencia está en conectar el flujo completo, no en cargar más datos.</h3>
+                <h3 className="text-2xl font-bold leading-tight md:text-3xl">La diferencia está en conectar el flujo completo, no en cargar más datos.</h3>
                 <p className="mt-4 text-brand-white/62">
                   El valor aparece cuando un evento web crea una oportunidad, una cotización dispara compras, una compra actualiza costos, el stock impacta ventas y los KPIs muestran rentabilidad sin perseguir planillas.
                 </p>
@@ -294,31 +295,31 @@ export default function HomePage() {
         </Container>
       </section>
 
-      <section className="bg-brand-light py-24">
+      <section className="bg-brand-light py-16 md:py-20 lg:py-24">
         <Container>
           <SectionHeader align="center" subtitle="Arquitectura de valor" title="Producto, automatización e inteligencia en una misma propuesta." />
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-4">
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-4">
             {[
               { icon: Activity, title: 'Módulos operativos', copy: 'Ventas, compras, stock, productos, proyectos, marketing, personas y organización funcionando conectados.' },
               { icon: ShieldCheck, title: 'Gobierno y trazabilidad', copy: 'Roles, permisos, auditoría, multiempresa, alcance por vendedor y control de datos sensibles.' },
               { icon: PlugZap, title: 'Automatización e integraciones', copy: 'APIs, bases, documentos y sistemas existentes conectados para eliminar doble carga.' },
               { icon: Bot, title: 'Copiloto empresarial', copy: 'Agentes que consultan documentos, datos, KPIs y módulos con contexto de empresa y usuario.' },
             ].map((item) => (
-              <div key={item.title} className="rounded-lg bg-brand-white p-8 shadow-sm">
-                <item.icon className="text-brand-primary" size={30} />
-                <h3 className="mt-6 text-xl font-bold text-brand-dark">{item.title}</h3>
-                <p className="mt-4 text-sm leading-relaxed text-brand-dark/62">{item.copy}</p>
+              <div key={item.title} className="rounded-lg bg-brand-white p-6 shadow-sm md:p-7">
+                <item.icon className="text-brand-primary" size={28} />
+                <h3 className="mt-5 text-lg font-bold text-brand-dark md:text-xl">{item.title}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-brand-dark/62">{item.copy}</p>
               </div>
             ))}
           </div>
         </Container>
       </section>
 
-      <section className="bg-brand-dark py-24 text-brand-white">
+      <section className="bg-brand-dark py-16 text-brand-white md:py-20 lg:py-24">
         <Container className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:items-center">
           <div>
             <SectionHeader subtitle="Qué vendemos" title="No es un backoffice. Es una plataforma de operación e inteligencia." light />
-            <p className="text-lg leading-relaxed text-brand-white/60">
+            <p className="text-base leading-relaxed text-brand-white/60 md:text-lg">
               Implementamos un núcleo adaptable a empresas de servicios, comercio, distribución, industria liviana, construcción, mantenimiento, operaciones técnicas y equipos que venden, compran, ejecutan, comunican y reportan todos los días.
             </p>
           </div>
@@ -332,7 +333,7 @@ export default function HomePage() {
         </Container>
       </section>
 
-      <section className="bg-brand-white py-24">
+      <section className="bg-brand-white py-16 md:py-20 lg:py-24">
         <Container className="grid grid-cols-1 gap-14 lg:grid-cols-12 lg:items-center">
           <div className="lg:col-span-6">
             <SectionHeader subtitle="Impacto comercial" title="La promesa es simple: vender mejor, ejecutar mejor y medir mejor." />
@@ -345,9 +346,9 @@ export default function HomePage() {
               ))}
             </ul>
           </div>
-          <div className="rounded-lg border border-brand-dark/10 bg-brand-light p-8">
+          <div className="rounded-lg border border-brand-dark/10 bg-brand-light p-6 md:p-8">
             <LineChart className="text-brand-primary" size={34} />
-            <h3 className="mt-6 text-3xl font-bold leading-tight text-brand-dark">Diagnóstico de 7 días para detectar dónde se pierde dinero.</h3>
+            <h3 className="mt-5 text-2xl font-bold leading-tight text-brand-dark md:mt-6 md:text-3xl">Diagnóstico de 7 días para detectar dónde se pierde dinero.</h3>
             <p className="mt-4 text-brand-dark/62">
               Mapeamos procesos, sistemas, retrabajo, reportes, decisiones y oportunidades de automatización. Terminás con roadmap de implementación, prioridades y estimación de ROI operativo.
             </p>

@@ -13,7 +13,7 @@ export const Navbar = () => {
 
   return (
     <nav className="fixed top-0 w-full z-50 bg-brand-white/95 backdrop-blur-md border-b border-brand-dark/5 h-20 flex items-center">
-      <Container className="flex items-center justify-between px-6 md:px-10">
+      <Container className="flex items-center justify-between px-4 sm:px-6 md:px-10">
         <Link 
           to="/" 
           className="flex items-center gap-3 group focus-visible:outline-2 focus-visible:outline-brand-primary focus-visible:outline-offset-4 shrink-0"
@@ -22,7 +22,7 @@ export const Navbar = () => {
           <img 
             src="/assets/logos/dice-logo-lineal.svg" 
             alt={BRAND.name} 
-            className="h-9 md:h-11 w-auto shrink-0"
+            className="h-8 sm:h-9 md:h-11 w-auto shrink-0"
           />
         </Link>
 
@@ -58,10 +58,7 @@ export const Navbar = () => {
         </div>
 
         {/* Mobile Toggle */}
-        <div className="flex items-center gap-4 lg:hidden">
-          <Link to="/contacto" className="sm:hidden">
-            <Button size="sm" className="px-4 py-2 text-[10px] rounded-lg">Diagnóstico</Button>
-          </Link>
+        <div className="flex items-center gap-2 sm:gap-4 lg:hidden">
           <button 
             className="text-brand-dark p-2 hover:bg-brand-dark/5 rounded-lg transition-colors focus-visible:outline-2 focus-visible:outline-brand-primary" 
             onClick={() => setIsOpen(!isOpen)}
@@ -89,22 +86,22 @@ export const Navbar = () => {
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-              className="fixed top-0 right-0 h-full w-[80%] max-w-sm bg-brand-white z-50 lg:hidden shadow-2xl p-8 flex flex-col"
+              className="fixed top-0 right-0 h-full w-[88%] max-w-sm bg-brand-white z-50 lg:hidden shadow-2xl p-6 sm:p-8 flex flex-col"
             >
-              <div className="flex items-center justify-between mb-12">
+              <div className="flex items-center justify-between mb-10">
                 <span className="text-xs font-bold uppercase tracking-widest text-brand-primary">Menú</span>
                 <button onClick={() => setIsOpen(false)} className="p-2 hover:bg-brand-dark/5 rounded-lg">
                   <X size={24} />
                 </button>
               </div>
-              <div className="flex flex-col gap-6">
+              <div className="flex flex-col gap-5">
                 {navItems.map((item) => (
                   <Link
                     key={item.path}
                     to={item.path}
                     onClick={() => setIsOpen(false)}
                     className={cn(
-                      "text-xl font-medium uppercase tracking-tight transition-colors",
+                      "text-lg font-medium uppercase tracking-tight transition-colors",
                       location.pathname === item.path ? "text-brand-primary" : "text-brand-dark"
                     )}
                   >

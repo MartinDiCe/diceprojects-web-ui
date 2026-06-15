@@ -16,13 +16,41 @@
 }
 
 @layer base {
+  html,
+  body,
+  #root {
+    width: 100%;
+    overflow-x: hidden;
+  }
+
   body {
     @apply bg-brand-white text-brand-dark font-sans antialiased;
+  }
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
   }
 
   h1, h2, h3 {
     @apply font-sans font-normal;
     letter-spacing: 0;
+    overflow-wrap: break-word;
+  }
+
+  @media (max-width: 640px) {
+    p,
+    span,
+    a,
+    button,
+    label,
+    input,
+    textarea,
+    select {
+      min-width: 0;
+      overflow-wrap: anywhere;
+    }
   }
   
   h1, h2 {

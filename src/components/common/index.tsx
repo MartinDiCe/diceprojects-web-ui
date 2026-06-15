@@ -24,14 +24,14 @@ export const Button = ({
 
   const sizes = {
     sm: 'px-4 py-2 text-xs',
-    md: 'px-6 py-3 text-sm',
-    lg: 'px-10 py-5 text-base',
+    md: 'px-5 py-3 text-sm md:px-6',
+    lg: 'px-6 py-4 text-sm md:px-10 md:py-5 md:text-base',
   };
 
   return (
     <button
       className={cn(
-        'font-medium uppercase tracking-widest transition-all duration-300 inline-flex items-center justify-center gap-2 rounded-lg focus-visible:outline-2 focus-visible:outline-brand-primary focus-visible:outline-offset-4 disabled:opacity-50 disabled:cursor-not-allowed',
+        'min-w-0 max-w-full whitespace-normal text-center font-medium uppercase leading-tight tracking-[0.12em] md:tracking-widest transition-all duration-300 inline-flex items-center justify-center gap-2 rounded-lg focus-visible:outline-2 focus-visible:outline-brand-primary focus-visible:outline-offset-4 disabled:opacity-50 disabled:cursor-not-allowed',
         variants[variant],
         sizes[size],
         className
@@ -44,7 +44,7 @@ export const Button = ({
 };
 
 export const Container = ({ children, className }: { children: React.ReactNode; className?: string }) => (
-  <div className={cn('max-w-7xl mx-auto px-6 w-full', className)}>
+  <div className={cn('max-w-7xl mx-auto px-5 sm:px-6 w-full', className)}>
     {children}
   </div>
 );
@@ -70,7 +70,7 @@ export const SectionHeader = ({
       </span>
     )}
     <h2 className={cn(
-      'max-w-4xl text-3xl md:text-4xl lg:text-5xl font-medium tracking-tight leading-tight',
+      'max-w-4xl text-3xl md:text-4xl lg:text-5xl font-medium tracking-tight leading-tight text-balance',
       align === 'center' ? 'mx-auto' : '',
       light ? 'text-brand-white' : 'text-brand-dark'
     )}>

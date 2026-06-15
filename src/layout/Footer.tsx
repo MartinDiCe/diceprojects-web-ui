@@ -21,9 +21,9 @@ export const Footer = () => {
 
   return (
     <footer className="bg-[#25292F] text-brand-white border-t border-brand-white/10">
-      <div className="py-8">
+      <div className="py-7 md:py-8">
         <Container className="px-6 md:px-10">
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-12 text-center md:text-left justify-items-center md:justify-items-start">
+          <div className="grid grid-cols-1 gap-7 md:grid-cols-2 lg:grid-cols-12 text-center md:text-left justify-items-center md:justify-items-start">
             {/* Brand & Institutional Statement */}
             <div className="lg:col-span-3 space-y-3 flex flex-col items-center md:items-start">
               <Link to="/" className="inline-flex focus-visible:outline-2 focus-visible:outline-brand-primary focus-visible:outline-offset-4">
@@ -75,7 +75,7 @@ export const Footer = () => {
                   <div className="w-8 h-8 rounded-lg bg-brand-white/10 flex items-center justify-center group-hover:bg-brand-primary transition-colors">
                     <Mail size={14} className="text-brand-white/70 group-hover:text-brand-white" />
                   </div>
-                  <span className="text-sm font-medium text-brand-white/70 group-hover:text-brand-primary transition-colors">
+                  <span className="break-all text-sm font-medium text-brand-white/70 group-hover:text-brand-primary transition-colors">
                     {BRAND.contact.email}
                   </span>
                 </a>

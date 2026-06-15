@@ -70,7 +70,7 @@ const operationalScenarios = [
 
 export default function ServiciosPage() {
   return (
-    <div className="bg-brand-white pb-28">
+    <div className="bg-brand-white pb-20 md:pb-28">
       <Seo
         title="Catálogo de servicios y plataforma empresarial multirubro"
         description="Implementamos una plataforma empresarial para organización, productos, ventas, compras, stock, proyectos, marketing, seguridad, integraciones, KPIs y copiloto AI."
@@ -78,18 +78,18 @@ export default function ServiciosPage() {
         keywords={['plataforma empresarial', 'software multirubro', 'automatización empresarial', 'sistema operativo de negocio', 'integraciones empresariales', 'copiloto empresarial']}
         jsonLd={[organizationJsonLd(), serviceJsonLd('Plataforma empresarial Dice Projects', 'Sistema operativo de negocio con módulos operativos, automatización, integraciones y copiloto AI para empresas multirubro.', '/automatizacion-y-orquestacion')]}
       />
-      <section className="relative overflow-hidden bg-brand-dark pb-20 pt-36 text-brand-white">
+      <section className="relative overflow-hidden bg-brand-dark pb-16 pt-28 text-brand-white md:pb-20 md:pt-32">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_72%_20%,rgba(56,126,188,0.42),transparent_34%)]" />
         <Container className="relative z-10">
-          <div className="max-w-5xl space-y-7">
-            <span className="inline-flex rounded-full border border-brand-white/15 bg-brand-white/10 px-4 py-2 text-[11px] font-bold uppercase text-brand-white/75">
+          <div className="max-w-5xl space-y-6 md:space-y-7">
+            <span className="inline-flex max-w-full rounded-full border border-brand-white/15 bg-brand-white/10 px-3 py-2 text-[10px] font-bold uppercase leading-relaxed tracking-[0.16em] text-brand-white/75 sm:px-4 sm:text-[11px]">
               Plataforma + automatización + inteligencia empresarial
             </span>
-            <h1 className="text-5xl font-medium leading-none md:text-7xl">Un catálogo completo para digitalizar la operación de una empresa.</h1>
-            <p className="max-w-3xl text-xl leading-relaxed text-brand-white/65">
+            <h1 className="text-3xl font-medium leading-tight sm:text-4xl md:text-6xl md:leading-none lg:text-7xl">Un catálogo completo para digitalizar la operación de una empresa.</h1>
+            <p className="max-w-3xl text-base leading-relaxed text-brand-white/65 sm:text-lg md:text-xl">
               Dice Projects combina plataforma, consultoría de procesos, integraciones e inteligencia artificial para ordenar áreas comerciales, operativas, administrativas y ejecutivas sin encerrar el producto en un único rubro.
             </p>
-            <Link to="/contacto" className="inline-flex">
+            <Link to="/contacto" className="inline-flex w-full sm:w-auto">
               <Button size="lg">
                 Quiero una propuesta <ArrowRight size={18} />
               </Button>
@@ -98,7 +98,7 @@ export default function ServiciosPage() {
         </Container>
       </section>
 
-      <section className="py-20">
+      <section className="py-16 md:py-20">
         <Container>
           <SectionHeader align="center" subtitle="Oferta comercial" title="Paquetes claros para vender estrategia, plataforma e inteligencia." />
           <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
@@ -108,7 +108,7 @@ export default function ServiciosPage() {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className={`rounded-lg border p-8 ${offer.featured ? 'border-brand-primary bg-brand-dark text-brand-white shadow-2xl shadow-brand-primary/20' : 'border-brand-dark/10 bg-brand-white'}`}
+                className={`rounded-lg border p-6 md:p-8 ${offer.featured ? 'border-brand-primary bg-brand-dark text-brand-white shadow-2xl shadow-brand-primary/20' : 'border-brand-dark/10 bg-brand-white'}`}
               >
                 <p className={`text-xs font-bold uppercase ${offer.featured ? 'text-brand-primary' : 'text-brand-dark/45'}`}>{offer.label}</p>
                 <h2 className="mt-4 text-2xl font-bold leading-tight">{offer.title}</h2>
@@ -127,14 +127,14 @@ export default function ServiciosPage() {
         </Container>
       </section>
 
-      <section className="bg-brand-light py-24">
+      <section className="bg-brand-light py-16 md:py-20 lg:py-24">
         <Container>
           <SectionHeader subtitle="Catálogo funcional" title="Dominios del producto, listos para empaquetar por necesidad del cliente." />
           <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-4">
             {useCases.map((item) => (
-              <div key={item.title} className="rounded-lg bg-brand-white p-7">
-                <item.icon className="text-brand-primary" size={30} />
-                <h3 className="mt-5 text-xl font-bold text-brand-dark">{item.title}</h3>
+              <div key={item.title} className="rounded-lg bg-brand-white p-5 md:p-7">
+                <item.icon className="text-brand-primary" size={26} />
+                <h3 className="mt-4 text-lg font-bold text-brand-dark md:mt-5 md:text-xl">{item.title}</h3>
                 <p className="mt-3 text-sm leading-relaxed text-brand-dark/60">{item.copy}</p>
               </div>
             ))}
@@ -142,7 +142,7 @@ export default function ServiciosPage() {
         </Container>
       </section>
 
-      <section className="py-24">
+      <section className="py-16 md:py-20 lg:py-24">
         <Container>
           <SectionHeader
             subtitle="Ejemplos de negocio"
@@ -150,8 +150,8 @@ export default function ServiciosPage() {
           />
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
             {operationalScenarios.map(([title, copy], index) => (
-              <div key={title} className="grid grid-cols-[56px_1fr] gap-5 rounded-lg border border-brand-dark/10 bg-brand-white p-6">
-                <span className="flex h-12 w-12 items-center justify-center rounded-lg bg-brand-light text-sm font-bold text-brand-primary">
+              <div key={title} className="grid grid-cols-[44px_1fr] gap-4 rounded-lg border border-brand-dark/10 bg-brand-white p-4 sm:grid-cols-[56px_1fr] sm:gap-5 sm:p-6">
+                <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-brand-light text-xs font-bold text-brand-primary sm:h-12 sm:w-12 sm:text-sm">
                   {String(index + 1).padStart(2, '0')}
                 </span>
                 <div>
@@ -164,11 +164,11 @@ export default function ServiciosPage() {
         </Container>
       </section>
 
-      <section className="py-24">
+      <section className="py-16 md:py-20 lg:py-24">
         <Container className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:items-center">
           <div className="lg:col-span-5">
             <SectionHeader subtitle="Cómo se implementa" title="Del diagnóstico al sistema operativo de negocio." />
-            <p className="text-lg leading-relaxed text-brand-dark/60">
+            <p className="text-base leading-relaxed text-brand-dark/60 md:text-lg">
               No prometemos magia. Diseñamos un producto operativo por etapas: base de datos confiable, módulos correctos, permisos, automatizaciones, integraciones, reporting y copilotos donde agregan valor real.
             </p>
           </div>
@@ -180,8 +180,8 @@ export default function ServiciosPage() {
                 ['03', 'Automatización e integración', 'Conectamos APIs, documentos, bases y flujos para eliminar doble carga y acelerar decisiones.'],
                 ['04', 'Adopción y crecimiento', 'Medimos uso, ROI, costos AI, reglas nuevas, mejoras y oportunidades comerciales.'],
               ].map(([num, title, copy]) => (
-                <div key={num} className="grid grid-cols-[72px_1fr] gap-5 rounded-lg border border-brand-dark/10 p-5">
-                  <span className="text-3xl font-bold text-brand-primary">{num}</span>
+                <div key={num} className="grid grid-cols-[48px_1fr] gap-4 rounded-lg border border-brand-dark/10 p-4 sm:grid-cols-[72px_1fr] sm:gap-5 sm:p-5">
+                  <span className="text-2xl font-bold text-brand-primary sm:text-3xl">{num}</span>
                   <div>
                     <h3 className="font-bold text-brand-dark">{title}</h3>
                     <p className="mt-1 text-sm text-brand-dark/58">{copy}</p>
@@ -193,11 +193,11 @@ export default function ServiciosPage() {
         </Container>
       </section>
 
-      <section className="bg-brand-primary py-20 text-brand-white">
+      <section className="bg-brand-primary py-16 text-brand-white md:py-20">
         <Container className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:items-center">
           <div className="lg:col-span-8">
             <Rocket size={34} />
-            <h2 className="mt-6 text-4xl font-medium leading-tight md:text-5xl">Si tu operación depende de planillas, mensajes y memoria humana, tu empresa está pagando un impuesto invisible.</h2>
+            <h2 className="mt-6 text-3xl font-medium leading-tight md:text-5xl">Si tu operación depende de planillas, mensajes y memoria humana, tu empresa está pagando un impuesto invisible.</h2>
           </div>
           <div className="lg:col-span-4 lg:text-right">
             <Link to="/contacto">
