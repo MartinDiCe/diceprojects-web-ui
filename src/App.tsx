@@ -16,6 +16,7 @@ import LegalNoticePage from './pages/Legal/LegalNoticePage';
 import LegalHubPage from './pages/Legal/LegalHubPage';
 import { LanguageProvider } from './i18n/LanguageContext';
 import { MarketingTracker } from './components/marketing/MarketingTracker';
+import { PublicCopilotWidget } from './components/publicCopilot/PublicCopilotWidget';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -57,6 +58,7 @@ export default function App() {
             <Route path="/aviso-legal" element={<LegalNoticePage />} />
           </Routes>
         </MainLayout>
+        <PublicCopilotWidget />
       </Router>
     </LanguageProvider>
   );

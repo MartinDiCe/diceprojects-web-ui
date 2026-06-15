@@ -9,7 +9,7 @@ export const MarketingTracker = () => {
 
   useEffect(() => {
     void trackMarketingEvent({
-      eventType: 'PAGE_VIEW',
+      eventType: 'VIEW',
       actionCode: `page:${location.pathname}`,
       actionLabel: document.title,
       category: 'NAVIGATION',
