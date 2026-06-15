@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
 import { ChevronRight, Linkedin, Mail, Phone } from 'lucide-react';
 import { Container } from '@/src/components/common';
 import { LegalLinks } from '@/src/components/legal/LegalLinks';
@@ -8,7 +7,6 @@ import { copy, useLanguage } from '@/src/i18n/LanguageContext';
 
 export const Footer = () => {
   const { language } = useLanguage();
-  const navigate = useNavigate();
   const t = copy[language];
   const seoLinks = [
     { label: 'Plataforma empresarial', path: '/plataforma-empresarial-multirubro' },
@@ -23,10 +21,6 @@ export const Footer = () => {
     { label: 'Copiloto AI empresarial', path: '/copiloto-ai-empresarial' },
   ];
 
-  const goTo = React.useCallback((path: string) => {
-    navigate(path);
-  }, [navigate]);
-
   return (
     <footer className="bg-[#25292F] text-brand-white border-t border-brand-white/10">
       <div className="py-7 md:py-8">
@@ -34,13 +28,13 @@ export const Footer = () => {
           <div className="grid grid-cols-1 gap-7 md:grid-cols-2 lg:grid-cols-12 text-center md:text-left justify-items-center md:justify-items-start">
             {/* Brand & Institutional Statement */}
             <div className="lg:col-span-3 space-y-3 flex flex-col items-center md:items-start">
-              <Link to="/" className="inline-flex focus-visible:outline-2 focus-visible:outline-brand-primary focus-visible:outline-offset-4">
+              <a href="/" className="inline-flex focus-visible:outline-2 focus-visible:outline-brand-primary focus-visible:outline-offset-4">
                 <img 
                   src="/assets/logos/dice-logo-positivo.svg" 
                   alt={BRAND.name} 
                   className="h-14 md:h-16 w-auto shrink-0"
                 />
-              </Link>
+              </a>
 
               <p className="text-brand-white/68 max-w-xs text-sm leading-relaxed mx-auto md:mx-0">
                 {t.footer.statement}
@@ -68,14 +62,13 @@ export const Footer = () => {
                 <h4 className="text-[10px] font-bold uppercase tracking-[0.25em] text-brand-primary">{t.footer.solutions}</h4>
                 <div className="mt-3 grid grid-cols-1 gap-x-8 gap-y-2 sm:grid-cols-2">
                   {seoLinks.map((link, index) => (
-                    <button
+                    <a
                       key={link.path}
-                      type="button"
-                      onClick={() => goTo(link.path)}
                       className="block w-full text-center text-sm text-brand-white/60 transition hover:text-brand-primary md:text-left"
+                      href={link.path}
                     >
                       {t.footer.links[index] ?? link.label}
-                    </button>
+                    </a>
                   ))}
                 </div>
               </div>
@@ -106,15 +99,14 @@ export const Footer = () => {
               </div>
 
               <div className="pt-1">
-                <button
-                  type="button"
-                  onClick={() => goTo('/contacto#diagnostico')}
+                <a
+                  href="/contacto#diagnostico"
                   data-mkt="footer_diagnostic_cta"
                   data-mkt-category="LEAD"
                   className="inline-flex h-10 items-center justify-center rounded-lg bg-brand-primary px-5 text-xs font-bold uppercase tracking-[0.16em] text-brand-white transition hover:bg-brand-secondary"
                 >
                   {t.footer.diagnostic} <ChevronRight size={14} className="ml-2" />
-                </button>
+                </a>
               </div>
             </div>
           </div>

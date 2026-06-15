@@ -1,5 +1,4 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import { cn } from '@/src/lib/utils';
 
 interface LegalLinksProps {
@@ -21,11 +20,6 @@ export const LegalLinks = ({
   className 
 }: LegalLinksProps) => {
   const isFooter = variant === 'footer';
-  const navigate = useNavigate();
-
-  const goTo = React.useCallback((path: string) => {
-    navigate(path);
-  }, [navigate]);
 
   return (
     <div className={cn('space-y-4', className)}>
@@ -42,10 +36,9 @@ export const LegalLinks = ({
         !isFooter && 'grid grid-cols-1 md:grid-cols-2 gap-6'
       )}>
         {legalItems.map((item) => (
-          <button
+          <a
             key={item.path}
-            type="button"
-            onClick={() => goTo(item.path)}
+            href={item.path}
             className={cn(
               'w-full text-sm transition-colors focus-visible:outline-2 focus-visible:outline-brand-accent focus-visible:outline-offset-4',
               isFooter 
@@ -54,7 +47,7 @@ export const LegalLinks = ({
             )}
           >
             {item.name}
-          </button>
+          </a>
         ))}
       </nav>
     </div>

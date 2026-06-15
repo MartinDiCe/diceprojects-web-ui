@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
 import { Menu, X, ChevronRight } from 'lucide-react';
 import { cn } from '@/src/lib/utils';
@@ -11,7 +11,6 @@ import { copy, useLanguage } from '@/src/i18n/LanguageContext';
 export const Navbar = () => {
   const [isOpen, setIsOpen] = React.useState(false);
   const location = useLocation();
-  const navigate = useNavigate();
   const { language, toggleLanguage } = useLanguage();
   const t = copy[language];
   const navLabels = [t.nav.home, t.nav.solution, t.nav.method, t.nav.insights, t.nav.about, t.nav.contact];
@@ -19,13 +18,6 @@ export const Navbar = () => {
   const closeMenu = React.useCallback(() => {
     setIsOpen(false);
   }, []);
-
-  const goTo = React.useCallback((path: string) => {
-    closeMenu();
-    window.requestAnimationFrame(() => {
-      navigate(path);
-    });
-  }, [closeMenu, navigate]);
 
   React.useEffect(() => {
     if (!isOpen) return;
@@ -39,8 +31,8 @@ export const Navbar = () => {
   return (
     <nav className="fixed top-0 w-full z-50 bg-brand-white/95 backdrop-blur-md border-b border-brand-dark/5 h-16 md:h-20 flex items-center">
       <Container className="flex items-center justify-between px-4 sm:px-6 md:px-10">
-        <Link 
-          to="/" 
+        <a
+          href="/"
           className="flex items-center gap-3 group focus-visible:outline-2 focus-visible:outline-brand-primary focus-visible:outline-offset-4 shrink-0"
           aria-label={`${BRAND.name} - Inicio`}
         >
@@ -49,16 +41,16 @@ export const Navbar = () => {
             alt={BRAND.name} 
             className="h-7 sm:h-8 md:h-11 w-auto shrink-0"
           />
-        </Link>
+        </a>
 
         {/* Desktop Nav */}
         <div className="hidden lg:flex items-center gap-8">
           {navItems.map((item, index) => {
             const isActive = location.pathname === item.path;
             return (
-              <Link
+              <a
                 key={item.path}
-                to={item.path}
+                href={item.path}
                 aria-current={isActive ? 'page' : undefined}
                 className={cn(
                   "relative text-[11px] font-semibold uppercase tracking-[0.18em] transition-all focus-visible:outline-2 focus-visible:outline-brand-primary focus-visible:outline-offset-4",
@@ -72,7 +64,7 @@ export const Navbar = () => {
                     className="absolute -bottom-1 left-0 w-full h-[2px] bg-brand-primary rounded-full"
                   />
                 )}
-              </Link>
+              </a>
             );
           })}
           <button
@@ -83,11 +75,11 @@ export const Navbar = () => {
           >
             {language === 'es' ? 'EN' : 'ES'}
           </button>
-          <Link to="/contacto#diagnostico" data-mkt="nav_diagnostic_cta" data-mkt-category="LEAD">
+          <a href="/contacto#diagnostico" data-mkt="nav_diagnostic_cta" data-mkt-category="LEAD">
             <Button className="rounded-full h-10 px-5 text-[10px] font-semibold uppercase tracking-[0.16em]">
               {t.nav.cta} <ChevronRight size={14} className="ml-2" />
             </Button>
-          </Link>
+          </a>
         </div>
 
         {/* Mobile Toggle */}
@@ -137,29 +129,31 @@ export const Navbar = () => {
               </div>
               <div className="flex flex-col gap-2">
                 {navItems.map((item, index) => (
-                  <button
+                  <a
                     key={item.path}
-                    type="button"
-                    onClick={() => goTo(item.path)}
+                    href={item.path}
+                    onClick={closeMenu}
                     className={cn(
-                      "w-full rounded-lg px-3 py-3 text-left text-xl font-semibold uppercase tracking-tight transition-colors",
+                      "block w-full rounded-lg px-3 py-3 text-left text-xl font-semibold uppercase tracking-tight transition-colors",
                       location.pathname === item.path ? "bg-brand-primary/8 text-brand-primary" : "text-brand-dark hover:bg-brand-dark/5"
                     )}
                   >
                     {navLabels[index]}
-                  </button>
+                  </a>
                 ))}
               </div>
               <div className="mt-auto pt-8 border-t border-brand-dark/5">
-                <Button
-                  type="button"
-                  onClick={() => goTo('/contacto#diagnostico')}
+                <a
+                  href="/contacto#diagnostico"
+                  onClick={closeMenu}
                   data-mkt="mobile_nav_diagnostic_cta"
                   data-mkt-category="LEAD"
-                  className="w-full py-4 rounded-lg"
+                  className="block w-full"
                 >
-                  {t.nav.cta}
-                </Button>
+                  <Button className="w-full py-4 rounded-lg">
+                    {t.nav.cta}
+                  </Button>
+                </a>
               </div>
             </motion.div>
           </>
