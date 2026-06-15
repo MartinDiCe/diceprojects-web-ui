@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
 import { Menu, X, ChevronRight } from 'lucide-react';
 import { cn } from '@/src/lib/utils';
@@ -11,9 +11,21 @@ import { copy, useLanguage } from '@/src/i18n/LanguageContext';
 export const Navbar = () => {
   const [isOpen, setIsOpen] = React.useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
   const { language, toggleLanguage } = useLanguage();
   const t = copy[language];
   const navLabels = [t.nav.home, t.nav.solution, t.nav.method, t.nav.insights, t.nav.about, t.nav.contact];
+
+  const closeMenu = React.useCallback(() => {
+    setIsOpen(false);
+  }, []);
+
+  const goTo = React.useCallback((path: string) => {
+    closeMenu();
+    window.requestAnimationFrame(() => {
+      navigate(path);
+    });
+  }, [closeMenu, navigate]);
 
   React.useEffect(() => {
     if (!isOpen) return;
@@ -107,7 +119,7 @@ export const Navbar = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              onClick={() => setIsOpen(false)}
+              onClick={closeMenu}
               className="fixed inset-0 z-[70] bg-brand-dark/35 backdrop-blur-sm lg:hidden"
             />
             <motion.div
@@ -119,29 +131,35 @@ export const Navbar = () => {
             >
               <div className="mb-8 flex h-12 items-center justify-between">
                 <span className="text-xs font-bold uppercase tracking-[0.22em] text-brand-primary">{t.nav.menu}</span>
-                <button onClick={() => setIsOpen(false)} className="rounded-lg p-2 text-brand-dark hover:bg-brand-dark/5" aria-label={language === 'es' ? 'Cerrar menú' : 'Close menu'}>
+                <button type="button" onClick={closeMenu} className="rounded-lg p-2 text-brand-dark hover:bg-brand-dark/5" aria-label={language === 'es' ? 'Cerrar menú' : 'Close menu'}>
                   <X size={24} />
                 </button>
               </div>
               <div className="flex flex-col gap-2">
                 {navItems.map((item, index) => (
-                  <Link
+                  <button
                     key={item.path}
-                    to={item.path}
-                    onClick={() => setIsOpen(false)}
+                    type="button"
+                    onClick={() => goTo(item.path)}
                     className={cn(
-                      "rounded-lg px-3 py-3 text-xl font-semibold uppercase tracking-tight transition-colors",
+                      "w-full rounded-lg px-3 py-3 text-left text-xl font-semibold uppercase tracking-tight transition-colors",
                       location.pathname === item.path ? "bg-brand-primary/8 text-brand-primary" : "text-brand-dark hover:bg-brand-dark/5"
                     )}
                   >
                     {navLabels[index]}
-                  </Link>
+                  </button>
                 ))}
               </div>
               <div className="mt-auto pt-8 border-t border-brand-dark/5">
-                <Link to="/contacto#diagnostico" onClick={() => setIsOpen(false)} data-mkt="mobile_nav_diagnostic_cta" data-mkt-category="LEAD">
-                  <Button className="w-full py-4 rounded-lg">{t.nav.cta}</Button>
-                </Link>
+                <Button
+                  type="button"
+                  onClick={() => goTo('/contacto#diagnostico')}
+                  data-mkt="mobile_nav_diagnostic_cta"
+                  data-mkt-category="LEAD"
+                  className="w-full py-4 rounded-lg"
+                >
+                  {t.nav.cta}
+                </Button>
               </div>
             </motion.div>
           </>
