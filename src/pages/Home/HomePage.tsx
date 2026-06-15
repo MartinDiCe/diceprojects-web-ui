@@ -61,7 +61,7 @@ export default function HomePage() {
               {t.intro}
             </p>
             <div className="flex flex-col gap-3 sm:flex-row">
-              <Link to="/contacto" className="w-full sm:w-auto" data-mkt="home_primary_diagnostic_cta" data-mkt-category="LEAD">
+              <Link to="/contacto#diagnostico" className="w-full sm:w-auto" data-mkt="home_primary_diagnostic_cta" data-mkt-category="LEAD">
                 <Button size="lg" className="w-full sm:w-auto">
                   {t.primary} <ArrowRight size={18} />
                 </Button>

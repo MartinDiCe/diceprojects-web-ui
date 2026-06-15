@@ -124,7 +124,7 @@ export default function SobrePage() {
           <h2 className="text-4xl md:text-6xl font-black tracking-tighter max-w-3xl mx-auto leading-none">
             CONSTRUYAMOS TU AUTORIDAD OPERATIVA.
           </h2>
-          <Link to="/contacto">
+          <Link to="/contacto#diagnostico">
             <Button size="lg" className="px-12 py-6">
               Conectar con Dice Projects <ArrowRight className="ml-2" />
             </Button>

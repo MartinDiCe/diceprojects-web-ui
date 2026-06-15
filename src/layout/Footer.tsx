@@ -97,7 +97,7 @@ export const Footer = () => {
 
               <div className="pt-1">
                 <Link
-                  to="/contacto"
+                  to="/contacto#diagnostico"
                   data-mkt="footer_diagnostic_cta"
                   data-mkt-category="LEAD"
                   className="inline-flex h-10 items-center justify-center rounded-lg bg-brand-primary px-5 text-xs font-bold uppercase tracking-[0.16em] text-brand-white transition hover:bg-brand-secondary"

@@ -193,7 +193,7 @@ export default function SeoLandingPage({ page }: { page: LandingKey }) {
             </span>
             <h1 className="text-5xl font-medium leading-none md:text-7xl">{content.h1}</h1>
             <p className="max-w-3xl text-xl leading-relaxed text-brand-white/65">{content.intro}</p>
-            <Link to="/contacto" className="inline-flex">
+            <Link to="/contacto#diagnostico" className="inline-flex">
               <Button size="lg">Solicitar diagnóstico <ArrowRight size={18} /></Button>
             </Link>
           </div>
@@ -236,7 +236,7 @@ export default function SeoLandingPage({ page }: { page: LandingKey }) {
             <p className="mt-4 text-brand-white/78">Te mostramos prioridades, quick wins, integración necesaria y propuesta de implementación.</p>
           </div>
           <div className="lg:col-span-4 lg:text-right">
-            <Link to="/contacto">
+            <Link to="/contacto#diagnostico">
               <Button variant="secondary" size="lg" className="bg-brand-white text-brand-primary hover:bg-brand-light">
                 Agendar llamada
               </Button>

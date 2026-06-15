@@ -29,7 +29,7 @@ export default function ServiciosPage() {
             </span>
             <h1 className="text-3xl font-medium leading-tight sm:text-4xl md:text-6xl">{t.h1}</h1>
             <p className="max-w-[350px] text-base leading-relaxed text-brand-white/65 sm:max-w-3xl md:text-xl">{t.intro}</p>
-            <Link to="/contacto" className="inline-flex w-full sm:w-auto">
+            <Link to="/contacto#diagnostico" className="inline-flex w-full sm:w-auto">
               <Button size="lg" className="w-full sm:w-auto">
                 {t.cta} <ArrowRight size={18} />
               </Button>
@@ -97,7 +97,7 @@ export default function ServiciosPage() {
             <h2 className="mt-6 text-3xl font-medium leading-tight md:text-5xl">{t.finalCta}</h2>
           </div>
           <div className="lg:col-span-4 lg:text-right">
-            <Link to="/contacto">
+            <Link to="/contacto#diagnostico">
               <Button variant="secondary" size="lg" className="w-full bg-brand-white text-brand-primary hover:bg-brand-light sm:w-auto">
                 {t.cta}
               </Button>

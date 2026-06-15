@@ -87,7 +87,7 @@ export default function InsightArticlePage() {
                   <p className="text-sm text-white/50 leading-relaxed">
                     Si este artículo resuena con los desafíos de tu empresa, es momento de actuar.
                   </p>
-                  <Link to="/contacto" className="block">
+                  <Link to="/contacto#diagnostico" className="block">
                     <Button className="w-full py-5">Solicitar Diagnóstico</Button>
                   </Link>
                 </div>

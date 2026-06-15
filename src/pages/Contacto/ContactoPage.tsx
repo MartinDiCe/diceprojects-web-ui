@@ -1,5 +1,6 @@
 import { ArrowRight, CalendarCheck, Mail, MapPin, Phone, ShieldCheck } from 'lucide-react';
-import { useState, type FormEvent } from 'react';
+import { useEffect, useRef, useState, type FormEvent } from 'react';
+import { useLocation } from 'react-router-dom';
 import { Container, Button, SectionHeader } from '@/src/components/common';
 import { BRAND } from '@/src/app/config/branding.config';
 import { Seo, organizationJsonLd } from '@/src/components/seo/Seo';
@@ -31,9 +32,22 @@ const interestsByLanguage = {
 
 export default function ContactoPage() {
   const { language } = useLanguage();
+  const location = useLocation();
   const t = copy[language].contact;
   const interests = interestsByLanguage[language];
   const [submitState, setSubmitState] = useState<'idle' | 'submitting' | 'sent' | 'error'>('idle');
+  const formCardRef = useRef<HTMLDivElement | null>(null);
+  const firstInputRef = useRef<HTMLInputElement | null>(null);
+
+  useEffect(() => {
+    if (location.hash !== '#diagnostico') {
+      return;
+    }
+    window.setTimeout(() => {
+      formCardRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      firstInputRef.current?.focus({ preventScroll: true });
+    }, 80);
+  }, [location.hash]);
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -131,7 +145,7 @@ export default function ContactoPage() {
       <section className="py-16 md:py-20">
         <Container>
           <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-12">
-            <div className="space-y-8 lg:col-span-5">
+            <div className="order-2 space-y-8 lg:order-1 lg:col-span-5">
               <SectionHeader subtitle="Contact" title={t.directTitle} />
               <div className="space-y-4">
                 <a href={`mailto:${BRAND.contact.email}`} data-mkt="contact_email_click" data-mkt-category="CONTACT" className="flex items-center gap-4 rounded-lg border border-brand-dark/10 p-4 transition hover:border-brand-primary">
@@ -170,13 +184,17 @@ export default function ContactoPage() {
               </div>
             </div>
 
-            <div className="rounded-lg bg-brand-dark p-5 text-brand-white shadow-2xl sm:p-6 md:p-10 lg:col-span-7">
+            <div
+              id="diagnostico"
+              ref={formCardRef}
+              className="order-1 scroll-mt-24 rounded-lg bg-brand-dark p-5 text-brand-white shadow-2xl sm:p-6 md:p-10 lg:order-2 lg:col-span-7"
+            >
               <h2 className="text-3xl font-bold leading-tight">{t.formTitle}</h2>
               <p className="mt-3 text-sm leading-relaxed text-brand-white/55">{t.formIntro}</p>
               <form className="mt-6 grid grid-cols-1 gap-4 md:mt-8 md:grid-cols-2 md:gap-5" onSubmit={handleSubmit}>
                 <label className="space-y-2">
                   <span className="text-xs font-bold uppercase text-brand-white/45">{t.labels.name}</span>
-                  <input name="nombre" required className="w-full rounded-lg border border-brand-white/15 bg-brand-white/8 px-4 py-3 text-base outline-none transition focus:border-brand-primary" placeholder={t.labels.name} />
+                  <input ref={firstInputRef} name="nombre" required className="w-full rounded-lg border border-brand-white/15 bg-brand-white/8 px-4 py-3 text-base outline-none transition focus:border-brand-primary" placeholder={t.labels.name} />
                 </label>
                 <label className="space-y-2">
                   <span className="text-xs font-bold uppercase text-brand-white/45">{t.labels.company}</span>
