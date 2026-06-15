@@ -10,6 +10,10 @@ export type PublicCopilotIntent =
   | 'marketing'
   | 'implementation'
   | 'security'
+  | 'contact'
+  | 'company'
+  | 'industries'
+  | 'reports'
   | 'fallback';
 
 type IntentContent = {
@@ -25,11 +29,41 @@ const normalize = (value: string) => value
   .replace(/[\u0300-\u036f]/g, '');
 
 const hasAny = (message: string, keywords: string[]) => keywords.some((keyword) => message.includes(keyword));
+const looksLikeContact = (message: string) => hasAny(message, [
+  'contact',
+  'contacto',
+  'contactar',
+  'telefono',
+  'whatsapp',
+  'mail',
+  'email',
+  'correo',
+  'ubicacion',
+  'ubicados',
+  'queda',
+  'donde estan',
+  'donde queda',
+  'location',
+  'phone',
+  'where are',
+]);
 
 export const detectPublicCopilotIntent = (input: string): PublicCopilotIntent => {
   const message = normalize(input);
+  if (looksLikeContact(message)) {
+    return 'contact';
+  }
   if (hasAny(message, ['precio', 'costo', 'cotizacion', 'presupuesto', 'demo', 'diagnostico', 'llamada', 'contratar', 'quote', 'pricing', 'cost', 'book'])) {
     return 'pricing';
+  }
+  if (hasAny(message, ['empresa', 'organizacion', 'multiempresa', 'sucursal', 'vendedor', 'equipo', 'company', 'organization', 'branch', 'seller', 'team'])) {
+    return 'company';
+  }
+  if (hasAny(message, ['rubro', 'rubro', 'industria', 'servicio', 'comercio', 'automotor', 'constructor', 'industries', 'industry', 'business type'])) {
+    return 'industries';
+  }
+  if (hasAny(message, ['reporte', 'dashboard', 'indicador', 'kpi', 'rentabilidad', 'margen', 'metric', 'report', 'analytics', 'indicator'])) {
+    return 'reports';
   }
   if (hasAny(message, ['modulo', 'modulos', 'backoffice', 'plataforma', 'crm', 'ventas', 'compras', 'producto', 'catalogo', 'module', 'platform', 'sales', 'procurement'])) {
     return 'modules';
@@ -40,7 +74,7 @@ export const detectPublicCopilotIntent = (input: string): PublicCopilotIntent =>
   if (hasAny(message, ['ai', 'ia', 'copiloto', 'asistente', 'agente', 'documento', 'chat', 'bot', 'assistant', 'agent'])) {
     return 'ai';
   }
-  if (hasAny(message, ['obra', 'proyecto', 'servicio integral', 'automotor', 'mantenimiento', 'project', 'service', 'construction'])) {
+  if (hasAny(message, ['obra', 'proyecto', 'servicio integral', 'mantenimiento', 'project', 'construction'])) {
     return 'projects';
   }
   if (hasAny(message, ['stock', 'inventario', 'deposito', 'almacen', 'mercaderia', 'proveedor', 'inventory', 'warehouse', 'supplier'])) {
@@ -97,6 +131,27 @@ export const publicCopilotCopy: Record<Language, {
         prompts: ['Qué módulos suelen activar primero', 'Qué datos necesitan para estimar', 'Agendar diagnóstico'],
         cta: 'Agendar diagnóstico',
       },
+      contact: {
+        title: 'Contacto y ubicación',
+        answer: 'Dice Projects trabaja desde Buenos Aires, Argentina, con atención remota para empresas de distintos rubros. Podés escribir a mdice@diceprojects.com o llamar/WhatsApp al +54 11 7246 6605. Si querés, también puedo registrar una solicitud de diagnóstico desde acá.',
+        prompts: ['Agendar diagnóstico', 'Qué datos necesitan para estimar', 'Qué resuelve la plataforma'],
+        cta: 'Agendar diagnóstico',
+      },
+      company: {
+        title: 'Dónde queda “la empresa” en la plataforma',
+        answer: 'En Dice Projects cada empresa u organización es un espacio de trabajo separado: allí viven sus usuarios, permisos, vendedores, clientes, proveedores, productos, campañas, proyectos, stock, reportes y conocimiento del copiloto. Esto permite operar varias empresas sin mezclar datos.',
+        prompts: ['Cómo se cuidan permisos', 'Qué módulos usa una empresa', 'Cómo separa empresas'],
+      },
+      industries: {
+        title: 'Rubros donde aplica',
+        answer: 'La solución no está pensada sólo para obras. Aplica a servicios integrales, comercio, distribución, productos con catálogo, empresas con stock, compras, proveedores, automotores, mantenimiento, operaciones comerciales y negocios que necesitan ordenar procesos.',
+        prompts: ['Ver módulos principales', 'Proyectos y servicios', 'Stock y compras'],
+      },
+      reports: {
+        title: 'Indicadores y tableros',
+        answer: 'La plataforma busca que cada área deje datos medibles: leads, cotizaciones, compras, stock, avances, costos, desvíos, campañas y productividad. Con eso se arman tableros por empresa, área, proyecto o vendedor.',
+        prompts: ['Marketing conectado a ventas', 'Proyecto a rentabilidad', 'Agendar diagnóstico'],
+      },
       modules: {
         title: 'Plataforma modular para operar empresas',
         answer: 'Dice Projects conecta ventas, cotizaciones, compras, proveedores, productos, stock, proyectos, marketing, reportes y copiloto empresarial en una misma operación.',
@@ -138,9 +193,9 @@ export const publicCopilotCopy: Record<Language, {
         prompts: ['Cómo funciona el copiloto', 'Cómo separa empresas', 'Agendar diagnóstico'],
       },
       fallback: {
-        title: 'Puedo orientarte',
-        answer: 'Puedo ayudarte con plataforma, módulos, integraciones, copiloto empresarial, marketing, stock, compras, proyectos o diagnóstico comercial.',
-        prompts: ['Qué resuelve la plataforma', 'Cómo funciona el copiloto', 'Agendar diagnóstico'],
+        title: 'Te puedo guiar mejor si me das una pista',
+        answer: 'Puedo responder sobre contacto, empresas dentro de la plataforma, módulos, integraciones, copiloto empresarial, marketing, stock, compras, proyectos, reportes o diagnóstico comercial.',
+        prompts: ['Dónde queda la empresa', 'Cómo contacto', 'Qué resuelve la plataforma'],
       },
     },
   },
@@ -167,6 +222,27 @@ export const publicCopilotCopy: Record<Language, {
         answer: 'The proposal depends on modules, operational volume, integrations and support level. A short assessment is the best way to identify quick wins and scope.',
         prompts: ['Which modules start first?', 'What data is needed to estimate?', 'Book assessment'],
         cta: 'Book assessment',
+      },
+      contact: {
+        title: 'Contact and location',
+        answer: 'Dice Projects operates from Buenos Aires, Argentina, and supports companies remotely. You can email mdice@diceprojects.com or call/WhatsApp +54 11 7246 6605. I can also register an assessment request here.',
+        prompts: ['Book assessment', 'What data is needed to estimate?', 'What does the platform solve?'],
+        cta: 'Book assessment',
+      },
+      company: {
+        title: 'Where “company” lives in the platform',
+        answer: 'In Dice Projects each company or organization is a separate workspace: users, permissions, sellers, customers, suppliers, products, campaigns, projects, inventory, reports and copilot knowledge live there. This keeps data separated across companies.',
+        prompts: ['How permissions work', 'Which modules a company uses', 'How companies are separated'],
+      },
+      industries: {
+        title: 'Industries where it applies',
+        answer: 'The solution is not only for construction. It fits integrated services, commerce, distribution, product catalogs, inventory operations, procurement, suppliers, automotive, maintenance, commercial teams and businesses that need process control.',
+        prompts: ['See main modules', 'Projects and services', 'Inventory and procurement'],
+      },
+      reports: {
+        title: 'Indicators and dashboards',
+        answer: 'The platform turns daily work into measurable data: leads, quotes, procurement, inventory, progress, costs, deviations, campaigns and productivity. Dashboards can be viewed by company, area, project or seller.',
+        prompts: ['Marketing connected to sales', 'Project profitability', 'Book assessment'],
       },
       modules: {
         title: 'Modular platform for business operations',
@@ -209,9 +285,9 @@ export const publicCopilotCopy: Record<Language, {
         prompts: ['How the copilot works', 'How companies are separated', 'Book assessment'],
       },
       fallback: {
-        title: 'I can guide you',
-        answer: 'I can help with the platform, modules, integrations, enterprise copilot, marketing, inventory, procurement, projects or commercial assessment.',
-        prompts: ['What does the platform solve?', 'How does the copilot work?', 'Book assessment'],
+        title: 'I can guide you better with a bit more context',
+        answer: 'I can answer about contact, companies inside the platform, modules, integrations, enterprise copilot, marketing, inventory, procurement, projects, reports or commercial assessment.',
+        prompts: ['Where does the company live?', 'How do I contact you?', 'What does the platform solve?'],
       },
     },
   },

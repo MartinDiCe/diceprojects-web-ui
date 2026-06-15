@@ -192,7 +192,7 @@ export const PublicCopilotWidget = () => {
     <div className="fixed bottom-5 right-4 z-[70] sm:right-6">
       <div
         className={cn(
-          'mb-3 w-[calc(100vw-2rem)] max-w-[380px] overflow-hidden rounded-lg border border-brand-dark/10 bg-brand-white shadow-2xl transition-all duration-200',
+          'mb-3 w-[calc(100vw-2rem)] max-w-[380px] overflow-hidden rounded-lg border border-brand-dark/10 bg-brand-white shadow-2xl transition-all duration-200 max-sm:max-h-[72dvh]',
           isOpen ? 'translate-y-0 opacity-100' : 'pointer-events-none translate-y-3 opacity-0',
         )}
         aria-hidden={!isOpen}
@@ -212,7 +212,7 @@ export const PublicCopilotWidget = () => {
           </button>
         </div>
 
-        <div className="max-h-[440px] space-y-3 overflow-y-auto bg-[#F6F8FA] p-4">
+        <div className="max-h-[min(440px,52dvh)] space-y-3 overflow-y-auto bg-[#F6F8FA] p-4">
           {messages.map((message) => (
             <div key={message.id} className={cn('flex', message.sender === 'user' ? 'justify-end' : 'justify-start')}>
               <div className={cn(
