@@ -3,6 +3,7 @@ import { motion } from 'motion/react';
 import { ArrowRight, Mail, MapPin, Phone, ShieldCheck } from 'lucide-react';
 import { Container, Button, SectionHeader } from '@/src/components/common';
 import { BRAND } from '@/src/app/config/branding.config';
+import { Seo, organizationJsonLd } from '@/src/components/seo/Seo';
 
 const interests = [
   'Obras y proyectos',
@@ -20,6 +21,13 @@ export default function ContactoPage() {
 
   return (
     <div className="bg-brand-white pb-28">
+      <Seo
+        title="Diagnóstico de automatización y mejora de procesos"
+        description="Solicitá un diagnóstico comercial para detectar oportunidades de automatización, integraciones, software operativo y copiloto AI empresarial."
+        path="/contacto"
+        keywords={['diagnóstico de automatización', 'consultoría de procesos', 'mejora de procesos empresariales', 'automatización de operaciones']}
+        jsonLd={organizationJsonLd()}
+      />
       <section className="bg-brand-dark pb-20 pt-36 text-brand-white">
         <Container>
           <div className="max-w-5xl space-y-7">

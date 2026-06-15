@@ -13,6 +13,7 @@ import {
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Container, Button, SectionHeader } from '@/src/components/common';
+import { Seo, organizationJsonLd, serviceJsonLd } from '@/src/components/seo/Seo';
 
 const offers = [
   {
@@ -52,6 +53,13 @@ export default function ServiciosPage() {
 
   return (
     <div className="bg-brand-white pb-28">
+      <Seo
+        title="Solución empresarial para automatización, integraciones y copiloto AI"
+        description="Implementamos una solución empresarial para obras, servicios, productos, cotizaciones, compras, integraciones, KPIs y copiloto AI por empresa."
+        path="/automatizacion-y-orquestacion"
+        keywords={['solución empresarial', 'automatización empresarial', 'software multirubro', 'integraciones empresariales', 'copiloto empresarial']}
+        jsonLd={[organizationJsonLd(), serviceJsonLd('Solución empresarial Dice Projects', 'Automatización, plataforma operativa, integraciones y copiloto AI para empresas multirubro.', '/automatizacion-y-orquestacion')]}
+      />
       <section className="relative overflow-hidden bg-brand-dark pb-20 pt-36 text-brand-white">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_72%_20%,rgba(56,126,188,0.42),transparent_34%)]" />
         <Container className="relative z-10">

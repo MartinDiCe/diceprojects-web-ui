@@ -15,6 +15,7 @@ import {
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Container, Button, SectionHeader } from '@/src/components/common';
+import { Seo, organizationJsonLd, serviceJsonLd } from '@/src/components/seo/Seo';
 
 const operatingSystems = [
   { icon: Building2, title: 'Obras y servicios', copy: 'Avances, recursos, costos, partes, aprobaciones y seguimiento por cliente.' },
@@ -49,6 +50,16 @@ export default function HomePage() {
 
   return (
     <div className="overflow-hidden bg-brand-white">
+      <Seo
+        title="Automatización de procesos, obras, cotizaciones y copiloto empresarial"
+        description="Dice Projects automatiza procesos empresariales, ordena obras y servicios, productos, presupuestos, cotizaciones, integraciones y copiloto AI con datos reales."
+        path="/"
+        keywords={['automatización de procesos', 'software para obras', 'cotizaciones empresariales', 'integraciones API', 'copiloto AI empresarial', 'mejora de procesos']}
+        jsonLd={[
+          organizationJsonLd(),
+          serviceJsonLd('Automatización de procesos empresariales y copiloto AI', 'Solución para automatizar operaciones, integrar sistemas y asistir decisiones con agentes AI empresariales.', '/'),
+        ]}
+      />
       <section className="relative overflow-hidden bg-brand-dark text-brand-white lg:min-h-[92svh]">
         <div className="absolute inset-0 opacity-45">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_68%_20%,rgba(56,126,188,0.46),transparent_34%),linear-gradient(135deg,rgba(37,41,47,0.96),rgba(18,25,35,0.92))]" />

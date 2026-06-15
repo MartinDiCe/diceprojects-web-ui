@@ -6,6 +6,14 @@ import { LegalLinks } from '@/src/components/legal/LegalLinks';
 import { BRAND } from '@/src/app/config/branding.config';
 
 export const Footer = () => {
+  const seoLinks = [
+    { label: 'Automatización de procesos', path: '/automatizacion-de-procesos' },
+    { label: 'Software para obras', path: '/software-gestion-obras-servicios' },
+    { label: 'Presupuestos y cotizaciones', path: '/presupuestos-cotizaciones-compras' },
+    { label: 'Integraciones empresariales', path: '/integraciones-apis-bases-documentos' },
+    { label: 'Copiloto AI empresarial', path: '/copiloto-ai-empresarial' },
+  ];
+
   return (
     <footer className="bg-[#25292F] text-brand-white border-t border-brand-white/10">
       <div className="py-10">
@@ -41,6 +49,14 @@ export const Footer = () => {
             {/* Legal Links */}
             <div className="lg:col-span-4 flex flex-col items-center md:items-start">
               <LegalLinks variant="footer" />
+              <div className="mt-6 space-y-2">
+                <h4 className="text-[10px] font-bold uppercase tracking-[0.25em] text-brand-primary">Soluciones</h4>
+                {seoLinks.map((link) => (
+                  <Link key={link.path} to={link.path} className="block text-sm text-brand-white/60 transition hover:text-brand-primary">
+                    {link.label}
+                  </Link>
+                ))}
+              </div>
             </div>
 
             {/* Contact & CTA */}

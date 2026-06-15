@@ -3,22 +3,22 @@
   "short_name": "Dice",
   "icons": [
     {
-      "src": "/assets/logos/dice-isologo.png",
+      "src": "/favicon/favicon-16x16.png",
       "sizes": "16x16",
       "type": "image/png"
     },
     {
-      "src": "/assets/logos/dice-isologo.png",
+      "src": "/favicon/favicon-32x32.png",
       "sizes": "32x32",
       "type": "image/png"
     },
     {
-      "src": "/assets/logos/dice-isologo.png",
+      "src": "/favicon/apple-touch-icon.png",
       "sizes": "180x180",
       "type": "image/png"
     }
   ],
-  "theme_color": "#F27D26",
-  "background_color": "#E4E3E0",
+  "theme_color": "#387EBC",
+  "background_color": "#EDEEF0",
   "display": "standalone"
 }
