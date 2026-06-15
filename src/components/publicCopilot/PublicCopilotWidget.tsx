@@ -11,16 +11,36 @@ type BotMessage = {
   text: string;
   title?: string;
   prompts?: string[];
-  intent?: PublicCopilotIntent;
+  intent?: PublicCopilotIntent | string;
   showLead?: boolean;
+};
+
+type RemoteBotConfig = {
+  welcomeMessage?: string | null;
+  quickPrompts?: string[] | null;
+  maxQuestionsPerSession?: number | null;
+};
+
+type RemoteBotAnswer = {
+  intent?: string | null;
+  title?: string | null;
+  answer: string;
+  quickPrompts?: string[] | null;
+  leadSuggested?: boolean | null;
+  llmUsed?: boolean | null;
+  aiConsentRequired?: boolean | null;
+  costNotice?: string | null;
 };
 
 const MAX_QUESTIONS_PER_SESSION = 12;
 const MAX_MESSAGE_LENGTH = 280;
 
 const sessionQuestionKey = 'diceprojects.publicCopilot.questions';
+const sessionIdKey = 'diceprojects.publicCopilot.sessionId';
 const env = ((import.meta as unknown as { env?: Record<string, string | undefined> }).env || {});
 const PUBLIC_BOT_ENABLED = env.VITE_PUBLIC_BOT_ENABLED !== 'false';
+const API_BASE_URL = (env.VITE_API_BASE_URL || 'https://api.diceprojects.com/api').replace(/\/$/, '');
+const PUBLIC_BOT_KEY = env.VITE_PUBLIC_BOT_KEY || env.VITE_MARKETING_CAMPAIGN_KEY || '';
 
 const getSessionQuestionCount = () => Number(window.sessionStorage.getItem(sessionQuestionKey) || '0');
 const incrementSessionQuestionCount = () => {
@@ -29,11 +49,47 @@ const incrementSessionQuestionCount = () => {
   return next;
 };
 
+const getSessionId = () => {
+  const current = window.sessionStorage.getItem(sessionIdKey);
+  if (current) return current;
+  const next = crypto.randomUUID();
+  window.sessionStorage.setItem(sessionIdKey, next);
+  return next;
+};
+
+const fetchRemoteBotConfig = async (): Promise<RemoteBotConfig | null> => {
+  if (!PUBLIC_BOT_KEY) return null;
+  const response = await fetch(`${API_BASE_URL}/v1/public-bots/${encodeURIComponent(PUBLIC_BOT_KEY)}/config`);
+  if (!response.ok) return null;
+  return response.json() as Promise<RemoteBotConfig>;
+};
+
+const askRemoteBot = async (message: string, language: string, allowAi = false): Promise<RemoteBotAnswer | null> => {
+  if (!PUBLIC_BOT_KEY) return null;
+  const response = await fetch(`${API_BASE_URL}/v1/public-bots/${encodeURIComponent(PUBLIC_BOT_KEY)}/message`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      message,
+      visitorId: getMarketingVisitorId(),
+      sessionId: getSessionId(),
+      language,
+      pageUrl: window.location.href,
+      referrerUrl: document.referrer || undefined,
+      allowAi,
+    }),
+  });
+  if (!response.ok) return null;
+  return response.json() as Promise<RemoteBotAnswer>;
+};
+
 export const PublicCopilotWidget = () => {
   const { language } = useLanguage();
   const copy = publicCopilotCopy[language];
+  const [remoteConfig, setRemoteConfig] = useState<RemoteBotConfig | null>(null);
   const [isOpen, setIsOpen] = useState(false);
   const [input, setInput] = useState('');
+  const [pendingAiQuestion, setPendingAiQuestion] = useState<string | null>(null);
   const [leadState, setLeadState] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle');
   const [messages, setMessages] = useState<BotMessage[]>(() => [
     {
@@ -60,6 +116,29 @@ export const PublicCopilotWidget = () => {
     });
   }, [copy]);
 
+  useEffect(() => {
+    let cancelled = false;
+    fetchRemoteBotConfig()
+      .then((config) => {
+        if (cancelled || !config) return;
+        setRemoteConfig(config);
+        setMessages((current) => {
+          if (current.length !== 1 || current[0].id !== 'greeting') return current;
+          return [{
+            id: 'greeting',
+            sender: 'bot',
+            title: copy.title,
+            text: config.welcomeMessage || copy.greeting,
+            prompts: config.quickPrompts?.length ? config.quickPrompts : copy.quickPrompts,
+          }];
+        });
+      })
+      .catch(() => undefined);
+    return () => {
+      cancelled = true;
+    };
+  }, [copy]);
+
   const hasLeadPrompt = useMemo(() => messages.some((message) => message.showLead), [messages]);
   const lastIntent = useMemo(() => {
     for (let index = messages.length - 1; index >= 0; index -= 1) {
@@ -72,7 +151,7 @@ export const PublicCopilotWidget = () => {
     return null;
   }
 
-  const answerQuestion = (rawValue: string) => {
+  const answerQuestion = async (rawValue: string, allowAi = false) => {
     const value = rawValue.trim().slice(0, MAX_MESSAGE_LENGTH);
     if (!value) return;
 
@@ -84,7 +163,8 @@ export const PublicCopilotWidget = () => {
       text: value,
     };
 
-    if (questionCount > MAX_QUESTIONS_PER_SESSION) {
+    const maxQuestions = remoteConfig?.maxQuestionsPerSession || MAX_QUESTIONS_PER_SESSION;
+    if (questionCount > maxQuestions) {
       setMessages((current) => [
         ...current,
         userMessage,
@@ -98,6 +178,33 @@ export const PublicCopilotWidget = () => {
         },
       ]);
       return;
+    }
+
+    try {
+      const remote = await askRemoteBot(value, language, allowAi);
+      if (remote?.answer) {
+        if (remote.aiConsentRequired) {
+          setPendingAiQuestion(value);
+        } else if (allowAi || remote.llmUsed) {
+          setPendingAiQuestion(null);
+        }
+        setMessages((current) => [
+          ...current,
+          userMessage,
+          {
+            id: crypto.randomUUID(),
+            sender: 'bot',
+            title: remote.title || copy.title,
+            text: remote.costNotice ? `${remote.answer}\n\n${remote.costNotice}` : remote.answer,
+            prompts: remote.quickPrompts?.length ? remote.quickPrompts : copy.quickPrompts,
+            intent: remote.intent || 'remote',
+            showLead: Boolean(remote.leadSuggested),
+          },
+        ]);
+        return;
+      }
+    } catch {
+      // Fallback local: mantiene el sitio vendiendo aunque Marketing API no responda.
     }
 
     const intent = detectPublicCopilotIntent(value);
@@ -146,7 +253,7 @@ export const PublicCopilotWidget = () => {
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    answerQuestion(input);
+    void answerQuestion(input);
   };
 
   const submitLead = async (event: FormEvent<HTMLFormElement>) => {
@@ -227,7 +334,10 @@ export const PublicCopilotWidget = () => {
                       <button
                         key={prompt}
                         type="button"
-                        onClick={() => answerQuestion(prompt)}
+                        onClick={() => {
+                          const usesAi = prompt.toLowerCase().includes('usar ia') && Boolean(pendingAiQuestion);
+                          void answerQuestion(usesAi ? pendingAiQuestion || prompt : prompt, usesAi);
+                        }}
                         className="rounded-full border border-brand-primary/20 bg-brand-primary/5 px-3 py-1 text-[11px] font-bold text-brand-primary transition hover:bg-brand-primary hover:text-brand-white"
                       >
                         {prompt}
