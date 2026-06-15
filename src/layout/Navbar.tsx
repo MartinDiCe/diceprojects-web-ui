@@ -15,8 +15,17 @@ export const Navbar = () => {
   const t = copy[language];
   const navLabels = [t.nav.home, t.nav.solution, t.nav.method, t.nav.insights, t.nav.about, t.nav.contact];
 
+  React.useEffect(() => {
+    if (!isOpen) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [isOpen]);
+
   return (
-    <nav className="fixed top-0 w-full z-50 bg-brand-white/95 backdrop-blur-md border-b border-brand-dark/5 h-20 flex items-center">
+    <nav className="fixed top-0 w-full z-50 bg-brand-white/95 backdrop-blur-md border-b border-brand-dark/5 h-16 md:h-20 flex items-center">
       <Container className="flex items-center justify-between px-4 sm:px-6 md:px-10">
         <Link 
           to="/" 
@@ -26,7 +35,7 @@ export const Navbar = () => {
           <img 
             src="/assets/logos/dice-logo-lineal.svg" 
             alt={BRAND.name} 
-            className="h-8 sm:h-9 md:h-11 w-auto shrink-0"
+            className="h-7 sm:h-8 md:h-11 w-auto shrink-0"
           />
         </Link>
 
@@ -99,30 +108,30 @@ export const Navbar = () => {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setIsOpen(false)}
-              className="fixed inset-0 bg-brand-dark/20 backdrop-blur-sm z-40 lg:hidden"
+              className="fixed inset-0 z-[70] bg-brand-dark/35 backdrop-blur-sm lg:hidden"
             />
             <motion.div
               initial={{ x: '100%' }}
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-              className="fixed top-0 right-0 h-full w-[88%] max-w-sm bg-brand-white z-50 lg:hidden shadow-2xl p-6 sm:p-8 flex flex-col"
+              className="fixed inset-y-0 right-0 z-[80] flex h-[100dvh] w-full max-w-sm flex-col overflow-y-auto bg-brand-white p-6 shadow-2xl sm:p-8 lg:hidden"
             >
-              <div className="flex items-center justify-between mb-10">
-                <span className="text-xs font-bold uppercase tracking-widest text-brand-primary">{t.nav.menu}</span>
-                <button onClick={() => setIsOpen(false)} className="p-2 hover:bg-brand-dark/5 rounded-lg">
+              <div className="mb-8 flex h-12 items-center justify-between">
+                <span className="text-xs font-bold uppercase tracking-[0.22em] text-brand-primary">{t.nav.menu}</span>
+                <button onClick={() => setIsOpen(false)} className="rounded-lg p-2 text-brand-dark hover:bg-brand-dark/5" aria-label={language === 'es' ? 'Cerrar menú' : 'Close menu'}>
                   <X size={24} />
                 </button>
               </div>
-              <div className="flex flex-col gap-5">
+              <div className="flex flex-col gap-2">
                 {navItems.map((item, index) => (
                   <Link
                     key={item.path}
                     to={item.path}
                     onClick={() => setIsOpen(false)}
                     className={cn(
-                      "text-lg font-medium uppercase tracking-tight transition-colors",
-                      location.pathname === item.path ? "text-brand-primary" : "text-brand-dark"
+                      "rounded-lg px-3 py-3 text-xl font-semibold uppercase tracking-tight transition-colors",
+                      location.pathname === item.path ? "bg-brand-primary/8 text-brand-primary" : "text-brand-dark hover:bg-brand-dark/5"
                     )}
                   >
                     {navLabels[index]}
