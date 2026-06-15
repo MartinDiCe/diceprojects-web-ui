@@ -57,11 +57,18 @@ const useCases = [
   { icon: Building2, title: 'Multirubro y multiempresa', copy: 'Un mismo núcleo para operar distintas unidades, empresas, vendedores y rubros.' },
 ];
 
-export default function ServiciosPage() {
-  React.useEffect(() => {
-    document.title = 'Solución empresarial | Dice Projects';
-  }, []);
+const operationalScenarios = [
+  ['Producto con carrito consultivo', 'Catálogo web, carrito, solicitud de cotización, asignación a vendedor y link inteligente para aprobación del cliente.'],
+  ['Eventos de navegación y demanda', 'Captura de visitas, formularios, campañas, productos vistos, origen del lead y señales para seguimiento comercial.'],
+  ['Stock y movimientos', 'Depósitos, entradas, salidas, reservas, ajustes, disponibilidad y reposición conectadas con ventas y compras.'],
+  ['Compras a múltiples proveedores', 'Solicitud de presupuesto simultánea, recepción de respuestas, comparativa de costos, plazos y adjudicación.'],
+  ['Obras y proyectos técnicos', 'Presupuestos, recursos, avances, certificaciones, costos, responsables, documentación y desvíos.'],
+  ['Proyectos integrales privados', 'Automotores, servicios integrales, instalaciones, mantenimiento, entregas o posventa con templates e hitos.'],
+  ['Gestión comercial completa', 'Clientes, vendedores, prospectos, cotizaciones, propuestas, seguimiento, WhatsApp, PDF y links públicos.'],
+  ['Copiloto y agentes especializados', 'Agentes para documentos, APIs, bases, KPIs, compras, ventas y proyectos con permisos por empresa y usuario.'],
+];
 
+export default function ServiciosPage() {
   return (
     <div className="bg-brand-white pb-28">
       <Seo
@@ -129,6 +136,28 @@ export default function ServiciosPage() {
                 <item.icon className="text-brand-primary" size={30} />
                 <h3 className="mt-5 text-xl font-bold text-brand-dark">{item.title}</h3>
                 <p className="mt-3 text-sm leading-relaxed text-brand-dark/60">{item.copy}</p>
+              </div>
+            ))}
+          </div>
+        </Container>
+      </section>
+
+      <section className="py-24">
+        <Container>
+          <SectionHeader
+            subtitle="Ejemplos de negocio"
+            title="Flujos reales que se pueden activar, combinar y escalar."
+          />
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+            {operationalScenarios.map(([title, copy], index) => (
+              <div key={title} className="grid grid-cols-[56px_1fr] gap-5 rounded-lg border border-brand-dark/10 bg-brand-white p-6">
+                <span className="flex h-12 w-12 items-center justify-center rounded-lg bg-brand-light text-sm font-bold text-brand-primary">
+                  {String(index + 1).padStart(2, '0')}
+                </span>
+                <div>
+                  <h3 className="text-lg font-bold text-brand-dark">{title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-brand-dark/60">{copy}</p>
+                </div>
               </div>
             ))}
           </div>

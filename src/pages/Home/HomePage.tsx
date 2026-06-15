@@ -3,6 +3,7 @@ import { motion } from 'motion/react';
 import {
   ArrowRight,
   Activity,
+  BarChart3,
   Bell,
   Bot,
   Boxes,
@@ -13,9 +14,13 @@ import {
   GitBranch,
   LineChart,
   Megaphone,
+  MousePointerClick,
   PlugZap,
+  Send,
   ShieldCheck,
+  ShoppingCart,
   Sparkles,
+  Truck,
   Users,
   Warehouse,
 } from 'lucide-react';
@@ -57,6 +62,57 @@ const platformModules = [
   'Copiloto AI por empresa',
   'Integraciones API/BD/documentos',
   'Seguridad, auditoría y permisos',
+];
+
+const businessExamples = [
+  {
+    icon: ShoppingCart,
+    title: 'Producto web con carrito consultivo',
+    copy: 'Un cliente arma un carrito, pide cotización y el sistema deriva la solicitud al vendedor correcto. El vendedor responde con una propuesta y un link inteligente para que el cliente apruebe, rechace o pida cambios.',
+    steps: ['Catálogo', 'Carrito', 'Vendedor', 'Link de aprobación'],
+  },
+  {
+    icon: MousePointerClick,
+    title: 'Eventos y comportamiento digital',
+    copy: 'Registramos visitas, consultas, formularios, productos vistos, señales de interés, campañas y origen del lead para saber qué hace cada cliente en la web y alimentar acciones comerciales.',
+    steps: ['Evento', 'Lead', 'Campaña', 'Acción comercial'],
+  },
+  {
+    icon: Warehouse,
+    title: 'Stock, depósitos y movimientos',
+    copy: 'Manejamos existencias por depósito, entradas, salidas, reservas, ajustes, reposición y trazabilidad para que ventas y compras trabajen con disponibilidad real.',
+    steps: ['Depósito', 'Movimiento', 'Reserva', 'Reposición'],
+  },
+  {
+    icon: Send,
+    title: 'Compra inteligente a proveedores',
+    copy: 'Cuando falta mercadería o se necesita costear una operación, generamos solicitudes de presupuesto a varios proveedores, comparamos respuestas y adjudicamos por mejor costo, plazo o condición.',
+    steps: ['Solicitud', 'Proveedores', 'Comparativa', 'Adjudicación'],
+  },
+  {
+    icon: Building2,
+    title: 'Obras y proyectos con desvíos',
+    copy: 'Controlamos recursos, presupuestos, avances, certificaciones, costos, partes y desvíos para constructoras, mantenimiento, instalaciones o servicios técnicos.',
+    steps: ['Presupuesto', 'Recursos', 'Avance', 'Certificación'],
+  },
+  {
+    icon: Truck,
+    title: 'Proyectos integrales multirubro',
+    copy: 'Armamos flujos para automotores, servicios privados, instalaciones, entregas, posventa o mantenimiento: templates, responsables, recursos, hitos, costos y documentación.',
+    steps: ['Template', 'Responsable', 'Hitos', 'Entrega'],
+  },
+  {
+    icon: BarChart3,
+    title: 'KPIs ejecutivos y rentabilidad',
+    copy: 'Unimos ventas, compras, stock, proyectos, marketing y costos para medir margen, conversión, tiempos, oportunidades abiertas, cumplimiento y rentabilidad por empresa o unidad.',
+    steps: ['Datos', 'KPIs', 'Alertas', 'Decisión'],
+  },
+  {
+    icon: Bot,
+    title: 'Copiloto empresarial con contexto',
+    copy: 'El asistente consulta documentos, APIs, bases, proyectos, clientes y métricas respetando permisos. Puede derivar al agente correcto para compras, ventas, documentos, datos o proyectos.',
+    steps: ['Pregunta', 'Permisos', 'Agente', 'Respuesta'],
+  },
 ];
 
 export default function HomePage() {
@@ -192,6 +248,47 @@ export default function HomePage() {
                   <p className="mt-3 text-sm leading-relaxed text-brand-dark/60">{item.copy}</p>
                 </div>
               ))}
+            </div>
+          </div>
+        </Container>
+      </section>
+
+      <section className="bg-brand-white py-24">
+        <Container>
+          <SectionHeader
+            align="center"
+            subtitle="Ejemplos de negocio"
+            title="Casos concretos que la plataforma puede resolver desde el backoffice."
+          />
+          <div className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-4">
+            {businessExamples.map((item) => (
+              <div key={item.title} className="flex min-h-full flex-col rounded-lg border border-brand-dark/10 bg-brand-light/50 p-6">
+                <item.icon className="text-brand-primary" size={30} />
+                <h3 className="mt-5 text-xl font-bold leading-tight text-brand-dark">{item.title}</h3>
+                <p className="mt-3 flex-1 text-sm leading-relaxed text-brand-dark/62">{item.copy}</p>
+                <div className="mt-6 grid grid-cols-2 gap-2">
+                  {item.steps.map((step) => (
+                    <span key={step} className="rounded-md bg-brand-white px-3 py-2 text-xs font-bold text-brand-dark/70">
+                      {step}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className="mt-10 rounded-lg bg-brand-dark p-8 text-brand-white">
+            <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:items-center">
+              <div className="lg:col-span-8">
+                <h3 className="text-3xl font-bold leading-tight">La diferencia está en conectar el flujo completo, no en cargar más datos.</h3>
+                <p className="mt-4 text-brand-white/62">
+                  El valor aparece cuando un evento web crea una oportunidad, una cotización dispara compras, una compra actualiza costos, el stock impacta ventas y los KPIs muestran rentabilidad sin perseguir planillas.
+                </p>
+              </div>
+              <div className="lg:col-span-4 lg:text-right">
+                <Link to="/automatizacion-y-orquestacion">
+                  <Button>Ver catálogo completo <ArrowRight size={16} /></Button>
+                </Link>
+              </div>
             </div>
           </div>
         </Container>
