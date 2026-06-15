@@ -14,7 +14,7 @@ export const Footer = () => {
     { label: 'Automatización de procesos', path: '/automatizacion-de-procesos' },
     { label: 'Gestión comercial', path: '/gestion-comercial-crm-operativo' },
     { label: 'Productos y catálogo', path: '/gestion-productos-catalogo-web' },
-    { label: 'Stock y almacenes', path: '/gestion-stock-almacenes-inventario' },
+    { label: 'Stock de productos', path: '/gestion-stock-productos-inventario' },
     { label: 'Marketing y leads', path: '/marketing-leads-campanas-embudos' },
     { label: 'Presupuestos y cotizaciones', path: '/presupuestos-cotizaciones-compras' },
     { label: 'Proyectos y servicios', path: '/software-gestion-obras-servicios' },

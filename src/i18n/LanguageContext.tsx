@@ -140,7 +140,7 @@ export const copy = {
         'Automatización de procesos',
         'Gestión comercial',
         'Productos y catálogo',
-        'Stock y almacenes',
+        'Stock de productos',
         'Marketing y leads',
         'Presupuestos y cotizaciones',
         'Proyectos y servicios',
@@ -162,7 +162,7 @@ export const copy = {
       catalog: [
         ['Ventas y cotizaciones', 'Carritos consultivos, propuestas, links de aprobación y seguimiento comercial.'],
         ['Compras y proveedores', 'Solicitudes simultáneas, comparativas, adjudicación y trazabilidad de costos.'],
-        ['Productos y stock', 'Catálogo, precios, depósitos, movimientos, reservas y disponibilidad real.'],
+        ['Productos y stock', 'Catálogo, precios, puntos de stock, movimientos simples y disponibilidad por tienda o canal.'],
         ['Proyectos y servicios', 'Obras, servicios integrales, hitos, recursos, costos, avances y desvíos.'],
         ['Marketing y demanda', 'Leads, campañas, formularios, eventos web y señales de interés.'],
         ['Copiloto empresarial', 'Agentes, documentos, sistemas, indicadores, conocimiento por empresa y control de costos.'],
@@ -196,7 +196,7 @@ export const copy = {
       examplesTitle: 'Casos que se pueden activar.',
       examples: [
         ['Producto con carrito consultivo', 'Catálogo, solicitud, vendedor asignado y link de aprobación.'],
-        ['Stock y compras', 'Reposición, proveedores, comparativas y adjudicación.'],
+        ['Stock de productos y compras', 'Disponibilidad, reposición simple, proveedores, comparativas y adjudicación.'],
         ['Proyectos integrales', 'Servicios, automotores, instalaciones, mantenimiento y posventa.'],
         ['Copiloto de negocio', 'Agentes para documentos, datos, indicadores, ventas, compras y proyectos.'],
       ],
@@ -262,7 +262,7 @@ export const copy = {
         'Process automation',
         'Commercial operations',
         'Products and catalog',
-        'Inventory and warehouses',
+        'Product inventory',
         'Marketing and leads',
         'Quotes and procurement',
         'Projects and services',
@@ -284,7 +284,7 @@ export const copy = {
       catalog: [
         ['Sales and quotes', 'Consultative carts, proposals, approval links and commercial follow-up.'],
         ['Procurement', 'Multi-supplier requests, comparisons, awards and cost traceability.'],
-        ['Products and inventory', 'Catalog, pricing, warehouses, movements, reservations and real availability.'],
+        ['Products and inventory', 'Catalog, pricing, product stock points, simple movements and availability by store or channel.'],
         ['Projects and services', 'Works, integrated services, milestones, resources, costs, progress and deviations.'],
         ['Marketing and demand', 'Leads, campaigns, forms, web events and buying signals.'],
         ['Enterprise copilot', 'Agents, documents, business systems, KPIs, company knowledge and cost control.'],
@@ -292,7 +292,7 @@ export const copy = {
       workflowsTitle: 'Business workflows, not disconnected screens.',
       workflows: [
         ['Cart to quote', 'Customers submit a request, sales respond, and a smart link tracks approval, rejection or changes.'],
-        ['Smart procurement', 'When stock is missing, request quotes from suppliers and award by cost, timing or terms.'],
+        ['Smart procurement', 'When product stock is missing, request quotes from suppliers and award by cost, timing or terms.'],
         ['Web events to sales', 'Capture interests, campaigns and viewed products to act on real buying signals.'],
         ['Project to profitability', 'Track resources, progress, costs, certifications and KPIs by company or unit.'],
       ],

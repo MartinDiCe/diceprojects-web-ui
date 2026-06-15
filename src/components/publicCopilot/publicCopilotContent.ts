@@ -77,7 +77,7 @@ export const detectPublicCopilotIntent = (input: string): PublicCopilotIntent =>
   if (hasAny(message, ['obra', 'proyecto', 'servicio integral', 'mantenimiento', 'project', 'construction'])) {
     return 'projects';
   }
-  if (hasAny(message, ['stock', 'inventario', 'deposito', 'almacen', 'mercaderia', 'proveedor', 'inventory', 'warehouse', 'supplier'])) {
+  if (hasAny(message, ['stock', 'inventario', 'producto', 'tienda', 'canal', 'mercaderia', 'proveedor', 'inventory', 'product stock', 'store stock', 'supplier'])) {
     return 'inventory';
   }
   if (hasAny(message, ['lead', 'campana', 'marketing', 'evento', 'web', 'embudo', 'cliente', 'funnel', 'campaign'])) {
@@ -174,7 +174,7 @@ export const publicCopilotCopy: Record<Language, {
       },
       inventory: {
         title: 'Stock, compras y proveedores',
-        answer: 'Podés controlar depósitos, movimientos, disponibilidad y reposición. Cuando falta mercadería, se puede solicitar presupuesto a varios proveedores y comparar respuestas.',
+        answer: 'Podés controlar stock de productos por tienda, canal o punto de venta, con movimientos simples, disponibilidad y reposición. Cuando falta mercadería, se puede solicitar presupuesto a proveedores y comparar respuestas.',
         prompts: ['Cómo adjudicar proveedores', 'Cómo conecta con ventas', 'Agendar diagnóstico'],
       },
       marketing: {
@@ -266,7 +266,7 @@ export const publicCopilotCopy: Record<Language, {
       },
       inventory: {
         title: 'Inventory, procurement and suppliers',
-        answer: 'You can control warehouses, movements, availability and replenishment. When stock is missing, request quotes from multiple suppliers and compare responses.',
+        answer: 'You can control product inventory by store, channel or sales point, with simple movements, availability and replenishment. When product stock is missing, request quotes from suppliers and compare responses.',
         prompts: ['How suppliers are awarded', 'How it connects to sales', 'Book assessment'],
       },
       marketing: {

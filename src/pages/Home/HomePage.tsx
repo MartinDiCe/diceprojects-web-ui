@@ -8,18 +8,18 @@ import {
   FileCheck2,
   Megaphone,
   MousePointerClick,
+  PackageCheck,
   PlugZap,
   Send,
   ShieldCheck,
   ShoppingCart,
-  Warehouse,
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Container, Button, SectionHeader } from '@/src/components/common';
 import { Seo, organizationJsonLd, serviceJsonLd } from '@/src/components/seo/Seo';
 import { copy, useLanguage } from '@/src/i18n/LanguageContext';
 
-const catalogIcons = [FileCheck2, Send, Warehouse, Building2, Megaphone, Bot];
+const catalogIcons = [FileCheck2, Send, PackageCheck, Building2, Megaphone, Bot];
 const workflowIcons = [ShoppingCart, PlugZap, MousePointerClick, BarChart3];
 
 export default function HomePage() {

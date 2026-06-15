@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Navigate, Routes, Route, useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 import { MainLayout } from './layout/MainLayout';
 import HomePage from './pages/Home/HomePage';
@@ -45,7 +45,8 @@ export default function App() {
             <Route path="/automatizacion-de-procesos" element={<SeoLandingPage page="automatizacion" />} />
             <Route path="/gestion-comercial-crm-operativo" element={<SeoLandingPage page="comercial" />} />
             <Route path="/gestion-productos-catalogo-web" element={<SeoLandingPage page="productos" />} />
-            <Route path="/gestion-stock-almacenes-inventario" element={<SeoLandingPage page="stock" />} />
+            <Route path="/gestion-stock-productos-inventario" element={<SeoLandingPage page="stock" />} />
+            <Route path="/gestion-stock-almacenes-inventario" element={<Navigate to="/gestion-stock-productos-inventario" replace />} />
             <Route path="/marketing-leads-campanas-embudos" element={<SeoLandingPage page="marketing" />} />
             <Route path="/software-gestion-obras-servicios" element={<SeoLandingPage page="obras" />} />
             <Route path="/presupuestos-cotizaciones-compras" element={<SeoLandingPage page="cotizaciones" />} />
