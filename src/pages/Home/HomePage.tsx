@@ -61,12 +61,12 @@ export default function HomePage() {
               {t.intro}
             </p>
             <div className="flex flex-col gap-3 sm:flex-row">
-              <Link to="/contacto" className="w-full sm:w-auto">
+              <Link to="/contacto" className="w-full sm:w-auto" data-mkt="home_primary_diagnostic_cta" data-mkt-category="LEAD">
                 <Button size="lg" className="w-full sm:w-auto">
                   {t.primary} <ArrowRight size={18} />
                 </Button>
               </Link>
-              <Link to="/automatizacion-y-orquestacion" className="w-full sm:w-auto">
+              <Link to="/automatizacion-y-orquestacion" className="w-full sm:w-auto" data-mkt="home_solution_cta" data-mkt-category="DISCOVERY">
                 <Button variant="outline" size="lg" className="w-full border-brand-white/45 bg-brand-dark/20 text-brand-white backdrop-blur hover:border-brand-white hover:bg-brand-white hover:text-brand-dark sm:w-auto">
                   {t.secondary}
                 </Button>

@@ -46,6 +46,8 @@ export const Footer = () => {
                   href={BRAND.social.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
+                  data-mkt="footer_linkedin_click"
+                  data-mkt-category="SOCIAL"
                   className="w-9 h-9 bg-brand-white/10 rounded-lg flex items-center justify-center hover:bg-brand-primary transition-colors group focus-visible:outline-2 focus-visible:outline-brand-primary focus-visible:outline-offset-4"
                   aria-label={`LinkedIn de ${BRAND.name}`}
                 >
@@ -74,7 +76,7 @@ export const Footer = () => {
               <h4 className="text-[10px] font-bold uppercase tracking-[0.25em] text-brand-primary">{t.footer.contact}</h4>
 
               <div className="space-y-3">
-                <a href={`mailto:${BRAND.contact.email}`} className="flex items-center gap-3 group focus-visible:outline-2 focus-visible:outline-brand-primary focus-visible:outline-offset-4 w-fit mx-auto md:mx-0">
+                <a href={`mailto:${BRAND.contact.email}`} data-mkt="footer_email_click" data-mkt-category="CONTACT" className="flex items-center gap-3 group focus-visible:outline-2 focus-visible:outline-brand-primary focus-visible:outline-offset-4 w-fit mx-auto md:mx-0">
                   <div className="w-8 h-8 rounded-lg bg-brand-white/10 flex items-center justify-center group-hover:bg-brand-primary transition-colors">
                     <Mail size={14} className="text-brand-white/70 group-hover:text-brand-white" />
                   </div>
@@ -83,7 +85,7 @@ export const Footer = () => {
                   </span>
                 </a>
 
-                <a href={BRAND.contact.phoneUrl} className="flex items-center gap-3 group focus-visible:outline-2 focus-visible:outline-brand-primary focus-visible:outline-offset-4 w-fit mx-auto md:mx-0">
+                <a href={BRAND.contact.phoneUrl} data-mkt="footer_whatsapp_click" data-mkt-category="CONTACT" className="flex items-center gap-3 group focus-visible:outline-2 focus-visible:outline-brand-primary focus-visible:outline-offset-4 w-fit mx-auto md:mx-0">
                   <div className="w-8 h-8 rounded-lg bg-brand-white/10 flex items-center justify-center group-hover:bg-brand-primary transition-colors">
                     <Phone size={14} className="text-brand-white/70 group-hover:text-brand-white" />
                   </div>
@@ -96,6 +98,8 @@ export const Footer = () => {
               <div className="pt-1">
                 <Link
                   to="/contacto"
+                  data-mkt="footer_diagnostic_cta"
+                  data-mkt-category="LEAD"
                   className="inline-flex h-10 items-center justify-center rounded-lg bg-brand-primary px-5 text-xs font-bold uppercase tracking-[0.16em] text-brand-white transition hover:bg-brand-secondary"
                 >
                   {t.footer.diagnostic} <ChevronRight size={14} className="ml-2" />

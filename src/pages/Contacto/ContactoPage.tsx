@@ -1,9 +1,10 @@
 import { ArrowRight, CalendarCheck, Mail, MapPin, Phone, ShieldCheck } from 'lucide-react';
-import type { FormEvent } from 'react';
+import { useState, type FormEvent } from 'react';
 import { Container, Button, SectionHeader } from '@/src/components/common';
 import { BRAND } from '@/src/app/config/branding.config';
 import { Seo, organizationJsonLd } from '@/src/components/seo/Seo';
 import { copy, useLanguage } from '@/src/i18n/LanguageContext';
+import { submitMarketingLead, trackMarketingEvent } from '@/src/lib/marketingCapture';
 
 const interestsByLanguage = {
   es: [
@@ -32,11 +33,61 @@ export default function ContactoPage() {
   const { language } = useLanguage();
   const t = copy[language].contact;
   const interests = interestsByLanguage[language];
+  const [submitState, setSubmitState] = useState<'idle' | 'submitting' | 'sent' | 'error'>('idle');
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const form = new FormData(event.currentTarget);
+    const formElement = event.currentTarget;
+    const form = new FormData(formElement);
     const selectedInterests = form.getAll('intereses').join(', ') || 'Sin especificar';
+    const fullName = String(form.get('nombre') || '').trim();
+    const email = String(form.get('email') || '').trim();
+    const company = String(form.get('empresa') || '').trim();
+    const phone = String(form.get('telefono') || '').trim();
+    const message = String(form.get('dolor') || '').trim();
+    const metadata = {
+      company,
+      industry: form.get('rubro') || '',
+      companySize: form.get('tamano') || '',
+      priority: form.get('prioridad') || '',
+      interests: selectedInterests,
+      language,
+      form: 'diagnostic',
+    };
+
+    setSubmitState('submitting');
+    try {
+      await submitMarketingLead({
+        fullName,
+        email,
+        phone,
+        message: [
+          `Empresa: ${company}`,
+          `Rubro: ${form.get('rubro') || ''}`,
+          `Tamaño: ${form.get('tamano') || ''}`,
+          `Prioridad: ${form.get('prioridad') || ''}`,
+          `Intereses: ${selectedInterests}`,
+          '',
+          message,
+        ].join('\n'),
+        actionCode: 'diagnostic_form_submit',
+        consent: true,
+        metadata,
+      });
+      void trackMarketingEvent({
+        eventType: 'CONVERSION',
+        actionCode: 'diagnostic_form_submit',
+        actionLabel: 'Diagnostic form submitted',
+        category: 'LEAD',
+        metadata,
+      });
+      setSubmitState('sent');
+      formElement.reset();
+      return;
+    } catch {
+      setSubmitState('error');
+    }
+
     const subject = encodeURIComponent(`Lead diagnóstico Dice Projects - ${form.get('empresa') || 'Empresa'}`);
     const body = encodeURIComponent([
       'Nuevo lead para diagnóstico Dice Projects',
@@ -83,14 +134,14 @@ export default function ContactoPage() {
             <div className="space-y-8 lg:col-span-5">
               <SectionHeader subtitle="Contact" title={t.directTitle} />
               <div className="space-y-4">
-                <a href={`mailto:${BRAND.contact.email}`} className="flex items-center gap-4 rounded-lg border border-brand-dark/10 p-4 transition hover:border-brand-primary">
+                <a href={`mailto:${BRAND.contact.email}`} data-mkt="contact_email_click" data-mkt-category="CONTACT" className="flex items-center gap-4 rounded-lg border border-brand-dark/10 p-4 transition hover:border-brand-primary">
                   <Mail className="shrink-0 text-brand-primary" size={24} />
                   <div>
                     <p className="text-xs font-bold uppercase text-brand-dark/45">Email</p>
                     <p className="break-all font-bold text-brand-dark">{BRAND.contact.email}</p>
                   </div>
                 </a>
-                <a href={BRAND.contact.phoneUrl} className="flex items-center gap-4 rounded-lg border border-brand-dark/10 p-4 transition hover:border-brand-primary">
+                <a href={BRAND.contact.phoneUrl} data-mkt="contact_whatsapp_click" data-mkt-category="CONTACT" className="flex items-center gap-4 rounded-lg border border-brand-dark/10 p-4 transition hover:border-brand-primary">
                   <Phone className="shrink-0 text-brand-primary" size={24} />
                   <div>
                     <p className="text-xs font-bold uppercase text-brand-dark/45">WhatsApp</p>
@@ -185,9 +236,19 @@ export default function ContactoPage() {
                   <textarea name="dolor" rows={4} className="w-full resize-none rounded-lg border border-brand-white/15 bg-brand-white/8 px-4 py-3 text-base outline-none transition focus:border-brand-primary" placeholder="Examples: slow quoting, disconnected inventory, manual purchasing, duplicate data..." />
                 </label>
                 <div className="md:col-span-2">
-                  <Button type="submit" className="w-full py-5">
-                    {t.labels.submit} <ArrowRight size={18} />
+                  <Button type="submit" className="w-full py-5" disabled={submitState === 'submitting'} data-mkt="diagnostic_form_submit" data-mkt-category="LEAD">
+                    {submitState === 'submitting' ? (language === 'es' ? 'Enviando...' : 'Sending...') : t.labels.submit} <ArrowRight size={18} />
                   </Button>
+                  {submitState === 'sent' && (
+                    <p className="mt-3 rounded-lg border border-emerald-400/30 bg-emerald-400/10 px-4 py-3 text-center text-sm font-semibold text-emerald-100">
+                      {language === 'es' ? 'Solicitud registrada. Te contactamos para coordinar el diagnóstico.' : 'Request received. We will contact you to schedule the assessment.'}
+                    </p>
+                  )}
+                  {submitState === 'error' && (
+                    <p className="mt-3 rounded-lg border border-amber-300/30 bg-amber-300/10 px-4 py-3 text-center text-sm font-semibold text-amber-100">
+                      {language === 'es' ? 'No pudimos registrar el lead en backoffice. Abrimos el email como respaldo.' : 'We could not register the lead in backoffice. Email fallback opened.'}
+                    </p>
+                  )}
                   <p className="mt-3 text-center text-xs text-brand-white/45">{t.labels.note}</p>
                 </div>
               </form>

@@ -7,6 +7,9 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   type?: 'button' | 'submit' | 'reset';
   className?: string;
   children: React.ReactNode;
+  disabled?: boolean;
+  'data-mkt'?: string;
+  'data-mkt-category'?: string;
 }
 
 export const Button = ({ 

@@ -62,7 +62,7 @@ export const Navbar = () => {
           >
             {language === 'es' ? 'EN' : 'ES'}
           </button>
-          <Link to="/contacto">
+          <Link to="/contacto" data-mkt="nav_diagnostic_cta" data-mkt-category="LEAD">
             <Button className="rounded-full h-10 px-5 text-[10px] font-semibold uppercase tracking-[0.16em]">
               {t.nav.cta} <ChevronRight size={14} className="ml-2" />
             </Button>
@@ -130,7 +130,7 @@ export const Navbar = () => {
                 ))}
               </div>
               <div className="mt-auto pt-8 border-t border-brand-dark/5">
-                <Link to="/contacto" onClick={() => setIsOpen(false)}>
+                <Link to="/contacto" onClick={() => setIsOpen(false)} data-mkt="mobile_nav_diagnostic_cta" data-mkt-category="LEAD">
                   <Button className="w-full py-4 rounded-lg">{t.nav.cta}</Button>
                 </Link>
               </div>

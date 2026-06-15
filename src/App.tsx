@@ -15,6 +15,7 @@ import CookiesPage from './pages/Legal/CookiesPage';
 import LegalNoticePage from './pages/Legal/LegalNoticePage';
 import LegalHubPage from './pages/Legal/LegalHubPage';
 import { LanguageProvider } from './i18n/LanguageContext';
+import { MarketingTracker } from './components/marketing/MarketingTracker';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -29,6 +30,7 @@ export default function App() {
     <LanguageProvider>
       <Router>
         <ScrollToTop />
+        <MarketingTracker />
         <MainLayout>
           <Routes>
             <Route path="/" element={<HomePage />} />
