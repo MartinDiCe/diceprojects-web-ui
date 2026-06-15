@@ -15,7 +15,7 @@ const interestsByLanguage = {
     'Eventos web / leads',
     'Proyectos integrales',
     'Copiloto AI empresarial',
-    'Integraciones API / BD',
+    'Integraciones con sistemas y datos',
   ],
   en: [
     'Sales and quotes',
@@ -25,7 +25,7 @@ const interestsByLanguage = {
     'Web events / leads',
     'Integrated projects',
     'Enterprise AI copilot',
-    'API / database integrations',
+    'Systems and data integrations',
   ],
 };
 
@@ -216,7 +216,7 @@ export default function ContactoPage() {
                     <option>Operate and sell better</option>
                     <option>Automate manual processes</option>
                     <option>Integrate systems and data</option>
-                    <option>Deploy AI with documents/APIs/databases</option>
+                    <option>Deploy AI with documents, systems and data</option>
                     <option>Plan a complete transformation</option>
                   </select>
                 </label>

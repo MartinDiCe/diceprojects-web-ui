@@ -165,7 +165,7 @@ export const copy = {
         ['Productos y stock', 'Catálogo, precios, depósitos, movimientos, reservas y disponibilidad real.'],
         ['Proyectos y servicios', 'Obras, servicios integrales, hitos, recursos, costos, avances y desvíos.'],
         ['Marketing y demanda', 'Leads, campañas, formularios, eventos web y señales de interés.'],
-        ['AI Orchestrator', 'Agentes, documentos, APIs, bases, KPIs, memoria y control de costos.'],
+        ['Copiloto empresarial', 'Agentes, documentos, sistemas, indicadores, conocimiento por empresa y control de costos.'],
       ],
       workflowsTitle: 'Flujos de negocio, no pantallas sueltas.',
       workflows: [
@@ -191,14 +191,14 @@ export const copy = {
       offers: [
         ['Blueprint operativo', 'Mapa de procesos, módulos, datos, permisos, ROI y quick wins.'],
         ['Implementación de plataforma', 'Configuración de módulos, roles, catálogos, dashboards y flujos.'],
-        ['Copiloto e integraciones AI', 'Documentos, APIs, bases, conocimiento, agentes y control de costos.'],
+        ['Copiloto e integraciones AI', 'Documentos, sistemas, datos, conocimiento de la empresa, agentes y control de costos.'],
       ],
       examplesTitle: 'Casos que se pueden activar.',
       examples: [
         ['Producto con carrito consultivo', 'Catálogo, solicitud, vendedor asignado y link de aprobación.'],
         ['Stock y compras', 'Reposición, proveedores, comparativas y adjudicación.'],
         ['Proyectos integrales', 'Servicios, automotores, instalaciones, mantenimiento y posventa.'],
-        ['Copiloto de negocio', 'Agentes para documentos, datos, KPIs, ventas, compras y proyectos.'],
+        ['Copiloto de negocio', 'Agentes para documentos, datos, indicadores, ventas, compras y proyectos.'],
       ],
       implementationTitle: 'Implementación clara.',
       steps: [
@@ -233,7 +233,7 @@ export const copy = {
         interests: 'Qué querés resolver',
         pain: 'Principal dolor operativo',
         submit: 'Generar lead y enviar solicitud',
-        note: 'Hoy se envía por email prellenado. Está listo para conectar con CRM/backoffice cuando activemos el endpoint.',
+        note: 'La solicitud queda registrada para seguimiento comercial y diagnóstico.',
       },
     },
   },
@@ -287,7 +287,7 @@ export const copy = {
         ['Products and inventory', 'Catalog, pricing, warehouses, movements, reservations and real availability.'],
         ['Projects and services', 'Works, integrated services, milestones, resources, costs, progress and deviations.'],
         ['Marketing and demand', 'Leads, campaigns, forms, web events and buying signals.'],
-        ['AI Orchestrator', 'Agents, documents, APIs, databases, KPIs, memory and cost control.'],
+        ['Enterprise copilot', 'Agents, documents, business systems, KPIs, company knowledge and cost control.'],
       ],
       workflowsTitle: 'Business workflows, not disconnected screens.',
       workflows: [
@@ -313,14 +313,14 @@ export const copy = {
       offers: [
         ['Operational blueprint', 'Processes, modules, data, permissions, ROI and quick wins.'],
         ['Platform implementation', 'Modules, roles, catalogs, dashboards and workflows.'],
-        ['AI copilot and integrations', 'Documents, APIs, databases, knowledge, agents and cost governance.'],
+        ['AI copilot and integrations', 'Documents, systems, business data, company knowledge, agents and cost governance.'],
       ],
       examplesTitle: 'Use cases you can activate.',
       examples: [
         ['Consultative product cart', 'Catalog, request, assigned seller and approval link.'],
         ['Inventory and procurement', 'Replenishment, suppliers, comparisons and awards.'],
         ['Integrated projects', 'Services, automotive, installations, maintenance and after-sales.'],
-        ['Business copilot', 'Agents for documents, data, KPIs, sales, procurement and projects.'],
+        ['Business copilot', 'Agents for documents, data, indicators, sales, procurement and projects.'],
       ],
       implementationTitle: 'Clear implementation.',
       steps: [
@@ -355,7 +355,7 @@ export const copy = {
         interests: 'What do you want to solve?',
         pain: 'Main operational pain',
         submit: 'Generate lead and send request',
-        note: 'Today it opens a prefilled email. It is ready to connect with CRM/backoffice when the endpoint is enabled.',
+        note: 'Your request is registered for commercial follow-up and assessment.',
       },
     },
   },
