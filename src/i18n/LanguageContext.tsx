@@ -12,10 +12,73 @@ type LanguageContextValue = {
 
 const LanguageContext = React.createContext<LanguageContextValue | undefined>(undefined);
 
+const SPANISH_REGIONS = new Set([
+  'AR',
+  'BO',
+  'CL',
+  'CO',
+  'CR',
+  'CU',
+  'DO',
+  'EC',
+  'ES',
+  'GT',
+  'HN',
+  'MX',
+  'NI',
+  'PA',
+  'PE',
+  'PR',
+  'PY',
+  'SV',
+  'UY',
+  'VE',
+]);
+
+function resolveLanguageFromLocale(locale: string): Language | null {
+  const normalized = locale.trim().toLowerCase();
+  if (!normalized) return null;
+  const [languageCode, regionCode] = normalized.split(/[-_]/);
+  if (languageCode === 'en') return 'en';
+  if (languageCode === 'es') return 'es';
+  if (regionCode && SPANISH_REGIONS.has(regionCode.toUpperCase())) return 'es';
+  return null;
+}
+
+function detectBrowserLanguage(): Language {
+  if (typeof window === 'undefined') return 'es';
+
+  const locales = [
+    ...(navigator.languages ?? []),
+    navigator.language,
+  ].filter(Boolean);
+
+  for (const locale of locales) {
+    const detected = resolveLanguageFromLocale(locale);
+    if (detected) return detected;
+  }
+
+  const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  if (timezone?.startsWith('America/')) {
+    return timezone === 'America/New_York'
+      || timezone === 'America/Chicago'
+      || timezone === 'America/Denver'
+      || timezone === 'America/Los_Angeles'
+      || timezone === 'America/Phoenix'
+      || timezone === 'America/Anchorage'
+      || timezone === 'Pacific/Honolulu'
+      ? 'en'
+      : 'es';
+  }
+
+  return 'en';
+}
+
 function getInitialLanguage(): Language {
   if (typeof window === 'undefined') return 'es';
   const stored = window.localStorage.getItem(STORAGE_KEY);
-  return stored === 'en' ? 'en' : 'es';
+  if (stored === 'en' || stored === 'es') return stored;
+  return detectBrowserLanguage();
 }
 
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
