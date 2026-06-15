@@ -1,0 +1,24 @@
+{
+  "name": "Dice Projects",
+  "short_name": "Dice",
+  "icons": [
+    {
+      "src": "/assets/logos/dice-isologo.png",
+      "sizes": "16x16",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/logos/dice-isologo.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/logos/dice-isologo.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ],
+  "theme_color": "#F27D26",
+  "background_color": "#E4E3E0",
+  "display": "standalone"
+}
