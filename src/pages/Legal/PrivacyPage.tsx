@@ -31,7 +31,7 @@ export default function PrivacyPage() {
       <p>Conservamos los datos mientras sean necesarios para la operación de la plataforma, la prestación de servicios, auditoría, soporte, seguridad o cumplimiento de obligaciones aplicables. Cuando la información deja de ser necesaria, puede ser eliminada, anonimizada o retenida solo según corresponda legal o técnicamente.</p>
 
       <h2>8. Derechos de los usuarios</h2>
-      <p>Los usuarios pueden solicitar acceso, rectificación, actualización o eliminación de sus datos personales. En cuentas empresariales, algunas solicitudes pueden requerir intervención del administrador de la organización titular del tenant.</p>
+      <p>Los usuarios pueden solicitar acceso, rectificación, actualización o eliminación de sus datos personales. En cuentas empresariales, algunas solicitudes pueden requerir intervención del administrador de la organización titular de la cuenta.</p>
 
       <h2>9. Contacto</h2>
       <p>Para consultas sobre privacidad, escribinos a <a href="mailto:mdice@diceprojects.com">mdice@diceprojects.com</a>.</p>
