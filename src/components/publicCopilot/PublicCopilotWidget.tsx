@@ -1,4 +1,4 @@
-import { FormEvent, useMemo, useState } from 'react';
+import { FormEvent, useEffect, useMemo, useState } from 'react';
 import { ArrowRight, Bot, CheckCircle2, MessageCircle, Send, X } from 'lucide-react';
 import { publicCopilotCopy, detectPublicCopilotIntent, type PublicCopilotIntent } from './publicCopilotContent';
 import { useLanguage } from '@/src/i18n/LanguageContext';
@@ -44,6 +44,21 @@ export const PublicCopilotWidget = () => {
       prompts: copy.quickPrompts,
     },
   ]);
+
+  useEffect(() => {
+    setMessages((current) => {
+      if (current.length !== 1 || current[0].id !== 'greeting') {
+        return current;
+      }
+      return [{
+        id: 'greeting',
+        sender: 'bot',
+        title: copy.title,
+        text: copy.greeting,
+        prompts: copy.quickPrompts,
+      }];
+    });
+  }, [copy]);
 
   const hasLeadPrompt = useMemo(() => messages.some((message) => message.showLead), [messages]);
   const lastIntent = useMemo(() => {
@@ -192,7 +207,7 @@ export const PublicCopilotWidget = () => {
               <p className="text-[11px] font-semibold text-brand-white/55">{copy.subtitle}</p>
             </div>
           </div>
-          <button type="button" onClick={() => setIsOpen(false)} className="rounded-lg p-2 text-brand-white/70 transition hover:bg-brand-white/10 hover:text-brand-white" aria-label="Cerrar copiloto">
+          <button type="button" onClick={() => setIsOpen(false)} className="rounded-lg p-2 text-brand-white/70 transition hover:bg-brand-white/10 hover:text-brand-white" aria-label={language === 'es' ? 'Cerrar copiloto' : 'Close copilot'}>
             <X size={18} />
           </button>
         </div>
@@ -257,7 +272,7 @@ export const PublicCopilotWidget = () => {
             placeholder={copy.placeholder}
             className="min-w-0 flex-1 rounded-lg border border-brand-dark/10 px-3 py-3 text-sm outline-none transition focus:border-brand-primary"
           />
-          <button type="submit" className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-brand-primary text-brand-white transition hover:bg-brand-secondary" aria-label="Enviar">
+          <button type="submit" className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-brand-primary text-brand-white transition hover:bg-brand-secondary" aria-label={language === 'es' ? 'Enviar' : 'Send'}>
             <Send size={17} />
           </button>
         </form>
@@ -273,7 +288,7 @@ export const PublicCopilotWidget = () => {
               actionCode: 'public_copilot_open',
               actionLabel: 'Open public copilot',
               category: 'PUBLIC_COPILOT',
-              metadata: { zeroLlm: true },
+              metadata: { zeroLlm: true, language },
             });
           }
         }}
