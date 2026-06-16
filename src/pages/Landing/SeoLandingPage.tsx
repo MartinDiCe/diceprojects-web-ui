@@ -3,10 +3,11 @@ import { ArrowRight, CheckCircle2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Container, SectionHeader, buttonClassName } from '@/src/components/common';
 import { Seo, organizationJsonLd, serviceJsonLd } from '@/src/components/seo/Seo';
+import { type Language, useLanguage } from '@/src/i18n/LanguageContext';
 
 type LandingKey = 'plataforma' | 'automatizacion' | 'comercial' | 'productos' | 'stock' | 'marketing' | 'sitios' | 'obras' | 'cotizaciones' | 'integraciones' | 'copiloto';
 
-const pages: Record<LandingKey, {
+type LandingContent = {
   path: string;
   title: string;
   description: string;
@@ -16,7 +17,9 @@ const pages: Record<LandingKey, {
   keywords: string[];
   bullets: string[];
   sections: Array<{ title: string; copy: string }>;
-}> = {
+};
+
+const pages: Record<LandingKey, LandingContent> = {
   plataforma: {
     path: '/plataforma-empresarial-multirubro',
     title: 'Plataforma empresarial multirubro',
@@ -184,8 +187,81 @@ const pages: Record<LandingKey, {
   },
 };
 
+const localizedPages: Record<Exclude<Language, 'es'>, Partial<Record<LandingKey, LandingContent>>> = {
+  en: {
+    obras: {
+      path: '/software-gestion-obras-servicios',
+      title: 'Project and integrated service management software',
+      description: 'System to manage projects, integrated services, progress, resources, costs, procurement, approvals and project reporting.',
+      eyebrow: 'Projects and services',
+      h1: 'Project and service management with control over progress, costs and execution.',
+      intro: 'Dice Projects organizes daily project and service operations: from resources and procurement to reporting, budgets and customer traceability.',
+      keywords: ['project management software', 'integrated service management', 'project progress control', 'field service software', 'contractor management system'],
+      bullets: ['Progress and resources', 'Project costs', 'Procurement and suppliers', 'Customer reporting', 'Project dashboards'],
+      sections: [
+        { title: 'One view per project', copy: 'Centralize tasks, costs, resources, documents, milestones and owners to operate from one reliable source.' },
+        { title: 'Procurement connected to execution', copy: 'Connect project needs with requests, quotes, suppliers and approvals.' },
+        { title: 'Executive control', copy: 'Dashboards show deviations, progress, margin, pending items and decisions that need action.' },
+      ],
+    },
+  },
+  pt: {
+    obras: {
+      path: '/software-gestion-obras-servicios',
+      title: 'Software para gestão de projetos e serviços integrados',
+      description: 'Sistema para gerenciar projetos, serviços integrados, avanços, recursos, custos, compras, aprovações e relatórios por projeto.',
+      eyebrow: 'Projetos e serviços',
+      h1: 'Gestão de projetos e serviços com controle de avanços, custos e execução.',
+      intro: 'Dice Projects organiza a operação diária de projetos e serviços: de recursos e compras a relatórios, orçamentos e rastreabilidade por cliente.',
+      keywords: ['software de gestão de projetos', 'gestão de serviços integrados', 'controle de avanço de projeto', 'software para prestadores de serviço', 'sistema para obras e serviços'],
+      bullets: ['Avanços e recursos', 'Custos por projeto', 'Compras e fornecedores', 'Relatórios ao cliente', 'Dashboards por projeto'],
+      sections: [
+        { title: 'Uma visão por projeto', copy: 'Centralize tarefas, custos, recursos, documentos, marcos e responsáveis para operar com uma fonte confiável.' },
+        { title: 'Compras conectadas à execução', copy: 'Relacione necessidades do projeto com solicitações, cotações, fornecedores e aprovações.' },
+        { title: 'Controle executivo', copy: 'Dashboards mostram desvios, avanço, margem, pendências e decisões que exigem ação.' },
+      ],
+    },
+  },
+};
+
+const labels: Record<Language, {
+  requestDiagnostic: string;
+  outcomesSubtitle: string;
+  outcomesTitle: string;
+  finalTitle: string;
+  finalCopy: string;
+  scheduleCall: string;
+}> = {
+  es: {
+    requestDiagnostic: 'Solicitar diagnóstico',
+    outcomesSubtitle: 'Qué logramos',
+    outcomesTitle: 'Resultados buscados por empresas que necesitan operar mejor.',
+    finalTitle: 'Transformá este problema en un roadmap ejecutable.',
+    finalCopy: 'Te mostramos prioridades, quick wins, integración necesaria y propuesta de implementación.',
+    scheduleCall: 'Agendar llamada',
+  },
+  en: {
+    requestDiagnostic: 'Request assessment',
+    outcomesSubtitle: 'Outcomes',
+    outcomesTitle: 'Results sought by companies that need to operate better.',
+    finalTitle: 'Turn this problem into an executable roadmap.',
+    finalCopy: 'We show priorities, quick wins, required integration and an implementation proposal.',
+    scheduleCall: 'Book a call',
+  },
+  pt: {
+    requestDiagnostic: 'Solicitar diagnóstico',
+    outcomesSubtitle: 'O que alcançamos',
+    outcomesTitle: 'Resultados buscados por empresas que precisam operar melhor.',
+    finalTitle: 'Transforme este problema em um roadmap executável.',
+    finalCopy: 'Mostramos prioridades, quick wins, integração necessária e proposta de implementação.',
+    scheduleCall: 'Agendar chamada',
+  },
+};
+
 export default function SeoLandingPage({ page }: { page: LandingKey }) {
-  const content = pages[page];
+  const { language } = useLanguage();
+  const content = localizedPages[language as Exclude<Language, 'es'>]?.[page] ?? pages[page];
+  const t = labels[language];
 
   React.useEffect(() => {
     document.title = `${content.title} | Dice Projects`;
@@ -209,7 +285,7 @@ export default function SeoLandingPage({ page }: { page: LandingKey }) {
             <h1 className="text-5xl font-medium leading-none md:text-7xl">{content.h1}</h1>
             <p className="max-w-3xl text-xl leading-relaxed text-brand-white/65">{content.intro}</p>
             <Link to="/contacto#diagnostico" className={buttonClassName({ size: 'lg' })}>
-              Solicitar diagnóstico <ArrowRight size={18} />
+              {t.requestDiagnostic} <ArrowRight size={18} />
             </Link>
           </div>
         </Container>
@@ -218,7 +294,7 @@ export default function SeoLandingPage({ page }: { page: LandingKey }) {
       <section className="py-20">
         <Container className="grid grid-cols-1 gap-12 lg:grid-cols-12">
           <div className="lg:col-span-5">
-            <SectionHeader subtitle="Qué logramos" title="Resultados buscados por empresas que necesitan operar mejor." />
+            <SectionHeader subtitle={t.outcomesSubtitle} title={t.outcomesTitle} />
           </div>
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:col-span-7">
             {content.bullets.map((bullet) => (
@@ -247,12 +323,12 @@ export default function SeoLandingPage({ page }: { page: LandingKey }) {
       <section className="bg-brand-primary py-16 text-brand-white">
         <Container className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:items-center">
           <div className="lg:col-span-8">
-            <h2 className="text-4xl font-medium leading-tight">Transformá este problema en un roadmap ejecutable.</h2>
-            <p className="mt-4 text-brand-white/78">Te mostramos prioridades, quick wins, integración necesaria y propuesta de implementación.</p>
+            <h2 className="text-4xl font-medium leading-tight">{t.finalTitle}</h2>
+            <p className="mt-4 text-brand-white/78">{t.finalCopy}</p>
           </div>
           <div className="lg:col-span-4 lg:text-right">
             <Link to="/contacto#diagnostico" className={buttonClassName({ variant: 'secondary', size: 'lg', className: 'bg-brand-white text-brand-primary hover:bg-brand-light' })}>
-              Agendar llamada
+              {t.scheduleCall}
             </Link>
           </div>
         </Container>

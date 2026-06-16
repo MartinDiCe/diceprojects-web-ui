@@ -260,8 +260,8 @@ export const publicCopilotCopy: Record<Language, {
         prompts: ['How does it avoid token spend?', 'Which documents can it use?', 'Book assessment'],
       },
       projects: {
-        title: 'Works, services and integrated projects',
-        answer: 'The platform tracks progress, resources, costs, budgets, procurement, milestones, deviations and reports for works or integrated services.',
+        title: 'Projects, services and integrated operations',
+        answer: 'The platform tracks progress, resources, costs, budgets, procurement, milestones, deviations and reports for projects or integrated services.',
         prompts: ['How costs are measured', 'Which reports are available?', 'See modules'],
       },
       inventory: {

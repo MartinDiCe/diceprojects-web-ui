@@ -291,7 +291,7 @@ export const copy = {
         ['Sales and quotes', 'Consultative carts, proposals, approval links and commercial follow-up.'],
         ['Procurement', 'Multi-supplier requests, comparisons, awards and cost traceability.'],
         ['Products and inventory', 'Catalog, pricing, product stock points, simple movements and availability by store or channel.'],
-        ['Projects and services', 'Works, integrated services, milestones, resources, costs, progress and deviations.'],
+        ['Projects and services', 'Projects, integrated services, milestones, resources, costs, progress and deviations.'],
         ['Marketing and demand', 'Leads, campaigns, forms, web events and buying signals.'],
         ['Connected websites', 'Catalogs, portals and landing pages connected to products, campaigns, inventory and quotes.'],
         ['Enterprise copilot', 'Agents, documents, business systems, KPIs, company knowledge and cost control.'],
