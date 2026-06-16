@@ -48,6 +48,7 @@ export default function App() {
             <Route path="/gestion-stock-productos-inventario" element={<SeoLandingPage page="stock" />} />
             <Route path="/gestion-stock-almacenes-inventario" element={<Navigate to="/gestion-stock-productos-inventario" replace />} />
             <Route path="/marketing-leads-campanas-embudos" element={<SeoLandingPage page="marketing" />} />
+            <Route path="/sitios-conectados-backoffice-cotizaciones" element={<SeoLandingPage page="sitios" />} />
             <Route path="/software-gestion-obras-servicios" element={<SeoLandingPage page="obras" />} />
             <Route path="/presupuestos-cotizaciones-compras" element={<SeoLandingPage page="cotizaciones" />} />
             <Route path="/integraciones-apis-bases-documentos" element={<SeoLandingPage page="integraciones" />} />

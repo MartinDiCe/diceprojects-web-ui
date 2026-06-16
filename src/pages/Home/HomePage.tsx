@@ -6,6 +6,7 @@ import {
   Building2,
   CheckCircle2,
   FileCheck2,
+  Globe2,
   Megaphone,
   MousePointerClick,
   PackageCheck,
@@ -19,7 +20,7 @@ import { Container, SectionHeader, buttonClassName } from '@/src/components/comm
 import { Seo, organizationJsonLd, serviceJsonLd } from '@/src/components/seo/Seo';
 import { copy, useLanguage } from '@/src/i18n/LanguageContext';
 
-const catalogIcons = [FileCheck2, Send, PackageCheck, Building2, Megaphone, Bot];
+const catalogIcons = [FileCheck2, Send, PackageCheck, Building2, Megaphone, Globe2, Bot];
 const workflowIcons = [ShoppingCart, PlugZap, MousePointerClick, BarChart3];
 
 export default function HomePage() {

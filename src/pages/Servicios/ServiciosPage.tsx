@@ -1,10 +1,10 @@
-import { ArrowRight, Bot, CheckCircle2, Network, Rocket, Workflow } from 'lucide-react';
+import { ArrowRight, Bot, CheckCircle2, Globe2, Network, Rocket, Workflow } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Container, SectionHeader, buttonClassName } from '@/src/components/common';
 import { Seo, organizationJsonLd, serviceJsonLd } from '@/src/components/seo/Seo';
 import { copy, useLanguage } from '@/src/i18n/LanguageContext';
 
-const offerIcons = [Workflow, Network, Bot];
+const offerIcons = [Workflow, Network, Globe2, Bot];
 
 export default function ServiciosPage() {
   const { language } = useLanguage();
@@ -39,7 +39,7 @@ export default function ServiciosPage() {
       <section className="py-16 md:py-24">
         <Container>
           <SectionHeader align="center" subtitle="Offer" title={t.offersTitle} />
-          <div className="grid grid-cols-1 gap-5 lg:grid-cols-3">
+          <div className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-4">
             {t.offers.map(([title, body], index) => {
               const Icon = offerIcons[index] ?? CheckCircle2;
               const featured = index === 1;

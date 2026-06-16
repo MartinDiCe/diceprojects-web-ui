@@ -15,6 +15,7 @@ export const Footer = () => {
     { label: 'Productos y catálogo', path: '/gestion-productos-catalogo-web' },
     { label: 'Stock de productos', path: '/gestion-stock-productos-inventario' },
     { label: 'Marketing y leads', path: '/marketing-leads-campanas-embudos' },
+    { label: 'Sitios conectados', path: '/sitios-conectados-backoffice-cotizaciones' },
     { label: 'Presupuestos y cotizaciones', path: '/presupuestos-cotizaciones-compras' },
     { label: 'Proyectos y servicios', path: '/software-gestion-obras-servicios' },
     { label: 'Integraciones empresariales', path: '/integraciones-apis-bases-documentos' },

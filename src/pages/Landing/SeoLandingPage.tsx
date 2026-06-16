@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { Container, SectionHeader, buttonClassName } from '@/src/components/common';
 import { Seo, organizationJsonLd, serviceJsonLd } from '@/src/components/seo/Seo';
 
-type LandingKey = 'plataforma' | 'automatizacion' | 'comercial' | 'productos' | 'stock' | 'marketing' | 'obras' | 'cotizaciones' | 'integraciones' | 'copiloto';
+type LandingKey = 'plataforma' | 'automatizacion' | 'comercial' | 'productos' | 'stock' | 'marketing' | 'sitios' | 'obras' | 'cotizaciones' | 'integraciones' | 'copiloto';
 
 const pages: Record<LandingKey, {
   path: string;
@@ -135,6 +135,21 @@ const pages: Record<LandingKey, {
       { title: 'Captura multicanal', copy: 'Formularios públicos, QR, campañas y productos destacados para convertir interés en oportunidades.' },
       { title: 'Seguimiento real', copy: 'Cada prospecto queda asociado a empresa, vendedor, campaña, producto y estado.' },
       { title: 'Ventas conectadas', copy: 'Cuando el lead está listo, se transforma en cotización sin perder contexto.' },
+    ],
+  },
+  sitios: {
+    path: '/sitios-conectados-backoffice-cotizaciones',
+    title: 'Sitios web conectados al backoffice y cotizaciones',
+    description: 'Creamos sitios, catálogos, portales y landings conectados a productos, stock, campañas, clientes, vendedores y cotizaciones dentro del backoffice Dice Projects.',
+    eyebrow: 'Sitios conectados',
+    h1: 'Convertimos sitios públicos en canales comerciales conectados al backoffice.',
+    intro: 'Integramos tus sistemas actuales a Dice Projects y construimos sitios asociados a productos, catálogos, campañas y cotizaciones para que cada consulta llegue trazada, accionable y lista para vender.',
+    keywords: ['sitios web conectados al backoffice', 'catálogo web con cotizaciones', 'portal comercial conectado', 'integración web con CRM', 'sitios para vender productos'],
+    bullets: ['Catálogos y portales públicos', 'Productos, precios y stock conectados', 'Cotizaciones trazables', 'Leads y campañas al backoffice', 'Integración con sistemas existentes'],
+    sections: [
+      { title: 'La web como canal operativo', copy: 'El sitio deja de ser vidriera: captura intención, consulta disponibilidad, arma solicitudes y envía oportunidades al flujo comercial.' },
+      { title: 'Sitios por producto, marca o seller', copy: 'Creamos catálogos, landings y portales asociados a tus productos, campañas o unidades comerciales sin duplicar datos.' },
+      { title: 'Cotización con contexto', copy: 'Formularios, carritos, WhatsApp, links públicos y campañas entran al backoffice con trazabilidad de origen, producto y vendedor.' },
     ],
   },
   integraciones: {
