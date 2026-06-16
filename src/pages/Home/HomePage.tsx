@@ -20,7 +20,7 @@ import { Container, SectionHeader, buttonClassName } from '@/src/components/comm
 import { Seo, organizationJsonLd, serviceJsonLd } from '@/src/components/seo/Seo';
 import { copy, useLanguage } from '@/src/i18n/LanguageContext';
 
-const catalogIcons = [FileCheck2, Send, PackageCheck, Building2, Megaphone, Globe2, Bot];
+const catalogIcons = [FileCheck2, Send, PackageCheck, Building2, Megaphone, Globe2, PlugZap, Bot];
 const workflowIcons = [ShoppingCart, PlugZap, MousePointerClick, BarChart3];
 
 export default function HomePage() {
@@ -98,7 +98,7 @@ export default function HomePage() {
               <SectionHeader subtitle="Platform" title={t.catalogTitle} />
               <p className="text-base leading-relaxed text-brand-dark/60 md:text-lg">{t.catalogIntro}</p>
             </div>
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:col-span-7 xl:grid-cols-3">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:col-span-7 xl:grid-cols-4">
               {t.catalog.map(([title, body], index) => {
                 const Icon = catalogIcons[index] ?? Boxes;
                 return (
