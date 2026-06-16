@@ -40,7 +40,12 @@ const sessionIdKey = 'diceprojects.publicCopilot.sessionId';
 const env = ((import.meta as unknown as { env?: Record<string, string | undefined> }).env || {});
 const PUBLIC_BOT_ENABLED = env.VITE_PUBLIC_BOT_ENABLED !== 'false';
 const API_BASE_URL = (env.VITE_API_BASE_URL || 'https://api.diceprojects.com/api').replace(/\/$/, '');
-const PUBLIC_BOT_KEY = env.VITE_PUBLIC_BOT_KEY || env.VITE_MARKETING_CAMPAIGN_KEY || '';
+const MARKETING_CAMPAIGN_KEY = env.VITE_MARKETING_CAMPAIGN_KEY || '';
+const CONFIGURED_PUBLIC_BOT_KEY = env.VITE_PUBLIC_BOT_KEY || '';
+const PUBLIC_BOT_KEY =
+  CONFIGURED_PUBLIC_BOT_KEY && (CONFIGURED_PUBLIC_BOT_KEY !== 'diceprojects' || !MARKETING_CAMPAIGN_KEY || MARKETING_CAMPAIGN_KEY === 'diceprojects')
+    ? CONFIGURED_PUBLIC_BOT_KEY
+    : MARKETING_CAMPAIGN_KEY;
 
 const getSessionQuestionCount = () => Number(window.sessionStorage.getItem(sessionQuestionKey) || '0');
 const incrementSessionQuestionCount = () => {
