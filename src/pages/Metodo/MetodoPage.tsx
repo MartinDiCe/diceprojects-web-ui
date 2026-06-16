@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'motion/react';
 import { Target, Route, Database, Network, LineChart, ChevronRight, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { Container, Button, SectionHeader } from '@/src/components/common';
+import { Container, SectionHeader, buttonClassName } from '@/src/components/common';
 
 export default function MetodoPage() {
   React.useEffect(() => {
@@ -122,10 +122,8 @@ export default function MetodoPage() {
             <p className="text-xl text-white/50 leading-relaxed">
               El Método ORDEN permite que los líderes dejen de gestionar el día a día y empiecen a orquestar el futuro. Es la diferencia entre una empresa que sobrevive al crecimiento y una que lo domina.
             </p>
-            <Link to="/contacto#diagnostico">
-              <Button size="lg" className="px-12 py-6">
-                Iniciar con un Diagnóstico <ArrowRight className="ml-2" />
-              </Button>
+            <Link to="/contacto#diagnostico" className={buttonClassName({ size: 'lg', className: 'px-12 py-6' })}>
+              Iniciar con un Diagnóstico <ArrowRight className="ml-2" />
             </Link>
           </div>
         </Container>

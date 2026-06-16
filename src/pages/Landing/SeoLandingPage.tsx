@@ -1,7 +1,7 @@
 import React from 'react';
 import { ArrowRight, CheckCircle2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { Container, Button, SectionHeader } from '@/src/components/common';
+import { Container, SectionHeader, buttonClassName } from '@/src/components/common';
 import { Seo, organizationJsonLd, serviceJsonLd } from '@/src/components/seo/Seo';
 
 type LandingKey = 'plataforma' | 'automatizacion' | 'comercial' | 'productos' | 'stock' | 'marketing' | 'obras' | 'cotizaciones' | 'integraciones' | 'copiloto';
@@ -193,8 +193,8 @@ export default function SeoLandingPage({ page }: { page: LandingKey }) {
             </span>
             <h1 className="text-5xl font-medium leading-none md:text-7xl">{content.h1}</h1>
             <p className="max-w-3xl text-xl leading-relaxed text-brand-white/65">{content.intro}</p>
-            <Link to="/contacto#diagnostico" className="inline-flex">
-              <Button size="lg">Solicitar diagnóstico <ArrowRight size={18} /></Button>
+            <Link to="/contacto#diagnostico" className={buttonClassName({ size: 'lg' })}>
+              Solicitar diagnóstico <ArrowRight size={18} />
             </Link>
           </div>
         </Container>
@@ -236,10 +236,8 @@ export default function SeoLandingPage({ page }: { page: LandingKey }) {
             <p className="mt-4 text-brand-white/78">Te mostramos prioridades, quick wins, integración necesaria y propuesta de implementación.</p>
           </div>
           <div className="lg:col-span-4 lg:text-right">
-            <Link to="/contacto#diagnostico">
-              <Button variant="secondary" size="lg" className="bg-brand-white text-brand-primary hover:bg-brand-light">
-                Agendar llamada
-              </Button>
+            <Link to="/contacto#diagnostico" className={buttonClassName({ variant: 'secondary', size: 'lg', className: 'bg-brand-white text-brand-primary hover:bg-brand-light' })}>
+              Agendar llamada
             </Link>
           </div>
         </Container>

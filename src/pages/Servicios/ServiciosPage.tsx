@@ -1,6 +1,6 @@
 import { ArrowRight, Bot, CheckCircle2, Network, Rocket, Workflow } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { Container, Button, SectionHeader } from '@/src/components/common';
+import { Container, SectionHeader, buttonClassName } from '@/src/components/common';
 import { Seo, organizationJsonLd, serviceJsonLd } from '@/src/components/seo/Seo';
 import { copy, useLanguage } from '@/src/i18n/LanguageContext';
 
@@ -29,10 +29,8 @@ export default function ServiciosPage() {
             </span>
             <h1 className="text-3xl font-medium leading-tight sm:text-4xl md:text-6xl">{t.h1}</h1>
             <p className="max-w-[350px] text-base leading-relaxed text-brand-white/65 sm:max-w-3xl md:text-xl">{t.intro}</p>
-            <Link to="/contacto#diagnostico" className="inline-flex w-full sm:w-auto">
-              <Button size="lg" className="w-full sm:w-auto">
-                {t.cta} <ArrowRight size={18} />
-              </Button>
+            <Link to="/contacto#diagnostico" className={buttonClassName({ size: 'lg', className: 'w-full sm:w-auto' })}>
+              {t.cta} <ArrowRight size={18} />
             </Link>
           </div>
         </Container>
@@ -97,10 +95,8 @@ export default function ServiciosPage() {
             <h2 className="mt-6 text-3xl font-medium leading-tight md:text-5xl">{t.finalCta}</h2>
           </div>
           <div className="lg:col-span-4 lg:text-right">
-            <Link to="/contacto#diagnostico">
-              <Button variant="secondary" size="lg" className="w-full bg-brand-white text-brand-primary hover:bg-brand-light sm:w-auto">
-                {t.cta}
-              </Button>
+            <Link to="/contacto#diagnostico" className={buttonClassName({ variant: 'secondary', size: 'lg', className: 'w-full bg-brand-white text-brand-primary hover:bg-brand-light sm:w-auto' })}>
+              {t.cta}
             </Link>
           </div>
         </Container>

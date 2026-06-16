@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'motion/react';
 import { Award, Briefcase, ChevronRight, ArrowRight, ShieldCheck } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { Container, Button, SectionHeader } from '@/src/components/common';
+import { Container, SectionHeader, buttonClassName } from '@/src/components/common';
 
 export default function SobrePage() {
   React.useEffect(() => {
@@ -124,10 +124,8 @@ export default function SobrePage() {
           <h2 className="text-4xl md:text-6xl font-black tracking-tighter max-w-3xl mx-auto leading-none">
             CONSTRUYAMOS TU AUTORIDAD OPERATIVA.
           </h2>
-          <Link to="/contacto#diagnostico">
-            <Button size="lg" className="px-12 py-6">
-              Conectar con Dice Projects <ArrowRight className="ml-2" />
-            </Button>
+          <Link to="/contacto#diagnostico" className={buttonClassName({ size: 'lg', className: 'px-12 py-6' })}>
+            Conectar con Dice Projects <ArrowRight className="ml-2" />
           </Link>
         </Container>
       </section>

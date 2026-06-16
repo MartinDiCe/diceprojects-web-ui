@@ -1,7 +1,7 @@
 import { useParams, Link } from 'react-router-dom';
 import { motion } from 'motion/react';
 import { ArrowLeft, Clock, Tag, Share2 } from 'lucide-react';
-import { Container, Button } from '@/src/components/common';
+import { Container, buttonClassName } from '@/src/components/common';
 
 export default function InsightArticlePage() {
   const { slug } = useParams();
@@ -87,8 +87,8 @@ export default function InsightArticlePage() {
                   <p className="text-sm text-white/50 leading-relaxed">
                     Si este artículo resuena con los desafíos de tu empresa, es momento de actuar.
                   </p>
-                  <Link to="/contacto#diagnostico" className="block">
-                    <Button className="w-full py-5">Solicitar Diagnóstico</Button>
+                  <Link to="/contacto#diagnostico" className={buttonClassName({ className: 'w-full py-5' })}>
+                    Solicitar Diagnóstico
                   </Link>
                 </div>
               </div>

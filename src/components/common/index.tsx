@@ -13,13 +13,15 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   'data-mkt-category'?: string;
 }
 
-export const Button = ({ 
-  variant = 'primary', 
-  size = 'md', 
-  className, 
-  children, 
-  ...props 
-}: ButtonProps) => {
+export function buttonClassName({
+  variant = 'primary',
+  size = 'md',
+  className,
+}: {
+  variant?: 'primary' | 'secondary' | 'outline';
+  size?: 'sm' | 'md' | 'lg';
+  className?: string;
+} = {}) {
   const variants = {
     primary: 'bg-brand-primary text-brand-white hover:bg-brand-secondary',
     secondary: 'bg-brand-dark text-brand-white hover:opacity-90',
@@ -32,14 +34,24 @@ export const Button = ({
     lg: 'px-6 py-4 text-sm md:px-10 md:py-5 md:text-base',
   };
 
+  return cn(
+    'min-w-0 max-w-full whitespace-normal text-center font-medium uppercase leading-tight tracking-[0.12em] md:tracking-widest transition-all duration-300 inline-flex items-center justify-center gap-2 rounded-lg focus-visible:outline-2 focus-visible:outline-brand-primary focus-visible:outline-offset-4 disabled:opacity-50 disabled:cursor-not-allowed',
+    variants[variant],
+    sizes[size],
+    className
+  );
+}
+
+export const Button = ({ 
+  variant = 'primary', 
+  size = 'md', 
+  className, 
+  children, 
+  ...props 
+}: ButtonProps) => {
   return (
     <button
-      className={cn(
-        'min-w-0 max-w-full whitespace-normal text-center font-medium uppercase leading-tight tracking-[0.12em] md:tracking-widest transition-all duration-300 inline-flex items-center justify-center gap-2 rounded-lg focus-visible:outline-2 focus-visible:outline-brand-primary focus-visible:outline-offset-4 disabled:opacity-50 disabled:cursor-not-allowed',
-        variants[variant],
-        sizes[size],
-        className
-      )}
+      className={buttonClassName({ variant, size, className })}
       {...props}
     >
       {children}

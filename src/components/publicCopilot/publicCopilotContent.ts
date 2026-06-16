@@ -291,4 +291,96 @@ export const publicCopilotCopy: Record<Language, {
       },
     },
   },
+  pt: {
+    launcher: 'Copiloto Dice',
+    title: 'Copiloto Dice',
+    subtitle: 'Responde com informação curada do site. Sem consumo de IA.',
+    greeting: 'Olá, sou o copiloto do site. Posso orientar sobre a plataforma, módulos, integrações e diagnóstico comercial.',
+    placeholder: 'Pergunte sobre módulos, processos ou diagnóstico...',
+    quickPrompts: [
+      'O que a plataforma resolve?',
+      'Como funciona o copiloto empresarial?',
+      'Quero agendar diagnóstico',
+    ],
+    leadTitle: 'Agendar diagnóstico',
+    leadIntro: 'Deixe seus dados e registramos para acompanhamento comercial.',
+    leadButton: 'Registrar solicitação',
+    leadSent: 'Solicitação registrada. Entraremos em contato para coordenar.',
+    leadError: 'Não conseguimos registrar a solicitação. Tente pela página de Contato.',
+    limitMessage: 'Para proteger o site, pausamos novas perguntas nesta sessão. Você pode agendar um diagnóstico e seguimos por lá.',
+    intents: {
+      pricing: {
+        title: 'Diagnóstico antes de preço genérico',
+        answer: 'A proposta depende de módulos, volume operacional, integrações e nível de acompanhamento. O caminho mais eficiente é um diagnóstico curto para detectar quick wins e definir escopo.',
+        prompts: ['Quais módulos começam primeiro?', 'Quais dados precisam para estimar?', 'Agendar diagnóstico'],
+        cta: 'Agendar diagnóstico',
+      },
+      contact: {
+        title: 'Contato e localização',
+        answer: 'A Dice Projects trabalha a partir de Buenos Aires, Argentina, com atendimento remoto para empresas de diferentes segmentos. Você pode escrever para mdice@diceprojects.com ou chamar no WhatsApp +54 11 7246 6605. Também posso registrar uma solicitação de diagnóstico por aqui.',
+        prompts: ['Agendar diagnóstico', 'Quais dados precisam para estimar?', 'O que a plataforma resolve?'],
+        cta: 'Agendar diagnóstico',
+      },
+      company: {
+        title: 'Onde fica a empresa na plataforma',
+        answer: 'Na Dice Projects cada empresa ou organização é um espaço de trabalho separado: ali vivem usuários, permissões, vendedores, clientes, fornecedores, produtos, campanhas, projetos, estoque, relatórios e conhecimento do copiloto.',
+        prompts: ['Como funcionam permissões', 'Quais módulos uma empresa usa', 'Como separa empresas'],
+      },
+      industries: {
+        title: 'Segmentos onde aplica',
+        answer: 'A solução não é só para obras. Aplica a serviços integrais, comércio, distribuição, produtos com catálogo, empresas com estoque, compras, fornecedores, automotivo, manutenção e operações comerciais.',
+        prompts: ['Ver módulos principais', 'Projetos e serviços', 'Estoque e compras'],
+      },
+      reports: {
+        title: 'Indicadores e dashboards',
+        answer: 'A plataforma transforma a operação diária em dados mensuráveis: leads, cotações, compras, estoque, avanços, custos, desvios, campanhas e produtividade.',
+        prompts: ['Marketing conectado a vendas', 'Projeto para rentabilidade', 'Agendar diagnóstico'],
+      },
+      modules: {
+        title: 'Plataforma modular para operar empresas',
+        answer: 'Dice Projects conecta vendas, cotações, compras, fornecedores, produtos, estoque, projetos, marketing, relatórios e copiloto empresarial em uma mesma operação.',
+        prompts: ['Ver integrações', 'O que acontece com estoque e compras', 'Como capturam leads'],
+      },
+      integrations: {
+        title: 'Sistemas e dados conectados',
+        answer: 'Integramos fontes existentes como documentos, Drive, SharePoint, bases de dados, ERPs, CRMs e sistemas internos para reduzir retrabalho e alimentar processos.',
+        prompts: ['Como funcionam permissões', 'Pode ler documentos?', 'Agendar diagnóstico'],
+      },
+      ai: {
+        title: 'Copiloto empresarial com controle',
+        answer: 'O copiloto pode responder sobre processos, documentos, indicadores e dados autorizados. Para controlar custos, usa primeiro conhecimento curado e só escala para IA quando necessário.',
+        prompts: ['Como evita gastar tokens?', 'Quais documentos pode usar?', 'Agendar diagnóstico'],
+      },
+      projects: {
+        title: 'Obras, serviços e projetos integrais',
+        answer: 'A plataforma permite acompanhar avanços, recursos, custos, orçamentos, compras, marcos, desvios e relatórios para obras ou serviços integrais.',
+        prompts: ['Como medem custos', 'Quais relatórios gera', 'Ver módulos'],
+      },
+      inventory: {
+        title: 'Estoque, compras e fornecedores',
+        answer: 'Você pode controlar estoque de produtos por loja, canal ou ponto de venda, com movimentos simples, disponibilidade e reposição. Quando faltar mercadoria, pode solicitar orçamento a fornecedores e comparar respostas.',
+        prompts: ['Como adjudicar fornecedores', 'Como conecta com vendas', 'Agendar diagnóstico'],
+      },
+      marketing: {
+        title: 'Marketing conectado a vendas',
+        answer: 'A web pode capturar eventos, formulários, produtos vistos, campanhas e sinais de interesse. Esses dados viram oportunidades para acompanhamento comercial.',
+        prompts: ['Como ver os leads', 'Como medir campanha', 'Agendar diagnóstico'],
+      },
+      implementation: {
+        title: 'Implementação por etapas',
+        answer: 'O caminho recomendado é diagnóstico, desenho operacional, configuração de módulos, integrações prioritárias, adoção de usuários e melhoria contínua com indicadores.',
+        prompts: ['Quanto demora para começar?', 'Qual módulo vem primeiro?', 'Agendar diagnóstico'],
+      },
+      security: {
+        title: 'Permissões, privacidade e rastreabilidade',
+        answer: 'A informação é organizada por empresa, usuário, papéis e permissões. Ações relevantes podem ser auditadas para saber quem fez o quê e com qual alcance.',
+        prompts: ['Como funciona o copiloto', 'Como separa empresas', 'Agendar diagnóstico'],
+      },
+      fallback: {
+        title: 'Posso orientar melhor com mais contexto',
+        answer: 'Posso responder sobre contato, empresas na plataforma, módulos, integrações, copiloto empresarial, marketing, estoque, compras, projetos, relatórios ou diagnóstico comercial.',
+        prompts: ['Onde fica a empresa', 'Como contato', 'O que a plataforma resolve?'],
+      },
+    },
+  },
 };

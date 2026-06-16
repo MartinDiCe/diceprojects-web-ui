@@ -83,9 +83,37 @@ const askRemoteBot = async (message: string, language: string, allowAi = false):
   return response.json() as Promise<RemoteBotAnswer>;
 };
 
+const uiByLanguage = {
+  es: {
+    close: 'Cerrar copiloto',
+    name: 'Nombre',
+    company: 'Empresa',
+    phone: 'Teléfono / WhatsApp',
+    registering: 'Registrando...',
+    send: 'Enviar',
+  },
+  en: {
+    close: 'Close copilot',
+    name: 'Name',
+    company: 'Company',
+    phone: 'Phone / WhatsApp',
+    registering: 'Registering...',
+    send: 'Send',
+  },
+  pt: {
+    close: 'Fechar copiloto',
+    name: 'Nome',
+    company: 'Empresa',
+    phone: 'Telefone / WhatsApp',
+    registering: 'Registrando...',
+    send: 'Enviar',
+  },
+} as const;
+
 export const PublicCopilotWidget = () => {
   const { language } = useLanguage();
   const copy = publicCopilotCopy[language];
+  const ui = uiByLanguage[language];
   const [remoteConfig, setRemoteConfig] = useState<RemoteBotConfig | null>(null);
   const [isOpen, setIsOpen] = useState(false);
   const [input, setInput] = useState('');
@@ -314,7 +342,7 @@ export const PublicCopilotWidget = () => {
               <p className="text-[11px] font-semibold text-brand-white/55">{copy.subtitle}</p>
             </div>
           </div>
-          <button type="button" onClick={() => setIsOpen(false)} className="rounded-lg p-2 text-brand-white/70 transition hover:bg-brand-white/10 hover:text-brand-white" aria-label={language === 'es' ? 'Cerrar copiloto' : 'Close copilot'}>
+          <button type="button" onClick={() => setIsOpen(false)} className="rounded-lg p-2 text-brand-white/70 transition hover:bg-brand-white/10 hover:text-brand-white" aria-label={ui.close}>
             <X size={18} />
           </button>
         </div>
@@ -359,13 +387,13 @@ export const PublicCopilotWidget = () => {
                 </div>
               </div>
               <div className="grid grid-cols-1 gap-2">
-                <input name="name" required placeholder={language === 'es' ? 'Nombre' : 'Name'} className="rounded-lg border border-brand-dark/10 px-3 py-2 text-sm outline-none focus:border-brand-primary" />
-                <input name="company" required placeholder={language === 'es' ? 'Empresa' : 'Company'} className="rounded-lg border border-brand-dark/10 px-3 py-2 text-sm outline-none focus:border-brand-primary" />
+                <input name="name" required placeholder={ui.name} className="rounded-lg border border-brand-dark/10 px-3 py-2 text-sm outline-none focus:border-brand-primary" />
+                <input name="company" required placeholder={ui.company} className="rounded-lg border border-brand-dark/10 px-3 py-2 text-sm outline-none focus:border-brand-primary" />
                 <input name="email" type="email" required placeholder="Email" className="rounded-lg border border-brand-dark/10 px-3 py-2 text-sm outline-none focus:border-brand-primary" />
-                <input name="phone" placeholder={language === 'es' ? 'Teléfono / WhatsApp' : 'Phone / WhatsApp'} className="rounded-lg border border-brand-dark/10 px-3 py-2 text-sm outline-none focus:border-brand-primary" />
+                <input name="phone" placeholder={ui.phone} className="rounded-lg border border-brand-dark/10 px-3 py-2 text-sm outline-none focus:border-brand-primary" />
               </div>
               <button type="submit" disabled={leadState === 'sending'} className="mt-3 inline-flex w-full items-center justify-center gap-2 rounded-lg bg-brand-primary px-4 py-3 text-xs font-bold uppercase tracking-[0.14em] text-brand-white transition hover:bg-brand-secondary disabled:opacity-50">
-                {leadState === 'sending' ? (language === 'es' ? 'Registrando...' : 'Registering...') : copy.leadButton}
+                {leadState === 'sending' ? ui.registering : copy.leadButton}
                 <ArrowRight size={15} />
               </button>
               {leadState === 'sent' && <p className="mt-2 text-center text-xs font-bold text-emerald-600">{copy.leadSent}</p>}
@@ -382,7 +410,7 @@ export const PublicCopilotWidget = () => {
             placeholder={copy.placeholder}
             className="min-w-0 flex-1 rounded-lg border border-brand-dark/10 px-3 py-3 text-sm outline-none transition focus:border-brand-primary"
           />
-          <button type="submit" className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-brand-primary text-brand-white transition hover:bg-brand-secondary" aria-label={language === 'es' ? 'Enviar' : 'Send'}>
+          <button type="submit" className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-brand-primary text-brand-white transition hover:bg-brand-secondary" aria-label={ui.send}>
             <Send size={17} />
           </button>
         </form>

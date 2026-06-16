@@ -1,6 +1,6 @@
 import React from 'react';
 
-export type Language = 'es' | 'en';
+export type Language = 'es' | 'en' | 'pt';
 
 const STORAGE_KEY = 'diceprojects-language';
 
@@ -41,6 +41,7 @@ function resolveLanguageFromLocale(locale: string): Language | null {
   const [languageCode, regionCode] = normalized.split(/[-_]/);
   if (languageCode === 'en') return 'en';
   if (languageCode === 'es') return 'es';
+  if (languageCode === 'pt') return 'pt';
   if (regionCode && SPANISH_REGIONS.has(regionCode.toUpperCase())) return 'es';
   return null;
 }
@@ -77,7 +78,7 @@ function detectBrowserLanguage(): Language {
 function getInitialLanguage(): Language {
   if (typeof window === 'undefined') return 'es';
   const stored = window.localStorage.getItem(STORAGE_KEY);
-  if (stored === 'en' || stored === 'es') return stored;
+  if (stored === 'en' || stored === 'es' || stored === 'pt') return stored;
   return detectBrowserLanguage();
 }
 
@@ -98,7 +99,7 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
     () => ({
       language,
       setLanguage,
-      toggleLanguage: () => setLanguage(language === 'es' ? 'en' : 'es'),
+      toggleLanguage: () => setLanguage(language === 'es' ? 'en' : language === 'en' ? 'pt' : 'es'),
     }),
     [language, setLanguage],
   );
@@ -356,6 +357,128 @@ export const copy = {
         pain: 'Main operational pain',
         submit: 'Generate lead and send request',
         note: 'Your request is registered for commercial follow-up and assessment.',
+      },
+    },
+  },
+  pt: {
+    nav: {
+      home: 'Início',
+      solution: 'Solução',
+      method: 'Método',
+      insights: 'Insights',
+      about: 'Sobre',
+      contact: 'Contato',
+      cta: 'Agendar diagnóstico',
+      menu: 'Menu',
+      switch: 'Español',
+    },
+    footer: {
+      statement: 'Plataforma, automação e inteligência para organizar operações e vender melhor.',
+      legal: 'Legal e transparência',
+      solutions: 'Soluções',
+      contact: 'Contato',
+      diagnostic: 'Diagnóstico',
+      rights: 'Todos os direitos reservados.',
+      line: 'Produto empresarial • Automação • Copiloto AI',
+      links: [
+        'Plataforma empresarial',
+        'Automação de processos',
+        'Gestão comercial',
+        'Produtos e catálogo',
+        'Estoque de produtos',
+        'Marketing e leads',
+        'Orçamentos e cotações',
+        'Projetos e serviços',
+        'Integrações empresariais',
+        'Copiloto AI empresarial',
+      ],
+    },
+    home: {
+      seoTitle: 'Plataforma empresarial multissetorial para automação, operação e copiloto AI',
+      seoDescription: 'Dice Projects centraliza vendas, compras, produtos, projetos, serviços, estoque, marketing, integrações, KPIs e copiloto AI em uma plataforma operacional multissetorial.',
+      eyebrow: 'Enterprise operations platform',
+      h1: 'Operação conectada. Decisões com dados. AI pronta para trabalhar.',
+      intro: 'Centralize vendas, compras, produtos, estoque, projetos, marketing e integrações em uma mesma plataforma. Some copilotos que entendem seu negócio e respeitam permissões.',
+      primary: 'Agendar diagnóstico',
+      secondary: 'Ver solução',
+      proof: ['Multiempresa', 'Processos rastreáveis', 'AI com contexto'],
+      catalogTitle: 'Uma plataforma modular para operar melhor.',
+      catalogIntro: 'Ative os módulos que sua empresa precisa hoje e evolua para automação, relatórios e inteligência empresarial sem redesenhar tudo.',
+      catalog: [
+        ['Vendas e cotações', 'Carrinhos consultivos, propostas, links de aprovação e acompanhamento comercial.'],
+        ['Compras e fornecedores', 'Solicitações simultâneas, comparativos, adjudicação e rastreabilidade de custos.'],
+        ['Produtos e estoque', 'Catálogo, preços, pontos de estoque, movimentos simples e disponibilidade por loja ou canal.'],
+        ['Projetos e serviços', 'Obras, serviços integrais, marcos, recursos, custos, avanços e desvios.'],
+        ['Marketing e demanda', 'Leads, campanhas, formulários, eventos web e sinais de interesse.'],
+        ['Copiloto empresarial', 'Agentes, documentos, sistemas, indicadores, conhecimento por empresa e controle de custos.'],
+      ],
+      workflowsTitle: 'Fluxos de negócio, não telas soltas.',
+      workflows: [
+        ['Carrinho para cotação', 'O cliente monta uma solicitação, o vendedor responde e o link inteligente registra aprovação, rejeição ou mudanças.'],
+        ['Compra inteligente', 'Se faltar mercadoria, peça orçamento a vários fornecedores e adjudique por custo, prazo ou condição.'],
+        ['Eventos web para vendas', 'A web captura interesses, campanhas e produtos vistos para acionar leads reais.'],
+        ['Projeto para rentabilidade', 'Acompanhe recursos, avanços, custos, certificações e KPIs por empresa ou unidade.'],
+      ],
+      aiTitle: 'Bot para sites conectado ao backoffice.',
+      aiCopy: 'Você pode transformar o chat em um consultor público: responde perguntas do site, explica serviços, captura leads e encaminha oportunidades ao backoffice com contexto.',
+      aiBullets: ['Responde como vendedor consultivo', 'Usa conteúdo aprovado do site', 'Cria leads e conversas', 'Escala para humano quando corresponde'],
+      impactTitle: 'Menos atrito. Mais margem. Mais controle.',
+      impact: ['Menos tarefas manuais', 'Dado único entre áreas', 'Rastreabilidade e permissões', 'KPIs acionáveis', 'AI com governança'],
+    },
+    services: {
+      seoTitle: 'Catálogo de serviços e plataforma empresarial multissetorial',
+      seoDescription: 'Implementamos uma plataforma empresarial para organização, produtos, vendas, compras, estoque, projetos, marketing, segurança, integrações, KPIs e copiloto AI.',
+      eyebrow: 'Product + automation + AI',
+      h1: 'Desenhamos o sistema operacional do seu negócio.',
+      intro: 'Combinamos plataforma, consultoria e integrações para organizar a operação, automatizar fluxos e criar inteligência aplicável.',
+      cta: 'Quero uma proposta',
+      offersTitle: 'Três formas de começar.',
+      offers: [
+        ['Blueprint operacional', 'Mapa de processos, módulos, dados, permissões, ROI e quick wins.'],
+        ['Implementação da plataforma', 'Configuração de módulos, papéis, catálogos, dashboards e fluxos.'],
+        ['Copiloto e integrações AI', 'Documentos, sistemas, dados, conhecimento da empresa, agentes e controle de custos.'],
+      ],
+      examplesTitle: 'Casos que podem ser ativados.',
+      examples: [
+        ['Produto com carrinho consultivo', 'Catálogo, solicitação, vendedor atribuído e link de aprovação.'],
+        ['Estoque de produtos e compras', 'Disponibilidade, reposição simples, fornecedores, comparativos e adjudicação.'],
+        ['Projetos integrais', 'Serviços, automotivo, instalações, manutenção e pós-venda.'],
+        ['Copiloto de negócio', 'Agentes para documentos, dados, indicadores, vendas, compras e projetos.'],
+      ],
+      implementationTitle: 'Implementação clara.',
+      steps: [
+        ['01', 'Diagnóstico', 'Entendemos operação, sistemas, dores e oportunidades.'],
+        ['02', 'Desenho', 'Definimos módulos, dados, permissões, automações e indicadores.'],
+        ['03', 'Execução', 'Configuramos a plataforma, integramos fontes e treinamos usuários.'],
+        ['04', 'Evolução', 'Medimos uso, ROI, custos de AI e novos fluxos.'],
+      ],
+      finalCta: 'Se sua empresa vive em planilhas, mensagens e memória humana, há valor pronto para capturar.',
+    },
+    contact: {
+      seoTitle: 'Diagnóstico de automação e melhoria de processos',
+      seoDescription: 'Solicite um diagnóstico comercial para detectar oportunidades de automação, integrações, software operacional e copiloto AI empresarial.',
+      eyebrow: 'Diagnóstico executivo',
+      h1: 'Vamos encontrar onde sua operação perde tempo, margem e controle.',
+      intro: 'Deixe o contexto. Respondemos com quick wins, escopo, módulos e integrações possíveis.',
+      directTitle: 'Uma conversa bem feita vale mais que dez demos genéricas.',
+      confidentiality: 'Confidencialidade desde o primeiro contato',
+      confidentialityCopy: 'Podemos falar de processos, sistemas, custos e problemas operacionais com critério profissional.',
+      brief: 'Brief útil para venda',
+      briefCopy: 'O formulário organiza o lead por necessidade, segmento, prioridade, módulos e impacto buscado.',
+      formTitle: 'Agendar diagnóstico',
+      formIntro: 'Complete o contexto mínimo e geramos um brief comercial acionável.',
+      labels: {
+        name: 'Nome',
+        company: 'Empresa',
+        email: 'Email corporativo',
+        phone: 'Telefone / WhatsApp',
+        industry: 'Segmento',
+        size: 'Tamanho aproximado',
+        priority: 'Prioridade',
+        interests: 'O que você quer resolver',
+        pain: 'Principal dor operacional',
+        submit: 'Gerar lead e enviar solicitação',
+        note: 'A solicitação fica registrada para acompanhamento comercial e diagnóstico.',
       },
     },
   },

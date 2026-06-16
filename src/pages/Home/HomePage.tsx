@@ -15,7 +15,7 @@ import {
   ShoppingCart,
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { Container, Button, SectionHeader } from '@/src/components/common';
+import { Container, SectionHeader, buttonClassName } from '@/src/components/common';
 import { Seo, organizationJsonLd, serviceJsonLd } from '@/src/components/seo/Seo';
 import { copy, useLanguage } from '@/src/i18n/LanguageContext';
 
@@ -61,15 +61,21 @@ export default function HomePage() {
               {t.intro}
             </p>
             <div className="flex flex-col gap-3 sm:flex-row">
-              <Link to="/contacto#diagnostico" className="w-full sm:w-auto" data-mkt="home_primary_diagnostic_cta" data-mkt-category="LEAD">
-                <Button size="lg" className="w-full sm:w-auto">
-                  {t.primary} <ArrowRight size={18} />
-                </Button>
+              <Link
+                to="/contacto#diagnostico"
+                className={buttonClassName({ size: 'lg', className: 'w-full sm:w-auto' })}
+                data-mkt="home_primary_diagnostic_cta"
+                data-mkt-category="LEAD"
+              >
+                {t.primary} <ArrowRight size={18} />
               </Link>
-              <Link to="/automatizacion-y-orquestacion" className="w-full sm:w-auto" data-mkt="home_solution_cta" data-mkt-category="DISCOVERY">
-                <Button variant="outline" size="lg" className="w-full border-brand-white/45 bg-brand-dark/20 text-brand-white backdrop-blur hover:border-brand-white hover:bg-brand-white hover:text-brand-dark sm:w-auto">
-                  {t.secondary}
-                </Button>
+              <Link
+                to="/automatizacion-y-orquestacion"
+                className={buttonClassName({ variant: 'outline', size: 'lg', className: 'w-full border-brand-white/45 bg-brand-dark/20 text-brand-white backdrop-blur hover:border-brand-white hover:bg-brand-white hover:text-brand-dark sm:w-auto' })}
+                data-mkt="home_solution_cta"
+                data-mkt-category="DISCOVERY"
+              >
+                {t.secondary}
               </Link>
             </div>
             <div className="grid max-w-2xl grid-cols-1 gap-3 pt-2 text-sm font-semibold text-brand-white/78 sm:grid-cols-3">

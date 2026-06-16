@@ -28,12 +28,41 @@ const interestsByLanguage = {
     'Enterprise AI copilot',
     'Systems and data integrations',
   ],
+  pt: [
+    'Vendas e cotações',
+    'Produtos / catálogo web',
+    'Estoque e movimentos',
+    'Compras e fornecedores',
+    'Eventos web / leads',
+    'Projetos integrais',
+    'Copiloto AI empresarial',
+    'Integrações com sistemas e dados',
+  ],
 };
+
+const formStatusByLanguage = {
+  es: {
+    sending: 'Enviando...',
+    sent: 'Solicitud registrada. Te contactamos para coordinar el diagnóstico.',
+    error: 'No pudimos registrar el lead en backoffice. Abrimos el email como respaldo.',
+  },
+  en: {
+    sending: 'Sending...',
+    sent: 'Request received. We will contact you to schedule the assessment.',
+    error: 'We could not register the lead in backoffice. Email fallback opened.',
+  },
+  pt: {
+    sending: 'Enviando...',
+    sent: 'Solicitação registrada. Entraremos em contato para coordenar o diagnóstico.',
+    error: 'Não conseguimos registrar o lead no backoffice. Abrimos o email como alternativa.',
+  },
+} as const;
 
 export default function ContactoPage() {
   const { language } = useLanguage();
   const location = useLocation();
   const t = copy[language].contact;
+  const formStatus = formStatusByLanguage[language];
   const interests = interestsByLanguage[language];
   const [submitState, setSubmitState] = useState<'idle' | 'submitting' | 'sent' | 'error'>('idle');
   const formCardRef = useRef<HTMLDivElement | null>(null);
@@ -255,16 +284,16 @@ export default function ContactoPage() {
                 </label>
                 <div className="md:col-span-2">
                   <Button type="submit" className="w-full py-5" disabled={submitState === 'submitting'} data-mkt="diagnostic_form_submit" data-mkt-category="LEAD">
-                    {submitState === 'submitting' ? (language === 'es' ? 'Enviando...' : 'Sending...') : t.labels.submit} <ArrowRight size={18} />
+                    {submitState === 'submitting' ? formStatus.sending : t.labels.submit} <ArrowRight size={18} />
                   </Button>
                   {submitState === 'sent' && (
                     <p className="mt-3 rounded-lg border border-emerald-400/30 bg-emerald-400/10 px-4 py-3 text-center text-sm font-semibold text-emerald-100">
-                      {language === 'es' ? 'Solicitud registrada. Te contactamos para coordinar el diagnóstico.' : 'Request received. We will contact you to schedule the assessment.'}
+                      {formStatus.sent}
                     </p>
                   )}
                   {submitState === 'error' && (
                     <p className="mt-3 rounded-lg border border-amber-300/30 bg-amber-300/10 px-4 py-3 text-center text-sm font-semibold text-amber-100">
-                      {language === 'es' ? 'No pudimos registrar el lead en backoffice. Abrimos el email como respaldo.' : 'We could not register the lead in backoffice. Email fallback opened.'}
+                      {formStatus.error}
                     </p>
                   )}
                   <p className="mt-3 text-center text-xs text-brand-white/45">{t.labels.note}</p>
