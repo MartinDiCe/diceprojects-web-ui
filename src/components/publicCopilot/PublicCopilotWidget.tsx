@@ -329,11 +329,12 @@ export const PublicCopilotWidget = () => {
   };
 
   return (
-    <div className="fixed bottom-5 right-4 z-[70] sm:right-6">
+    <div className="pointer-events-none fixed bottom-5 right-4 z-[70] sm:right-6">
       <div
         className={cn(
           'mb-3 w-[calc(100vw-2rem)] max-w-[380px] overflow-hidden rounded-lg border border-brand-dark/10 bg-brand-white shadow-2xl transition-all duration-200 max-sm:max-h-[72dvh]',
           isOpen ? 'translate-y-0 opacity-100' : 'pointer-events-none translate-y-3 opacity-0',
+          isOpen ? 'pointer-events-auto' : '',
         )}
         aria-hidden={!isOpen}
       >
@@ -437,7 +438,7 @@ export const PublicCopilotWidget = () => {
         }}
         data-mkt="public_copilot_fab"
         data-mkt-category="PUBLIC_COPILOT"
-        className="ml-auto flex h-14 items-center gap-3 rounded-full bg-brand-dark px-5 text-sm font-bold text-brand-white shadow-2xl transition hover:-translate-y-0.5 hover:bg-brand-primary"
+        className="pointer-events-auto ml-auto flex h-14 items-center gap-3 rounded-full bg-brand-dark px-5 text-sm font-bold text-brand-white shadow-2xl transition hover:-translate-y-0.5 hover:bg-brand-primary"
       >
         <MessageCircle size={20} />
         <span className="hidden sm:inline">{copy.launcher}</span>
