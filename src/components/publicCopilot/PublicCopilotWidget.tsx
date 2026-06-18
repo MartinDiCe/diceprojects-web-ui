@@ -37,11 +37,13 @@ const MAX_MESSAGE_LENGTH = 280;
 
 const sessionQuestionKey = 'diceprojects.publicCopilot.questions';
 const sessionIdKey = 'diceprojects.publicCopilot.sessionId';
+const businessMemoryKey = 'diceprojects.publicCopilot.businessContext';
 const env = ((import.meta as unknown as { env?: Record<string, string | undefined> }).env || {});
 const PUBLIC_BOT_ENABLED = env.VITE_PUBLIC_BOT_ENABLED !== 'false';
 const API_BASE_URL = (env.VITE_API_BASE_URL || 'https://api.diceprojects.com/api').replace(/\/$/, '');
 const MARKETING_CAMPAIGN_KEY = env.VITE_MARKETING_CAMPAIGN_KEY || '';
 const CONFIGURED_PUBLIC_BOT_KEY = env.VITE_PUBLIC_BOT_KEY || '';
+const PUBLIC_WHATSAPP_URL = env.VITE_PUBLIC_WHATSAPP_URL || 'https://wa.me/541172466605';
 const PUBLIC_BOT_KEY =
   CONFIGURED_PUBLIC_BOT_KEY && (CONFIGURED_PUBLIC_BOT_KEY !== 'diceprojects' || !MARKETING_CAMPAIGN_KEY || MARKETING_CAMPAIGN_KEY === 'diceprojects')
     ? CONFIGURED_PUBLIC_BOT_KEY
@@ -60,6 +62,57 @@ const getSessionId = () => {
   const next = crypto.randomUUID();
   window.sessionStorage.setItem(sessionIdKey, next);
   return next;
+};
+
+const normalizeText = (value: string) => value
+  .toLowerCase()
+  .normalize('NFD')
+  .replace(/[\u0300-\u036f]/g, '');
+
+const isDiagnosticPrompt = (value: string) => {
+  const normalized = normalizeText(value);
+  return normalized.includes('diagnostico') || normalized.includes('assessment') || normalized.includes('propuesta');
+};
+
+const isWhatsappPrompt = (value: string) => {
+  const normalized = normalizeText(value);
+  return normalized.includes('whatsapp') || normalized.includes('hablar') || normalized.includes('falar pelo');
+};
+
+const detectBusinessContext = (value: string) => {
+  const normalized = normalizeText(value);
+  const vertical = [
+    ['health', ['salud', 'clinica', 'turno', 'paciente', 'medico', 'medical', 'health']],
+    ['commerce', ['catalogo', 'producto', 'stock', 'tienda', 'ecommerce', 'carrito', 'catalog']],
+    ['services', ['servicio', 'obra', 'proyecto', 'mantenimiento', 'service', 'project']],
+    ['operations', ['erp', 'crm', 'integracion', 'sistema', 'planilla', 'api', 'database', 'integration']],
+  ].find(([, keywords]) => (keywords as string[]).some((keyword) => normalized.includes(keyword)))?.[0] || 'business';
+
+  const pain = [
+    ['duplicate_work', ['doble carga', 'retrabajo', 'manual', 'planilla', 'excel', 'whatsapp']],
+    ['sales_followup', ['lead', 'venta', 'cotizacion', 'presupuesto', 'seguimiento']],
+    ['data_visibility', ['reporte', 'dashboard', 'kpi', 'indicador', 'margen', 'rentabilidad']],
+    ['integration', ['integrar', 'integracion', 'sistema', 'erp', 'crm', 'api']],
+  ].find(([, keywords]) => (keywords as string[]).some((keyword) => normalized.includes(keyword)))?.[0] || 'discovery';
+
+  return { vertical, pain, lastMessage: value, updatedAt: new Date().toISOString() };
+};
+
+const readBusinessMemory = () => {
+  try {
+    const raw = window.localStorage.getItem(businessMemoryKey);
+    return raw ? JSON.parse(raw) as ReturnType<typeof detectBusinessContext> : null;
+  } catch {
+    return null;
+  }
+};
+
+const saveBusinessMemory = (value: ReturnType<typeof detectBusinessContext>) => {
+  try {
+    window.localStorage.setItem(businessMemoryKey, JSON.stringify(value));
+  } catch {
+    // Storage may be unavailable in private contexts.
+  }
 };
 
 const fetchRemoteBotConfig = async (): Promise<RemoteBotConfig | null> => {
@@ -96,6 +149,10 @@ const uiByLanguage = {
     phone: 'Teléfono / WhatsApp',
     registering: 'Registrando...',
     send: 'Enviar',
+    whatsappOpened: 'También te abrí WhatsApp con el contexto de la consulta para que no tengas que repetir todo.',
+    diagnosticText: 'Perfecto. Para ordenar el diagnóstico conviene relevar rubro, proceso actual, sistemas que usan, volumen de operación y dónde se pierde tiempo o seguimiento.',
+    contextPrefix: 'Tomo como contexto',
+    webAssistantExample: 'Ejemplos concretos: una textil puede responder telas, precios y armar una solicitud; una empresa de servicios puede explicar paquetes y agendar diagnóstico; un negocio con catálogo puede capturar productos consultados y crear un lead con intención real.',
   },
   en: {
     close: 'Close copilot',
@@ -104,6 +161,10 @@ const uiByLanguage = {
     phone: 'Phone / WhatsApp',
     registering: 'Registering...',
     send: 'Send',
+    whatsappOpened: 'I also opened WhatsApp with the consultation context so you do not need to repeat everything.',
+    diagnosticText: 'Perfect. To structure the assessment we should capture industry, current process, systems in use, operational volume and where time or follow-up is being lost.',
+    contextPrefix: 'I will use this as context',
+    webAssistantExample: 'Concrete examples: a textile company can answer fabric, pricing and quote questions; a service business can explain packages and book assessments; a catalog business can capture viewed products and create a lead with real intent.',
   },
   pt: {
     close: 'Fechar copiloto',
@@ -112,6 +173,10 @@ const uiByLanguage = {
     phone: 'Telefone / WhatsApp',
     registering: 'Registrando...',
     send: 'Enviar',
+    whatsappOpened: 'Também abri o WhatsApp com o contexto da consulta para que você não precise repetir tudo.',
+    diagnosticText: 'Perfeito. Para organizar o diagnóstico convém levantar segmento, processo atual, sistemas usados, volume operacional e onde se perde tempo ou acompanhamento.',
+    contextPrefix: 'Vou usar como contexto',
+    webAssistantExample: 'Exemplos concretos: uma têxtil pode responder sobre tecidos, preços e pedidos de cotação; uma empresa de serviços pode explicar pacotes e agendar diagnóstico; um negócio com catálogo pode capturar produtos consultados e criar um lead com intenção real.',
   },
 } as const;
 
@@ -208,6 +273,66 @@ export const PublicCopilotWidget = () => {
           text: copy.limitMessage,
           showLead: true,
           intent: 'pricing',
+        },
+      ]);
+      return;
+    }
+
+    const businessContext = detectBusinessContext(value);
+    saveBusinessMemory(businessContext);
+
+    if (isWhatsappPrompt(value)) {
+      const text = encodeURIComponent(`Hola Dice Projects, quiero hablar sobre ${businessContext.pain === 'integration' ? 'integraciones y automatización' : 'un diagnóstico de negocio'}. Mi consulta: ${value}`);
+      window.open(`${PUBLIC_WHATSAPP_URL}?text=${text}`, '_blank', 'noopener,noreferrer');
+      const contactContent = copy.intents.contact;
+      setMessages((current) => [
+        ...current,
+        userMessage,
+        {
+          id: crypto.randomUUID(),
+          sender: 'bot',
+          title: contactContent.title,
+          text: `${contactContent.answer}\n\n${ui.whatsappOpened}`,
+          prompts: ['Agendar diagnóstico', 'Qué resuelve la plataforma', 'Bot para sitios web con KB'],
+          intent: 'contact',
+          showLead: true,
+        },
+      ]);
+      return;
+    }
+
+    if (isDiagnosticPrompt(value)) {
+      const previous = readBusinessMemory();
+      setMessages((current) => [
+        ...current,
+        userMessage,
+        {
+          id: crypto.randomUUID(),
+          sender: 'bot',
+          title: copy.leadTitle,
+          text: `${ui.diagnosticText}${previous?.lastMessage ? ` ${ui.contextPrefix}: "${previous.lastMessage}".` : ''}`,
+          prompts: ['Qué datos necesitan para estimar', 'Hablar por WhatsApp', 'Integraciones empresariales'],
+          intent: 'pricing',
+          showLead: true,
+        },
+      ]);
+      return;
+    }
+
+    const localIntent = detectPublicCopilotIntent(value);
+    if (localIntent === 'webAssistant') {
+      const content = copy.intents.webAssistant;
+      setMessages((current) => [
+        ...current,
+        userMessage,
+        {
+          id: crypto.randomUUID(),
+          sender: 'bot',
+          title: content.title,
+          text: `${content.answer}\n\n${ui.webAssistantExample}`,
+          prompts: ['Agendar diagnóstico', 'Cómo captura leads', 'Hablar por WhatsApp'],
+          intent: localIntent,
+          showLead: true,
         },
       ]);
       return;

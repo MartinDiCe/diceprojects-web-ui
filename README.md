@@ -29,6 +29,8 @@ VITE_API_BASE_URL="https://api.diceprojects.com/api"
 VITE_MARKETING_ENABLED="true"
 VITE_MARKETING_CAMPAIGN_KEY="diceprojects"
 VITE_PUBLIC_BOT_ENABLED="true"
+VITE_PUBLIC_BOT_KEY="diceprojects"
+VITE_PUBLIC_WHATSAPP_URL="https://wa.me/541172466605"
 ```
 
-El bot público `Copiloto Dice` usa respuestas curadas y detección de intención en frontend. No llama a Groq, Chat API ni AI Orchestrator, por lo que no consume tokens LLM ni expone credenciales internas.
+El bot público `Copiloto Dice` usa respuestas curadas, detección de intención en frontend y memoria local del contexto comercial. Puede responder sobre plataforma, integraciones, módulos, diagnóstico y el core de asistente web con KB; además deriva a formulario de lead o WhatsApp sin exponer credenciales internas.

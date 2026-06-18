@@ -5,6 +5,7 @@ export type PublicCopilotIntent =
   | 'modules'
   | 'integrations'
   | 'ai'
+  | 'webAssistant'
   | 'projects'
   | 'inventory'
   | 'marketing'
@@ -71,6 +72,9 @@ export const detectPublicCopilotIntent = (input: string): PublicCopilotIntent =>
   if (hasAny(message, ['integracion', 'integrar', 'sistema', 'erp', 'crm', 'drive', 'sharepoint', 'base', 'datos', 'integration', 'system', 'database'])) {
     return 'integrations';
   }
+  if (hasAny(message, ['bot web', 'bot para sitio', 'asistente web', 'asistente para sitio', 'chat web', 'chatbot', 'kb', 'knowledge base', 'base de conocimiento', 'asesor publico', 'asesor público', 'website bot', 'site assistant'])) {
+    return 'webAssistant';
+  }
   if (hasAny(message, ['ai', 'ia', 'copiloto', 'asistente', 'agente', 'documento', 'chat', 'bot', 'assistant', 'agent'])) {
     return 'ai';
   }
@@ -115,6 +119,7 @@ export const publicCopilotCopy: Record<Language, {
     placeholder: 'Preguntá sobre módulos, procesos o diagnóstico...',
     quickPrompts: [
       'Qué resuelve la plataforma',
+      'Bot para sitios web con KB',
       'Cómo funciona el copiloto empresarial',
       'Quiero agendar diagnóstico',
     ],
@@ -167,6 +172,12 @@ export const publicCopilotCopy: Record<Language, {
         answer: 'El copiloto puede responder sobre procesos, documentos, indicadores y datos autorizados. Para ahorrar costos, primero usa conocimiento curado y sólo escala a IA cuando hace falta.',
         prompts: ['Cómo evita gastar tokens', 'Qué documentos puede usar', 'Agendar diagnóstico'],
       },
+      webAssistant: {
+        title: 'Asistente web con conocimiento del negocio',
+        answer: 'Podemos convertir tu sitio en un asesor comercial: responde preguntas frecuentes, explica productos o servicios, usa una base de conocimiento aprobada, captura datos del interesado y deriva a formulario, WhatsApp o backoffice con contexto. Sirve para vender mejor sin obligar al visitante a esperar una respuesta humana.',
+        prompts: ['Qué puede responder en mi web', 'Cómo captura leads', 'Hablar por WhatsApp'],
+        cta: 'Agendar diagnóstico',
+      },
       projects: {
         title: 'Obras, servicios y proyectos integrales',
         answer: 'La plataforma permite seguir avances, recursos, costos, presupuestos, compras, hitos, desvíos y reportes para obras o servicios integrales.',
@@ -207,6 +218,7 @@ export const publicCopilotCopy: Record<Language, {
     placeholder: 'Ask about modules, processes or assessment...',
     quickPrompts: [
       'What does the platform solve?',
+      'Website bot with KB',
       'How does the enterprise copilot work?',
       'I want to book an assessment',
     ],
@@ -259,6 +271,12 @@ export const publicCopilotCopy: Record<Language, {
         answer: 'The copilot can answer about processes, documents, indicators and authorized data. To control costs, it uses curated knowledge first and only escalates to AI when needed.',
         prompts: ['How does it avoid token spend?', 'Which documents can it use?', 'Book assessment'],
       },
+      webAssistant: {
+        title: 'Website assistant with business knowledge',
+        answer: 'We can turn your website into a commercial advisor: it answers frequent questions, explains products or services, uses an approved knowledge base, captures visitor details and routes the opportunity to a form, WhatsApp or the backoffice with context. It helps sell better without making visitors wait for a human reply.',
+        prompts: ['What can it answer on my site?', 'How does it capture leads?', 'Talk on WhatsApp'],
+        cta: 'Book assessment',
+      },
       projects: {
         title: 'Projects, services and integrated operations',
         answer: 'The platform tracks progress, resources, costs, budgets, procurement, milestones, deviations and reports for projects or integrated services.',
@@ -299,6 +317,7 @@ export const publicCopilotCopy: Record<Language, {
     placeholder: 'Pergunte sobre módulos, processos ou diagnóstico...',
     quickPrompts: [
       'O que a plataforma resolve?',
+      'Bot para sites com KB',
       'Como funciona o copiloto empresarial?',
       'Quero agendar diagnóstico',
     ],
@@ -350,6 +369,12 @@ export const publicCopilotCopy: Record<Language, {
         title: 'Copiloto empresarial com controle',
         answer: 'O copiloto pode responder sobre processos, documentos, indicadores e dados autorizados. Para controlar custos, usa primeiro conhecimento curado e só escala para IA quando necessário.',
         prompts: ['Como evita gastar tokens?', 'Quais documentos pode usar?', 'Agendar diagnóstico'],
+      },
+      webAssistant: {
+        title: 'Assistente web com conhecimento do negócio',
+        answer: 'Podemos transformar seu site em um consultor comercial: responde perguntas frequentes, explica produtos ou serviços, usa uma base de conhecimento aprovada, captura dados do interessado e encaminha para formulário, WhatsApp ou backoffice com contexto. Ajuda a vender melhor sem obrigar o visitante a esperar uma resposta humana.',
+        prompts: ['O que pode responder no meu site?', 'Como captura leads?', 'Falar pelo WhatsApp'],
+        cta: 'Agendar diagnóstico',
       },
       projects: {
         title: 'Obras, serviços e projetos integrais',
