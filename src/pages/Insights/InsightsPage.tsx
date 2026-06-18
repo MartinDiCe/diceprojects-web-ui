@@ -3,6 +3,7 @@ import { motion } from 'motion/react';
 import { ArrowRight, Search, Clock, Tag } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Container, SectionHeader, Button } from '@/src/components/common';
+import { submitMarketingLead, trackMarketingEvent } from '@/src/lib/marketingCapture';
 
 const insights = [
   {
@@ -40,9 +41,47 @@ const insights = [
 ];
 
 export default function InsightsPage() {
+  const [newsletterState, setNewsletterState] = React.useState<'idle' | 'sending' | 'sent' | 'error'>('idle');
+
   React.useEffect(() => {
     document.title = "Insights & Perspectiva | Dice Projects";
   }, []);
+
+  const handleNewsletterSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const form = new FormData(event.currentTarget);
+    const email = String(form.get('email') || '').trim();
+    if (!email) return;
+
+    setNewsletterState('sending');
+    try {
+      await submitMarketingLead({
+        fullName: 'Newsletter Dice Projects',
+        email,
+        message: 'Suscripción a newsletter estratégica desde Insights.',
+        actionCode: 'newsletter_subscription',
+        consent: true,
+        metadata: {
+          form: 'newsletter',
+          section: 'insights',
+        },
+      });
+      void trackMarketingEvent({
+        eventType: 'CONVERSION',
+        actionCode: 'newsletter_subscription',
+        actionLabel: 'Newsletter subscription',
+        category: 'LEAD',
+        metadata: {
+          form: 'newsletter',
+          section: 'insights',
+        },
+      });
+      setNewsletterState('sent');
+      event.currentTarget.reset();
+    } catch {
+      setNewsletterState('error');
+    }
+  };
 
   return (
     <div className="pb-32">
@@ -105,13 +144,23 @@ export default function InsightsPage() {
                 <p className="text-sm font-medium text-brand-ink/60 leading-relaxed">
                   Recibe mensualmente nuestra perspectiva sobre orquestación y escalabilidad operativa.
                 </p>
-                <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
+                <form className="space-y-4" onSubmit={handleNewsletterSubmit}>
                   <input 
+                    name="email"
                     type="email" 
+                    required
                     placeholder="tu@email.com" 
                     className="w-full bg-white border border-brand-ink/10 p-5 text-sm font-bold focus:outline-none focus:border-brand-accent transition-colors rounded-2xl"
                   />
-                  <Button className="w-full py-5">Suscribirse</Button>
+                  <Button className="w-full py-5" disabled={newsletterState === 'sending'}>
+                    {newsletterState === 'sending' ? 'Enviando...' : 'Suscribirse'}
+                  </Button>
+                  {newsletterState === 'sent' && (
+                    <p className="text-xs font-bold text-emerald-600">Suscripción registrada.</p>
+                  )}
+                  {newsletterState === 'error' && (
+                    <p className="text-xs font-bold text-amber-600">No pudimos registrar la suscripción. Probá nuevamente.</p>
+                  )}
                 </form>
               </div>
 
