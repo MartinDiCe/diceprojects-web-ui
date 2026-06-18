@@ -44,10 +44,8 @@ const API_BASE_URL = (env.VITE_API_BASE_URL || 'https://api.diceprojects.com/api
 const MARKETING_CAMPAIGN_KEY = env.VITE_MARKETING_CAMPAIGN_KEY || '';
 const CONFIGURED_PUBLIC_BOT_KEY = env.VITE_PUBLIC_BOT_KEY || '';
 const PUBLIC_WHATSAPP_URL = env.VITE_PUBLIC_WHATSAPP_URL || 'https://wa.me/541172466605';
-const PUBLIC_BOT_KEY =
-  CONFIGURED_PUBLIC_BOT_KEY && (CONFIGURED_PUBLIC_BOT_KEY !== 'diceprojects' || !MARKETING_CAMPAIGN_KEY || MARKETING_CAMPAIGN_KEY === 'diceprojects')
-    ? CONFIGURED_PUBLIC_BOT_KEY
-    : MARKETING_CAMPAIGN_KEY;
+const PRIMARY_PUBLIC_BOT_KEY = CONFIGURED_PUBLIC_BOT_KEY || MARKETING_CAMPAIGN_KEY || 'diceprojects';
+const PUBLIC_BOT_KEYS = Array.from(new Set([PRIMARY_PUBLIC_BOT_KEY, 'diceprojects'].filter(Boolean)));
 
 const getSessionQuestionCount = () => Number(window.sessionStorage.getItem(sessionQuestionKey) || '0');
 const incrementSessionQuestionCount = () => {
@@ -116,29 +114,35 @@ const saveBusinessMemory = (value: ReturnType<typeof detectBusinessContext>) => 
 };
 
 const fetchRemoteBotConfig = async (): Promise<RemoteBotConfig | null> => {
-  if (!PUBLIC_BOT_KEY) return null;
-  const response = await fetch(`${API_BASE_URL}/v1/public-bots/${encodeURIComponent(PUBLIC_BOT_KEY)}/config`);
-  if (!response.ok) return null;
-  return response.json() as Promise<RemoteBotConfig>;
+  for (const publicBotKey of PUBLIC_BOT_KEYS) {
+    const response = await fetch(`${API_BASE_URL}/v1/public-bots/${encodeURIComponent(publicBotKey)}/config`);
+    if (response.ok) {
+      return response.json() as Promise<RemoteBotConfig>;
+    }
+  }
+  return null;
 };
 
 const askRemoteBot = async (message: string, language: string, allowAi = false): Promise<RemoteBotAnswer | null> => {
-  if (!PUBLIC_BOT_KEY) return null;
-  const response = await fetch(`${API_BASE_URL}/v1/public-bots/${encodeURIComponent(PUBLIC_BOT_KEY)}/message`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      message,
-      visitorId: getMarketingVisitorId(),
-      sessionId: getSessionId(),
-      language,
-      pageUrl: window.location.href,
-      referrerUrl: document.referrer || undefined,
-      allowAi,
-    }),
-  });
-  if (!response.ok) return null;
-  return response.json() as Promise<RemoteBotAnswer>;
+  for (const publicBotKey of PUBLIC_BOT_KEYS) {
+    const response = await fetch(`${API_BASE_URL}/v1/public-bots/${encodeURIComponent(publicBotKey)}/message`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        message,
+        visitorId: getMarketingVisitorId(),
+        sessionId: getSessionId(),
+        language,
+        pageUrl: window.location.href,
+        referrerUrl: document.referrer || undefined,
+        allowAi,
+      }),
+    });
+    if (response.ok) {
+      return response.json() as Promise<RemoteBotAnswer>;
+    }
+  }
+  return null;
 };
 
 const uiByLanguage = {
