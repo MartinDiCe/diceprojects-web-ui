@@ -454,10 +454,10 @@ export const PublicCopilotWidget = () => {
   };
 
   return (
-    <div className="pointer-events-none fixed bottom-5 right-4 z-[70] sm:right-6">
+    <div className="pointer-events-none fixed bottom-[calc(1rem+env(safe-area-inset-bottom))] right-4 z-[70] sm:bottom-5 sm:right-6">
       <div
         className={cn(
-          'mb-3 w-[calc(100vw-2rem)] max-w-[380px] overflow-hidden rounded-lg border border-brand-dark/10 bg-brand-white shadow-2xl transition-all duration-200 max-sm:max-h-[72dvh]',
+          'mb-3 flex w-[calc(100vw-2rem)] max-w-[380px] flex-col overflow-hidden rounded-lg border border-brand-dark/10 bg-brand-white shadow-2xl transition-all duration-200 max-sm:max-h-[calc(100dvh-8.5rem)]',
           isOpen ? 'translate-y-0 opacity-100' : 'pointer-events-none translate-y-3 opacity-0',
           isOpen ? 'pointer-events-auto' : '',
         )}
@@ -478,7 +478,7 @@ export const PublicCopilotWidget = () => {
           </button>
         </div>
 
-        <div className="max-h-[min(440px,52dvh)] space-y-3 overflow-y-auto bg-[#F6F8FA] p-4">
+        <div className="min-h-0 flex-1 space-y-3 overflow-y-auto bg-[#F6F8FA] p-4 sm:max-h-[min(440px,52dvh)]">
           {messages.map((message) => (
             <div key={message.id} className={cn('flex', message.sender === 'user' ? 'justify-end' : 'justify-start')}>
               <div className={cn(
@@ -533,7 +533,7 @@ export const PublicCopilotWidget = () => {
           )}
         </div>
 
-        <form onSubmit={handleSubmit} className="flex gap-2 border-t border-brand-dark/10 bg-brand-white p-3">
+        <form onSubmit={handleSubmit} className="flex shrink-0 items-center gap-2 border-t border-brand-dark/10 bg-brand-white p-3">
           <input
             value={input}
             maxLength={MAX_MESSAGE_LENGTH}
@@ -563,7 +563,10 @@ export const PublicCopilotWidget = () => {
         }}
         data-mkt="public_copilot_fab"
         data-mkt-category="PUBLIC_COPILOT"
-        className="pointer-events-auto ml-auto flex h-14 items-center gap-3 rounded-full bg-brand-dark px-5 text-sm font-bold text-brand-white shadow-2xl transition hover:-translate-y-0.5 hover:bg-brand-primary"
+        className={cn(
+          'pointer-events-auto ml-auto h-14 items-center gap-3 rounded-full bg-brand-dark px-5 text-sm font-bold text-brand-white shadow-2xl transition hover:-translate-y-0.5 hover:bg-brand-primary',
+          isOpen ? 'hidden sm:flex' : 'flex',
+        )}
       >
         <MessageCircle size={20} />
         <span className="hidden sm:inline">{copy.launcher}</span>
