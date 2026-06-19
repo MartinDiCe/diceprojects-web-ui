@@ -75,7 +75,7 @@ export const detectPublicCopilotIntent = (input: string): PublicCopilotIntent =>
   if (hasAny(message, ['bot web', 'bot para sitio', 'asistente web', 'asistente para sitio', 'chat web', 'chatbot', 'kb', 'knowledge base', 'base de conocimiento', 'asesor publico', 'asesor público', 'website bot', 'site assistant'])) {
     return 'webAssistant';
   }
-  if (hasAny(message, ['ai', 'ia', 'copiloto', 'asistente', 'agente', 'documento', 'chat', 'bot', 'assistant', 'agent'])) {
+  if (hasAny(message, ['ai', 'ia', 'copiloto', 'asistente', 'agente', 'documento', 'chat', 'bot', 'assistant', 'agent', 'token', 'tokens', 'llm', 'gastar', 'consumo ia', 'cuidar costo', 'ahorrar ia'])) {
     return 'ai';
   }
   if (hasAny(message, ['obra', 'proyecto', 'servicio integral', 'mantenimiento', 'project', 'construction'])) {
@@ -87,7 +87,7 @@ export const detectPublicCopilotIntent = (input: string): PublicCopilotIntent =>
   if (hasAny(message, ['lead', 'campana', 'marketing', 'evento', 'web', 'embudo', 'cliente', 'funnel', 'campaign'])) {
     return 'marketing';
   }
-  if (hasAny(message, ['implementar', 'tiempo', 'metodo', 'roadmap', 'adopcion', 'implement', 'timeline', 'method'])) {
+  if (hasAny(message, ['implementar', 'tiempo', 'metodo', 'roadmap', 'adopcion', 'estrategia', 'flujo', 'proceso', 'implement', 'timeline', 'method', 'strategy', 'workflow'])) {
     return 'implementation';
   }
   if (hasAny(message, ['seguridad', 'permiso', 'rol', 'auditoria', 'privacidad', 'security', 'permission', 'privacy', 'audit'])) {
@@ -168,9 +168,9 @@ export const publicCopilotCopy: Record<Language, {
         prompts: ['Cómo se cuidan permisos', 'Puede leer documentos', 'Agendar diagnóstico'],
       },
       ai: {
-        title: 'Copiloto empresarial con control',
-        answer: 'El copiloto puede responder sobre procesos, documentos, indicadores y datos autorizados. Para ahorrar costos, primero usa conocimiento curado y sólo escala a IA cuando hace falta.',
-        prompts: ['Cómo evita gastar tokens', 'Qué documentos puede usar', 'Agendar diagnóstico'],
+        title: 'Copiloto empresarial sin quemar tokens',
+        answer: 'La estrategia es híbrida: primero responde con conocimiento curado, reglas de negocio, formularios, catálogos, métricas y flujos aprobados. Si la pregunta requiere razonamiento abierto, recién ahí escala a IA con contexto acotado, permisos, límite de uso y trazabilidad. Así baja costo, reduce alucinaciones y mantiene respuestas consistentes. Ejemplos: explicar un módulo, derivar a un lead form, armar una consulta comercial, orientar por documentos permitidos o resumir indicadores autorizados.',
+        prompts: ['Qué documentos puede usar', 'Cómo captura leads', 'Agendar diagnóstico'],
       },
       webAssistant: {
         title: 'Asistente web con conocimiento del negocio',
@@ -205,8 +205,8 @@ export const publicCopilotCopy: Record<Language, {
       },
       fallback: {
         title: 'Te puedo guiar mejor si me das una pista',
-        answer: 'Puedo responder sobre contacto, empresas dentro de la plataforma, módulos, integraciones, copiloto empresarial, marketing, stock, compras, proyectos, reportes o diagnóstico comercial.',
-        prompts: ['Dónde queda la empresa', 'Cómo contacto', 'Qué resuelve la plataforma'],
+        answer: 'Puedo responder sobre módulos, integraciones, automatización, copilotos con KB, ahorro de tokens, captura de leads, stock, compras, ventas, proyectos, marketing, reportes y diagnóstico comercial. También puedo darte ejemplos de flujos: web que captura interesados, catálogo que arma cotizaciones, proveedores que responden presupuestos o copiloto interno que consulta documentos permitidos.',
+        prompts: ['Cómo evita gastar tokens', 'Qué flujo recomiendan', 'Agendar diagnóstico'],
       },
     },
   },
@@ -267,9 +267,9 @@ export const publicCopilotCopy: Record<Language, {
         prompts: ['How permissions work', 'Can it read documents?', 'Book assessment'],
       },
       ai: {
-        title: 'Enterprise copilot with control',
-        answer: 'The copilot can answer about processes, documents, indicators and authorized data. To control costs, it uses curated knowledge first and only escalates to AI when needed.',
-        prompts: ['How does it avoid token spend?', 'Which documents can it use?', 'Book assessment'],
+        title: 'Enterprise copilot without burning tokens',
+        answer: 'The strategy is hybrid: it answers first with curated knowledge, business rules, forms, catalogs, metrics and approved flows. Only when open reasoning is needed does it escalate to AI, with scoped context, permissions, usage limits and traceability. This lowers cost, reduces hallucinations and keeps answers consistent. Examples: explain a module, route to a lead form, build a commercial request, guide through allowed documents or summarize authorized indicators.',
+        prompts: ['Which documents can it use?', 'How does it capture leads?', 'Book assessment'],
       },
       webAssistant: {
         title: 'Website assistant with business knowledge',
@@ -304,8 +304,8 @@ export const publicCopilotCopy: Record<Language, {
       },
       fallback: {
         title: 'I can guide you better with a bit more context',
-        answer: 'I can answer about contact, companies inside the platform, modules, integrations, enterprise copilot, marketing, inventory, procurement, projects, reports or commercial assessment.',
-        prompts: ['Where does the company live?', 'How do I contact you?', 'What does the platform solve?'],
+        answer: 'I can answer about modules, integrations, automation, KB-powered copilots, token savings, lead capture, inventory, procurement, sales, projects, marketing, reports and commercial assessment. I can also explain example flows: a website that captures prospects, a catalog that builds quote requests, suppliers answering budgets or an internal copilot querying allowed documents.',
+        prompts: ['How does it avoid token spend?', 'Which flow do you recommend?', 'Book assessment'],
       },
     },
   },
@@ -366,9 +366,9 @@ export const publicCopilotCopy: Record<Language, {
         prompts: ['Como funcionam permissões', 'Pode ler documentos?', 'Agendar diagnóstico'],
       },
       ai: {
-        title: 'Copiloto empresarial com controle',
-        answer: 'O copiloto pode responder sobre processos, documentos, indicadores e dados autorizados. Para controlar custos, usa primeiro conhecimento curado e só escala para IA quando necessário.',
-        prompts: ['Como evita gastar tokens?', 'Quais documentos pode usar?', 'Agendar diagnóstico'],
+        title: 'Copiloto empresarial sem queimar tokens',
+        answer: 'A estratégia é híbrida: primeiro responde com conhecimento curado, regras de negócio, formulários, catálogos, métricas e fluxos aprovados. Só quando precisa de raciocínio aberto escala para IA, com contexto limitado, permissões, limite de uso e rastreabilidade. Isso reduz custo, diminui alucinações e mantém respostas consistentes. Exemplos: explicar um módulo, encaminhar para formulário de lead, montar uma consulta comercial, orientar por documentos permitidos ou resumir indicadores autorizados.',
+        prompts: ['Quais documentos pode usar?', 'Como captura leads?', 'Agendar diagnóstico'],
       },
       webAssistant: {
         title: 'Assistente web com conhecimento do negócio',
@@ -403,8 +403,8 @@ export const publicCopilotCopy: Record<Language, {
       },
       fallback: {
         title: 'Posso orientar melhor com mais contexto',
-        answer: 'Posso responder sobre contato, empresas na plataforma, módulos, integrações, copiloto empresarial, marketing, estoque, compras, projetos, relatórios ou diagnóstico comercial.',
-        prompts: ['Onde fica a empresa', 'Como contato', 'O que a plataforma resolve?'],
+        answer: 'Posso responder sobre módulos, integrações, automação, copilotos com KB, economia de tokens, captura de leads, estoque, compras, vendas, projetos, marketing, relatórios e diagnóstico comercial. Também posso explicar fluxos: site que captura interessados, catálogo que monta cotações, fornecedores respondendo orçamentos ou copiloto interno consultando documentos permitidos.',
+        prompts: ['Como evita gastar tokens?', 'Qual fluxo recomendam?', 'Agendar diagnóstico'],
       },
     },
   },
