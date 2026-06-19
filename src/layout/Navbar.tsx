@@ -117,7 +117,7 @@ export const Navbar = () => {
             <img
               src="/assets/logos/dice-logo-lineal.svg"
               alt={BRAND.name}
-              className="h-7 sm:h-8 md:h-11 w-auto shrink-0"
+              className="h-9 sm:h-10 md:h-12 w-auto shrink-0"
             />
           </Link>
 
