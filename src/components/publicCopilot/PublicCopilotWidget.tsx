@@ -157,6 +157,8 @@ const uiByLanguage = {
     diagnosticText: 'Perfecto. Para ordenar el diagnóstico conviene relevar rubro, proceso actual, sistemas que usan, volumen de operación y dónde se pierde tiempo o seguimiento.',
     contextPrefix: 'Tomo como contexto',
     webAssistantExample: 'Ejemplos concretos: una textil puede responder telas, precios y armar una solicitud; una empresa de servicios puede explicar paquetes y agendar diagnóstico; un negocio con catálogo puede capturar productos consultados y crear un lead con intención real.',
+    botUnavailableTitle: 'Bot no disponible',
+    botUnavailableText: 'No pude consultar el bot comercial en este momento. Probá nuevamente o dejá una solicitud para que te contactemos.',
   },
   en: {
     close: 'Close copilot',
@@ -169,6 +171,8 @@ const uiByLanguage = {
     diagnosticText: 'Perfect. To structure the assessment we should capture industry, current process, systems in use, operational volume and where time or follow-up is being lost.',
     contextPrefix: 'I will use this as context',
     webAssistantExample: 'Concrete examples: a textile company can answer fabric, pricing and quote questions; a service business can explain packages and book assessments; a catalog business can capture viewed products and create a lead with real intent.',
+    botUnavailableTitle: 'Bot unavailable',
+    botUnavailableText: 'I could not reach the commercial bot right now. Try again or leave a request and we will contact you.',
   },
   pt: {
     close: 'Fechar copiloto',
@@ -181,6 +185,8 @@ const uiByLanguage = {
     diagnosticText: 'Perfeito. Para organizar o diagnóstico convém levantar segmento, processo atual, sistemas usados, volume operacional e onde se perde tempo ou acompanhamento.',
     contextPrefix: 'Vou usar como contexto',
     webAssistantExample: 'Exemplos concretos: uma têxtil pode responder sobre tecidos, preços e pedidos de cotação; uma empresa de serviços pode explicar pacotes e agendar diagnóstico; um negócio com catálogo pode capturar produtos consultados e criar um lead com intenção real.',
+    botUnavailableTitle: 'Bot indisponível',
+    botUnavailableText: 'Não consegui consultar o bot comercial agora. Tente novamente ou deixe uma solicitação para entrarmos em contato.',
   },
 } as const;
 
@@ -323,25 +329,6 @@ export const PublicCopilotWidget = () => {
       return;
     }
 
-    const localIntent = detectPublicCopilotIntent(value);
-    if (localIntent === 'webAssistant') {
-      const content = copy.intents.webAssistant;
-      setMessages((current) => [
-        ...current,
-        userMessage,
-        {
-          id: crypto.randomUUID(),
-          sender: 'bot',
-          title: content.title,
-          text: `${content.answer}\n\n${ui.webAssistantExample}`,
-          prompts: ['Agendar diagnóstico', 'Cómo captura leads', 'Hablar por WhatsApp'],
-          intent: localIntent,
-          showLead: true,
-        },
-      ]);
-      return;
-    }
-
     try {
       const remote = await askRemoteBot(value, language, allowAi);
       if (remote?.answer) {
@@ -366,7 +353,7 @@ export const PublicCopilotWidget = () => {
         return;
       }
     } catch {
-      // Fallback local: mantiene el sitio vendiendo aunque Marketing API no responda.
+      // The public bot is the source of truth for commercial answers.
     }
 
     const intent = detectPublicCopilotIntent(value);
@@ -404,11 +391,11 @@ export const PublicCopilotWidget = () => {
       {
         id: crypto.randomUUID(),
         sender: 'bot',
-        title: content.title,
-        text: content.answer,
-        prompts: content.prompts,
+        title: ui.botUnavailableTitle,
+        text: ui.botUnavailableText,
+        prompts: ['Agendar diagnóstico', 'Hablar por WhatsApp', 'Qué resuelve la plataforma'],
         intent,
-        showLead,
+        showLead: true,
       },
     ]);
   };
