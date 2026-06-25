@@ -14,6 +14,7 @@ export const Footer = () => {
     { label: 'Gestión comercial', path: '/gestion-comercial-crm-operativo' },
     { label: 'Productos y catálogo', path: '/gestion-productos-catalogo-web' },
     { label: 'Stock de productos', path: '/gestion-stock-productos-inventario' },
+    { label: 'InmoPub inmobiliario', path: 'https://inmopub.com' },
     { label: 'Marketing y leads', path: '/marketing-leads-campanas-embudos' },
     { label: 'Sitios conectados', path: '/sitios-conectados-backoffice-cotizaciones' },
     { label: 'Presupuestos y cotizaciones', path: '/presupuestos-cotizaciones-compras' },
@@ -67,6 +68,8 @@ export const Footer = () => {
                       key={link.path}
                       className="block w-full text-center text-sm text-brand-white/60 transition hover:text-brand-primary md:text-left"
                       href={link.path}
+                      target={link.path.startsWith('http') ? '_blank' : undefined}
+                      rel={link.path.startsWith('http') ? 'noopener noreferrer' : undefined}
                     >
                       {t.footer.links[index] ?? link.label}
                     </a>

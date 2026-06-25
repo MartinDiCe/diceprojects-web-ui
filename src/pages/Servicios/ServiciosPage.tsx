@@ -63,6 +63,18 @@ export default function ServiciosPage() {
               <div key={title} className="rounded-lg bg-brand-white p-6">
                 <h3 className="text-lg font-bold text-brand-dark">{title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-brand-dark/60">{body}</p>
+                {title.toLowerCase().includes('inmopub') && (
+                  <a
+                    href="https://inmopub.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    data-mkt="services_inmopub_click"
+                    data-mkt-category="PRODUCT"
+                    className="mt-4 inline-flex items-center gap-2 text-xs font-black uppercase tracking-[0.16em] text-brand-primary"
+                  >
+                    Ver InmoPub <ArrowRight size={14} />
+                  </a>
+                )}
               </div>
             ))}
           </div>
