@@ -58,6 +58,7 @@ export default function App() {
             <Route path="/privacidad" element={<PrivacyPage />} />
             <Route path="/cookies" element={<CookiesPage />} />
             <Route path="/aviso-legal" element={<LegalNoticePage />} />
+            <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </MainLayout>
         <PublicCopilotWidget />
