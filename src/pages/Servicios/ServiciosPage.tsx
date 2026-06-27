@@ -75,6 +75,16 @@ export default function ServiciosPage() {
                     Ver InmoPub <ArrowRight size={14} />
                   </a>
                 )}
+                {/(proyectos|obras|projects|construction|servicios)/i.test(title) && !title.toLowerCase().includes('inmopub') && (
+                  <Link
+                    to="/software-gestion-obras-servicios"
+                    data-mkt="services_projects_click"
+                    data-mkt-category="PRODUCT"
+                    className="mt-4 inline-flex items-center gap-2 text-xs font-black uppercase tracking-[0.16em] text-brand-primary"
+                  >
+                    {language === 'en' ? 'View project management' : language === 'pt' ? 'Ver gestão de obras' : 'Ver gestión de obras'} <ArrowRight size={14} />
+                  </Link>
+                )}
               </div>
             ))}
           </div>
