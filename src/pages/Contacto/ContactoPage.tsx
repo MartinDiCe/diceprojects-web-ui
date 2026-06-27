@@ -254,7 +254,7 @@ export default function ContactoPage() {
                     <option>1 - 10</option>
                     <option>11 - 50</option>
                     <option>51 - 200</option>
-                    <option>200+</option>
+                    <option>Large team</option>
                   </select>
                 </label>
                 <label className="space-y-2 md:col-span-2">

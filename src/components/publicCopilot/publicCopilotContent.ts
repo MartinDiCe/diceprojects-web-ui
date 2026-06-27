@@ -131,9 +131,9 @@ export const publicCopilotCopy: Record<Language, {
     limitMessage: 'Para cuidar el sitio, pausamos nuevas preguntas por esta sesión. Podés agendar un diagnóstico y seguimos por ahí.',
     intents: {
       pricing: {
-        title: 'Diagnóstico antes que precio genérico',
-        answer: 'La propuesta depende de módulos, volumen operativo, integraciones y nivel de acompañamiento. Lo más eficiente es un diagnóstico corto para detectar quick wins y armar alcance.',
-        prompts: ['Qué módulos suelen activar primero', 'Qué datos necesitan para estimar', 'Agendar diagnóstico'],
+        title: 'Suscripción después de validar valor',
+        answer: 'Trabajamos con suscripción modular según módulos, volumen operativo, integraciones y nivel de acompañamiento. Primero conviene un diagnóstico corto y, si el problema está claro, una prueba de 3 meses con métricas reales antes de escalar el plan.',
+        prompts: ['Qué módulos suelen activar primero', 'Cómo sería la prueba de 3 meses', 'Agendar diagnóstico'],
         cta: 'Agendar diagnóstico',
       },
       contact: {
@@ -195,7 +195,7 @@ export const publicCopilotCopy: Record<Language, {
       },
       implementation: {
         title: 'Implementación por etapas',
-        answer: 'El camino recomendado es diagnóstico, diseño operativo, configuración de módulos, integraciones prioritarias, adopción de usuarios y mejora continua con indicadores.',
+        answer: 'El camino recomendado es diagnóstico, diseño operativo, prueba de 3 meses con indicadores, configuración de módulos, integraciones prioritarias, adopción de usuarios y mejora continua por suscripción.',
         prompts: ['Cuánto tarda un inicio', 'Qué módulo conviene primero', 'Agendar diagnóstico'],
       },
       security: {
@@ -230,9 +230,9 @@ export const publicCopilotCopy: Record<Language, {
     limitMessage: 'To protect the site, new questions are paused for this session. You can book an assessment and continue from there.',
     intents: {
       pricing: {
-        title: 'Assessment before generic pricing',
-        answer: 'The proposal depends on modules, operational volume, integrations and support level. A short assessment is the best way to identify quick wins and scope.',
-        prompts: ['Which modules start first?', 'What data is needed to estimate?', 'Book assessment'],
+        title: 'Subscription after value is validated',
+        answer: 'We work with modular subscriptions based on modules, operational volume, integrations and support level. The best path is a short assessment and, when the problem is clear, a 3-month proof with real metrics before scaling the plan.',
+        prompts: ['Which modules start first?', 'What does the 3-month proof look like?', 'Book assessment'],
         cta: 'Book assessment',
       },
       contact: {
@@ -294,7 +294,7 @@ export const publicCopilotCopy: Record<Language, {
       },
       implementation: {
         title: 'Implementation by stages',
-        answer: 'The recommended path is assessment, operating design, module setup, priority integrations, user adoption and continuous improvement with indicators.',
+        answer: 'The recommended path is assessment, operating design, a 3-month proof with indicators, module setup, priority integrations, user adoption and continuous improvement by subscription.',
         prompts: ['How long to start?', 'Which module comes first?', 'Book assessment'],
       },
       security: {
@@ -329,9 +329,9 @@ export const publicCopilotCopy: Record<Language, {
     limitMessage: 'Para proteger o site, pausamos novas perguntas nesta sessão. Você pode agendar um diagnóstico e seguimos por lá.',
     intents: {
       pricing: {
-        title: 'Diagnóstico antes de preço genérico',
-        answer: 'A proposta depende de módulos, volume operacional, integrações e nível de acompanhamento. O caminho mais eficiente é um diagnóstico curto para detectar quick wins e definir escopo.',
-        prompts: ['Quais módulos começam primeiro?', 'Quais dados precisam para estimar?', 'Agendar diagnóstico'],
+        title: 'Assinatura depois de validar valor',
+        answer: 'Trabalhamos com assinatura modular conforme módulos, volume operacional, integrações e nível de acompanhamento. Primeiro convém um diagnóstico curto e, se o problema estiver claro, uma prova de 3 meses com métricas reais antes de escalar o plano.',
+        prompts: ['Quais módulos começam primeiro?', 'Como seria a prova de 3 meses?', 'Agendar diagnóstico'],
         cta: 'Agendar diagnóstico',
       },
       contact: {
@@ -393,7 +393,7 @@ export const publicCopilotCopy: Record<Language, {
       },
       implementation: {
         title: 'Implementação por etapas',
-        answer: 'O caminho recomendado é diagnóstico, desenho operacional, configuração de módulos, integrações prioritárias, adoção de usuários e melhoria contínua com indicadores.',
+        answer: 'O caminho recomendado é diagnóstico, desenho operacional, prova de 3 meses com indicadores, configuração de módulos, integrações prioritárias, adoção de usuários e melhoria contínua por assinatura.',
         prompts: ['Quanto demora para começar?', 'Qual módulo vem primeiro?', 'Agendar diagnóstico'],
       },
       security: {
