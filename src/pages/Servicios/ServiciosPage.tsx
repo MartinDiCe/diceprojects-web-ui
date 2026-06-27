@@ -75,7 +75,19 @@ export default function ServiciosPage() {
                     Ver InmoPub <ArrowRight size={14} />
                   </a>
                 )}
-                {/(proyectos|obras|projects|construction|servicios)/i.test(title) && !title.toLowerCase().includes('inmopub') && (
+                {title.toLowerCase().includes('urban projects pub') && (
+                  <a
+                    href="https://urbanpub.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    data-mkt="services_urbanpub_click"
+                    data-mkt-category="PRODUCT"
+                    className="mt-4 inline-flex items-center gap-2 text-xs font-black uppercase tracking-[0.16em] text-brand-primary"
+                  >
+                    {language === 'en' ? 'View Urban Projects Pub' : language === 'pt' ? 'Ver Urban Projects Pub' : 'Ver Urban Projects Pub'} <ArrowRight size={14} />
+                  </a>
+                )}
+                {/(proyectos|obras|projects|construction|servicios)/i.test(title) && !title.toLowerCase().includes('inmopub') && !title.toLowerCase().includes('urban projects pub') && (
                   <Link
                     to="/software-gestion-obras-servicios"
                     data-mkt="services_projects_click"
