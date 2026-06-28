@@ -15,7 +15,7 @@ export const Footer = () => {
     { label: 'Productos y catálogo', path: '/gestion-productos-catalogo-web' },
     { label: 'Stock de productos', path: '/gestion-stock-productos-inventario' },
     { label: 'InmoPub inmobiliario', path: 'https://inmopub.com' },
-    { label: 'Urban Projects Pub obras', path: 'https://urbanpub.com' },
+    { label: 'Urban Projects Pub constructoras', path: 'https://urbanprojectspub.com' },
     { label: 'Marketing y leads', path: '/marketing-leads-campanas-embudos' },
     { label: 'Sitios conectados', path: '/sitios-conectados-backoffice-cotizaciones' },
     { label: 'Presupuestos y cotizaciones', path: '/presupuestos-cotizaciones-compras' },

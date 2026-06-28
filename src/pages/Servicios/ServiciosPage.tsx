@@ -77,14 +77,14 @@ export default function ServiciosPage() {
                 )}
                 {title.toLowerCase().includes('urban projects pub') && (
                   <a
-                    href="https://urbanpub.com"
+                    href="https://urbanprojectspub.com"
                     target="_blank"
                     rel="noopener noreferrer"
                     data-mkt="services_urbanpub_click"
                     data-mkt-category="PRODUCT"
                     className="mt-4 inline-flex items-center gap-2 text-xs font-black uppercase tracking-[0.16em] text-brand-primary"
                   >
-                    {language === 'en' ? 'View Urban Projects Pub' : language === 'pt' ? 'Ver Urban Projects Pub' : 'Ver Urban Projects Pub'} <ArrowRight size={14} />
+                    {language === 'en' ? 'View builder and architecture projects' : language === 'pt' ? 'Ver projetos para construtoras e arquitetura' : 'Ver proyectos para constructoras y estudios'} <ArrowRight size={14} />
                   </a>
                 )}
                 {/(proyectos|obras|projects|construction|servicios)/i.test(title) && !title.toLowerCase().includes('inmopub') && !title.toLowerCase().includes('urban projects pub') && (
@@ -94,7 +94,7 @@ export default function ServiciosPage() {
                     data-mkt-category="PRODUCT"
                     className="mt-4 inline-flex items-center gap-2 text-xs font-black uppercase tracking-[0.16em] text-brand-primary"
                   >
-                    {language === 'en' ? 'View project management' : language === 'pt' ? 'Ver gestão de obras' : 'Ver gestión de obras'} <ArrowRight size={14} />
+                    {language === 'en' ? 'View integral projects' : language === 'pt' ? 'Ver projetos integrais' : 'Ver proyectos integrales'} <ArrowRight size={14} />
                   </Link>
                 )}
               </div>
