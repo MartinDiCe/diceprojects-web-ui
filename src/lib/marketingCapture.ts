@@ -101,7 +101,7 @@ export const trackMarketingEvent = ({
   actionCode,
   actionLabel,
   category = 'WEBSITE',
-  eventType = 'PAGE_VIEW',
+  eventType = 'VIEW',
   metadata,
 }: CaptureOptions) => {
   if (typeof window === 'undefined') {
