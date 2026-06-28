@@ -96,7 +96,11 @@ export default function ServiciosPage() {
                     data-mkt-category="PRODUCT"
                     className="mt-4 inline-flex items-center gap-2 text-xs font-black uppercase tracking-[0.16em] text-brand-primary"
                   >
-                    {language === 'en' ? 'View wholesale commerce demo' : language === 'pt' ? 'Ver demo de comércio atacadista' : 'Ver comercio mayorista'} <ArrowRight size={14} />
+                    {index === 0
+                      ? (language === 'en' ? 'View product management' : language === 'pt' ? 'Ver gestão de produtos' : 'Ver gestión de productos')
+                      : index === 1
+                        ? (language === 'en' ? 'View catalog and marketing' : language === 'pt' ? 'Ver catálogo e marketing' : 'Ver catálogo y marketing')
+                        : (language === 'en' ? 'View stock and purchasing' : language === 'pt' ? 'Ver estoque e compras' : 'Ver stock y compras')} <ArrowRight size={14} />
                   </a>
                 )}
                 {/(proyectos|obras|projects|construction|servicios)/i.test(title) && index !== 4 && index !== 5 && (
