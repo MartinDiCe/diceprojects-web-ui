@@ -59,11 +59,11 @@ export default function ServiciosPage() {
         <Container>
           <SectionHeader subtitle="Use cases" title={t.examplesTitle} />
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-            {t.examples.map(([title, body]) => (
+            {t.examples.map(([title, body], index) => (
               <div key={title} className="rounded-lg bg-brand-white p-6">
                 <h3 className="text-lg font-bold text-brand-dark">{title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-brand-dark/60">{body}</p>
-                {title.toLowerCase().includes('inmopub') && (
+                {index === 4 && (
                   <a
                     href="https://inmopub.com"
                     target="_blank"
@@ -72,10 +72,10 @@ export default function ServiciosPage() {
                     data-mkt-category="PRODUCT"
                     className="mt-4 inline-flex items-center gap-2 text-xs font-black uppercase tracking-[0.16em] text-brand-primary"
                   >
-                    Ver InmoPub <ArrowRight size={14} />
+                    {language === 'en' ? 'View real estate management' : language === 'pt' ? 'Ver gestão imobiliária' : 'Ver gestión inmobiliaria'} <ArrowRight size={14} />
                   </a>
                 )}
-                {title.toLowerCase().includes('urban projects pub') && (
+                {index === 5 && (
                   <a
                     href="https://urbanprojectspub.com"
                     target="_blank"
@@ -84,10 +84,10 @@ export default function ServiciosPage() {
                     data-mkt-category="PRODUCT"
                     className="mt-4 inline-flex items-center gap-2 text-xs font-black uppercase tracking-[0.16em] text-brand-primary"
                   >
-                    {language === 'en' ? 'View builder and architecture projects' : language === 'pt' ? 'Ver projetos para construtoras e arquitetura' : 'Ver proyectos para constructoras y estudios'} <ArrowRight size={14} />
+                    {language === 'en' ? 'View real estate development projects' : language === 'pt' ? 'Ver projetos imobiliários e obra' : 'Ver proyectos inmobiliarios y obra'} <ArrowRight size={14} />
                   </a>
                 )}
-                {/(proyectos|obras|projects|construction|servicios)/i.test(title) && !title.toLowerCase().includes('inmopub') && !title.toLowerCase().includes('urban projects pub') && (
+                {/(proyectos|obras|projects|construction|servicios)/i.test(title) && index !== 4 && index !== 5 && (
                   <Link
                     to="/software-gestion-obras-servicios"
                     data-mkt="services_projects_click"
