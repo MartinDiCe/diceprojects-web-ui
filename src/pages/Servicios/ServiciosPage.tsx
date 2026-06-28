@@ -87,6 +87,18 @@ export default function ServiciosPage() {
                     {language === 'en' ? 'View real estate development projects' : language === 'pt' ? 'Ver projetos imobiliários e obra' : 'Ver proyectos inmobiliarios y obra'} <ArrowRight size={14} />
                   </a>
                 )}
+                {(index === 0 || index === 1 || index === 3) && (
+                  <a
+                    href="https://dicecommercepub.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    data-mkt="services_dicecommercepub_click"
+                    data-mkt-category="PRODUCT"
+                    className="mt-4 inline-flex items-center gap-2 text-xs font-black uppercase tracking-[0.16em] text-brand-primary"
+                  >
+                    {language === 'en' ? 'View wholesale commerce demo' : language === 'pt' ? 'Ver demo de comércio atacadista' : 'Ver comercio mayorista'} <ArrowRight size={14} />
+                  </a>
+                )}
                 {/(proyectos|obras|projects|construction|servicios)/i.test(title) && index !== 4 && index !== 5 && (
                   <Link
                     to="/software-gestion-obras-servicios"
