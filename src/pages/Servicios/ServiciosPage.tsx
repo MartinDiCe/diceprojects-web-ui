@@ -9,6 +9,11 @@ const offerIcons = [Workflow, Network, Globe2, Bot];
 export default function ServiciosPage() {
   const { language } = useLanguage();
   const t = copy[language].services;
+  const labels = {
+    offer: language === 'en' ? 'Services' : language === 'pt' ? 'Serviços' : 'Servicios',
+    cases: language === 'en' ? 'Solutions' : language === 'pt' ? 'Soluções' : 'Soluciones',
+    delivery: language === 'en' ? 'Method' : language === 'pt' ? 'Método' : 'Método',
+  };
 
   return (
     <div className="bg-brand-white pb-20 md:pb-28">
@@ -38,7 +43,7 @@ export default function ServiciosPage() {
 
       <section className="py-16 md:py-24">
         <Container>
-          <SectionHeader align="center" subtitle="Offer" title={t.offersTitle} />
+          <SectionHeader align="center" subtitle={labels.offer} title={t.offersTitle} />
           <div className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-4">
             {t.offers.map(([title, body], index) => {
               const Icon = offerIcons[index] ?? CheckCircle2;
@@ -57,7 +62,7 @@ export default function ServiciosPage() {
 
       <section className="bg-brand-light py-16 md:py-24">
         <Container>
-          <SectionHeader subtitle="Use cases" title={t.examplesTitle} />
+          <SectionHeader subtitle={labels.cases} title={t.examplesTitle} />
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
             {t.examples.map(([title, body], index) => (
               <div key={title} className="rounded-lg bg-brand-white p-6">
@@ -122,7 +127,7 @@ export default function ServiciosPage() {
       <section className="py-16 md:py-24">
         <Container className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:items-start">
           <div className="lg:col-span-5">
-            <SectionHeader subtitle="Delivery" title={t.implementationTitle} />
+            <SectionHeader subtitle={labels.delivery} title={t.implementationTitle} />
           </div>
           <div className="grid grid-cols-1 gap-3 lg:col-span-7">
             {t.steps.map(([num, title, body]) => (

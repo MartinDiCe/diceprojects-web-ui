@@ -26,6 +26,12 @@ const workflowIcons = [ShoppingCart, PlugZap, MousePointerClick, BarChart3];
 export default function HomePage() {
   const { language } = useLanguage();
   const t = copy[language].home;
+  const labels = {
+    capabilities: language === 'en' ? 'Consulting' : language === 'pt' ? 'Consultoria' : 'Consultoría',
+    core: language === 'en' ? 'Core platform' : language === 'pt' ? 'Core da plataforma' : 'Core de plataforma',
+    verticals: language === 'en' ? 'Vertical solutions' : language === 'pt' ? 'Soluções verticais' : 'Soluciones verticales',
+    outcome: language === 'en' ? 'Differentiation' : language === 'pt' ? 'Diferencial' : 'Diferencial',
+  };
 
   return (
     <div className="overflow-hidden bg-brand-white">
@@ -95,7 +101,7 @@ export default function HomePage() {
         <Container>
           <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:items-end">
             <div className="lg:col-span-5">
-              <SectionHeader subtitle="Platform" title={t.catalogTitle} />
+              <SectionHeader subtitle={labels.capabilities} title={t.catalogTitle} />
               <p className="text-base leading-relaxed text-brand-dark/60 md:text-lg">{t.catalogIntro}</p>
             </div>
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:col-span-7 xl:grid-cols-4">
@@ -116,7 +122,7 @@ export default function HomePage() {
 
       <section className="bg-brand-light py-16 md:py-24">
         <Container>
-          <SectionHeader align="center" subtitle="Workflows" title={t.workflowsTitle} />
+          <SectionHeader align="center" subtitle={labels.core} title={t.workflowsTitle} />
           <div className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-4">
             {t.workflows.map(([title, body], index) => {
               const Icon = workflowIcons[index] ?? CheckCircle2;
@@ -135,7 +141,7 @@ export default function HomePage() {
       <section className="bg-brand-dark py-16 text-brand-white md:py-24">
         <Container className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:items-center">
           <div className="lg:col-span-6">
-            <SectionHeader subtitle="Website AI" title={t.aiTitle} light />
+            <SectionHeader subtitle={labels.verticals} title={t.aiTitle} light />
             <p className="text-base leading-relaxed text-brand-white/62 md:text-lg">{t.aiCopy}</p>
           </div>
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:col-span-6">
@@ -152,7 +158,7 @@ export default function HomePage() {
       <section className="bg-brand-white py-16 md:py-24">
         <Container className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:items-center">
           <div className="lg:col-span-7">
-            <SectionHeader subtitle="Outcome" title={t.impactTitle} />
+            <SectionHeader subtitle={labels.outcome} title={t.impactTitle} />
           </div>
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:col-span-5">
             {t.impact.map((item) => (

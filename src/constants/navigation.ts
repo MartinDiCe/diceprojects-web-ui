@@ -1,7 +1,7 @@
 export const navItems = [
   { name: 'Inicio', path: '/' },
-  { name: 'Solución', path: '/automatizacion-y-orquestacion' },
-  { name: 'Método', path: '/metodo' },
+  { name: 'Plataforma', path: '/automatizacion-y-orquestacion' },
+  { name: 'Servicios', path: '/metodo' },
   { name: 'Insights', path: '/insights' },
   { name: 'Sobre', path: '/sobre' },
   { name: 'Contacto', path: '/contacto' },
