@@ -3,7 +3,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const dist = path.join(root, 'dist');
+const dist = path.resolve(root, process.env.BUILD_OUT_DIR || 'dist');
 const domain = 'https://diceprojects.com';
 const organization = {
   '@context': 'https://schema.org',
@@ -20,10 +20,10 @@ const organization = {
 const pages = [
   {
     path: '/',
-    title: 'Dice Projects | Plataforma empresarial, automatización y copiloto AI',
-    description: 'Plataforma empresarial multirubro para organizar ventas, compras, productos, stock, proyectos, marketing, integraciones, KPIs y copiloto AI con datos reales.',
-    h1: 'Tecnología y automatización para operar empresas con orden, datos y control.',
-    intro: 'Diseñamos, integramos e implementamos una plataforma operativa para conectar procesos, equipos y decisiones.',
+    title: 'Dice Projects | Soluciones digitales para tu negocio',
+    description: 'Explorá las soluciones de Dice Projects para mostrar lo que ofrecés, atender mejor y conectar la operación de tu negocio.',
+    h1: 'Una solución para cada forma de avanzar.',
+    intro: 'Herramientas para mostrar lo que ofrecés, atender mejor y hacer que tu operación fluya.',
   },
   {
     path: '/automatizacion-y-orquestacion',
@@ -177,26 +177,20 @@ function seoHead(page) {
 }
 
 function staticBody(page) {
-  const links = pages
-    .filter((item) => item.path !== page.path && item.path !== '/')
-    .map((item) => `<li><a href="${item.path}">${escapeHtml(item.title.replace(' | Dice Projects', ''))}</a></li>`)
-    .join('');
-
   return `<main id="seo-content">
       <header><a href="/" aria-label="Dice Projects">Dice Projects</a></header>
       <article>
         <h1>${escapeHtml(page.h1)}</h1>
         <p>${escapeHtml(page.intro)}</p>
         <p>${escapeHtml(page.description)}</p>
-        <p><a href="/contacto#diagnostico">Solicitar diagnóstico</a></p>
+        <p><a href="/#soluciones">Explorar soluciones</a></p>
       </article>
-      <nav aria-label="Soluciones"><ul>${links}</ul></nav>
     </main>`;
 }
 
 const template = await readFile(path.join(dist, 'index.html'), 'utf8');
 
-for (const page of pages) {
+for (const page of pages.filter((item) => item.path === '/')) {
   const fullTitle = page.title.includes('Dice Projects') ? page.title : `${page.title} | Dice Projects`;
   const title = `<title>${escapeHtml(fullTitle)}</title>`;
   let html = replaceTag(template, /<title>[\s\S]*?<\/title>/i, title);
@@ -211,4 +205,4 @@ for (const page of pages) {
   await writeFile(output, html);
 }
 
-console.log(`Generated static SEO documents for ${pages.length} routes.`);
+console.log('Generated static SEO document for the home page.');
